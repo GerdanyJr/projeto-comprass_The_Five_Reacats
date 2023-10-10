@@ -1,21 +1,31 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, Text } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 
 interface FormButtonProps {
   title: string;
+  isLoading?: boolean;
   disabled?: boolean;
   onPress: () => void;
 }
 
-export function FormButton({ title, disabled, onPress }: FormButtonProps) {
+export function FormButton({
+  title,
+  isLoading,
+  disabled,
+  onPress,
+}: FormButtonProps) {
   return (
     <Pressable
       style={[styles.button, disabled && styles.disabledButton]}
       onPress={onPress}
-      disabled={disabled}
+      disabled={disabled || isLoading}
     >
-      <Text style={styles.title}>{title}</Text>
+      {isLoading ? (
+        <ActivityIndicator size={28} color="white" />
+      ) : (
+        <Text style={styles.title}>{title}</Text>
+      )}
     </Pressable>
   );
 }
