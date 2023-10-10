@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 
-export function CardItem({name, description, price}: {name:string, description:string, price:string}) {
+export function CardItem({name, description, price, url}: {name:string, description:string, price:string,url:string}) {
   const [count, setCount] = useState(0);
 
   return (
@@ -22,10 +22,10 @@ export function CardItem({name, description, price}: {name:string, description:s
         </Pressable>
       </View>
       <Pressable style={styles.productContainer}>
-        <Image source={require("../assets/images/product-example.png")} style={styles.productImage}/>
+        <Image source={{uri:url}} style={styles.productImage}/>
         <View>
-          <Text style={styles.productName}>{name}</Text>
-          <Text style={styles.productDescription}>{description}</Text>
+          <Text style={styles.productName} >{name}</Text>
+          <Text style={styles.productDescription} numberOfLines={2}>{description}</Text>
           <Text style={styles.productPrice}>{price} R$</Text>
         </View>
       </Pressable>
@@ -36,6 +36,7 @@ export function CardItem({name, description, price}: {name:string, description:s
 const styles = StyleSheet.create({
   container: {
     width: 148,
+    marginLeft: 16,
   },
 
   countContainer: {
