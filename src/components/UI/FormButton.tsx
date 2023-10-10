@@ -20,6 +20,7 @@ export function FormButton({
       style={[styles.button, disabled && styles.disabledButton]}
       onPress={onPress}
       disabled={disabled || isLoading}
+      android_ripple={{ foreground: true, color: Colors.gray_100 }}
     >
       {isLoading ? (
         <ActivityIndicator size={28} color="white" />
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.red_500,
     borderRadius: 25,
+    overflow: 'hidden'
   },
   disabledButton: {
     backgroundColor: Colors.gray_900,
