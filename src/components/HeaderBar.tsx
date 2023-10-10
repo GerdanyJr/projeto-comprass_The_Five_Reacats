@@ -57,10 +57,13 @@ const styles = StyleSheet.create({
     width: 207,
     height: 22,
     flexDirection: 'row',
-    padding: 2,
+    paddingLeft: 1,
+    paddingTop: 1,
     gap: 4,
     backgroundColor: '#fff',
     borderRadius: 12,
+    borderColor: "#000",
+    borderWidth: 1
   },
 
   userImage: {
