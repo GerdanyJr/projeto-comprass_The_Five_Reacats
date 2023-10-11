@@ -9,6 +9,7 @@ export function CompassBackground({ children }: { children: React.ReactNode }) {
         resizeMode="stretch"
         source={require('../../assets/images/compass_logo.png')}
         imageStyle={styles.imgBackground}
+        accessibilityHint='Comprass logo'
       >
         {children}
       </ImageBackground>

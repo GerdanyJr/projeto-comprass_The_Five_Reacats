@@ -59,7 +59,14 @@ export function InputField(props: InputFieldProps): JSX.Element {
 
   return (
     <>
-      <View style={[styles.inputContainer, !props.enabledInput && styles.disabledInput, props.error && styles.errorInput]}>
+      <View
+        style={[
+          styles.inputContainer,
+          !props.enabledInput && styles.disabledInput,
+          props.error && styles.errorInput,
+        ]}
+        testID="input field"
+      >
         <View>
           <Animated.Text
             style={[
@@ -87,7 +94,7 @@ export function InputField(props: InputFieldProps): JSX.Element {
         </View>
         {props.icon && props.enabledInput && (
           <Pressable onPress={props.onIconPress}>
-            <Image source={props.icon} />
+            <Image source={props.icon} accessibilityHint="icon" />
           </Pressable>
         )}
       </View>
@@ -107,7 +114,7 @@ const styles = StyleSheet.create({
     paddingTop: 8,
   },
   disabledInput: {
-    backgroundColor: Colors.gray_200
+    backgroundColor: Colors.gray_200,
   },
   label: {
     position: 'absolute',
