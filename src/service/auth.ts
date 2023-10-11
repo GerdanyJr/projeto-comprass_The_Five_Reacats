@@ -24,3 +24,14 @@ export async function getUser(token: string) {
   const data: User = await response.data;
   return data;
 }
+
+export async function signUp(name: string, email: string, password: string) {
+  const response = await axios.post('https://api.escuelajs.co/api/v1/users/', {
+    name: name,
+    email: email,
+    password: password,
+    avatar: 'https://st3.depositphotos.com/4111759/13425/v/450/depositphotos_134255634-stock-illustration-avatar-icon-male-profile-gray.jpg',
+  });
+  const data: User = await response.data;
+  return data;
+}
