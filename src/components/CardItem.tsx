@@ -1,31 +1,53 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Pressable,
-} from 'react-native';
+import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import { useState } from 'react';
 
-export function CardItem({name, description, price, url}: {name:string, description:string, price:string,url:string}) {
+export function CardItem({
+  name,
+  description,
+  price,
+  url,
+}: {
+  name: string;
+  description: string;
+  price: string;
+  url: string;
+}) {
   const [count, setCount] = useState(0);
 
   return (
     <View style={styles.container}>
       <View style={styles.countContainer}>
-        <Pressable onPress={() => {(count !== 0) ? setCount(count -1 ) : setCount(count)}} style={[styles.button, styles.leftCorner]}>
-          <Image source={require('../assets/images/minus-icon.png')} style={styles.minus}/>
+        <Pressable
+          onPress={() => {
+            count !== 0 ? setCount(count - 1) : setCount(count);
+          }}
+          style={[styles.button, styles.leftCorner]}
+        >
+          <Image
+            source={require('../assets/images/minus-icon.png')}
+            style={styles.minus}
+          />
         </Pressable>
         <Text style={styles.count}>{count}</Text>
-        <Pressable onPress={() => {setCount(count + 1)}} style={[styles.button, styles.rightCorner]}>
-          <Image source={require('../assets/images/plus-icon.png')} style={styles.plus}/>
+        <Pressable
+          onPress={() => {
+            setCount(count + 1);
+          }}
+          style={[styles.button, styles.rightCorner]}
+        >
+          <Image
+            source={require('../assets/images/plus-icon.png')}
+            style={styles.plus}
+          />
         </Pressable>
       </View>
       <Pressable style={styles.productContainer}>
-        <Image source={{uri:url}} style={styles.productImage}/>
+        <Image source={{ uri: url }} style={styles.productImage} />
         <View>
-          <Text style={styles.productName} >{name}</Text>
-          <Text style={styles.productDescription} numberOfLines={2}>{description}</Text>
+          <Text style={styles.productName}>{name}</Text>
+          <Text style={styles.productDescription} numberOfLines={2}>
+            {description}
+          </Text>
           <Text style={styles.productPrice}>{price} R$</Text>
         </View>
       </Pressable>
@@ -37,28 +59,29 @@ const styles = StyleSheet.create({
   container: {
     width: 148,
     marginLeft: 16,
+    alignContent: 'center',
   },
 
   countContainer: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
   },
 
-  button:{
-    backgroundColor: "#FF0024",
+  button: {
+    backgroundColor: '#FF0024',
     width: 50,
     height: 21,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   leftCorner: {
     borderTopLeftRadius: 12,
   },
 
-  rightCorner:{
-    borderTopRightRadius: 12
+  rightCorner: {
+    borderTopRightRadius: 12,
   },
 
   minus: {
@@ -67,12 +90,12 @@ const styles = StyleSheet.create({
     borderRadius: 13,
   },
 
-  count:{
+  count: {
     width: 46,
-    textAlign: "center",
-    color: "#000",
-    backgroundColor: "#fff",
-    borderColor: "#9B9B9B",
+    textAlign: 'center',
+    color: '#000',
+    backgroundColor: '#fff',
+    borderColor: '#9B9B9B',
     borderTopWidth: 1,
     borderBottomWidth: 1,
   },
@@ -82,31 +105,33 @@ const styles = StyleSheet.create({
     height: 13,
   },
 
-  productContainer:{
-
+  productContainer: {
+    alignItems: 'center',
   },
 
   productImage: {
-    width: 148,
+    width: 146,
     height: 184,
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
   },
 
-  productName:{
+  productName: {
     marginTop: 8,
-    color: "#9B9B9B",
+    color: '#9B9B9B',
     fontSize: 14,
-    fontWeight: "700"
+    fontWeight: '700',
   },
-  productDescription:{
+  productDescription: {
     marginTop: 4,
-    color: "#000",
+    color: '#000',
     fontSize: 10,
-    fontWeight: "400"
+    fontWeight: '400',
   },
-  productPrice:{
+  productPrice: {
     marginTop: 6,
-    color: "#FF0024",
+    color: '#FF0024',
     fontSize: 16,
-    fontWeight: "800"
+    fontWeight: '800',
   },
 });
