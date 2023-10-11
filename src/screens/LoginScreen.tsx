@@ -4,7 +4,10 @@ import { CompassBackground } from '../components/Login/CompassBackground';
 import { RedirectText } from '../components/Login/RedirectText';
 import { useForm } from 'react-hook-form';
 import { getUser, login } from '../service/auth';
-import { getErrorMessageByCode, getFormErrorMessage } from '../util/errors';
+import {
+  getErrorMessageByCode,
+  getLoginFormErrorMessage,
+} from '../util/errors';
 import { LoginForm } from '../components/Login/LoginForm';
 
 export interface Inputs {
@@ -29,7 +32,7 @@ export function LoginScreen() {
     },
   });
   useEffect(() => {
-    setErrorMessage(() => getFormErrorMessage(errors));
+    setErrorMessage(() => getLoginFormErrorMessage(errors));
   }, [errors.email, errors.password]);
 
   function handleIconPress() {
