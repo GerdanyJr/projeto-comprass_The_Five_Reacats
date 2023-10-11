@@ -36,7 +36,7 @@ export function CardItemExemple() {
           source={require('../assets/images/product-example.png')}
           style={styles.productImage}
         />
-        <View>
+        <View style={styles.textContainer}>
           <Text style={styles.productName}>name</Text>
           <Text style={styles.productDescription} numberOfLines={2}>
             Crafted from the softest, breathable fabric
@@ -103,10 +103,15 @@ const styles = StyleSheet.create({
   },
 
   productImage: {
-    width: 148,
+    width: 146,
     height: 184,
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
+  },
+
+  textContainer:{
+    width: 148,
+    textAlign: "left" 
   },
 
   productName: {

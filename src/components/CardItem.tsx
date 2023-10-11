@@ -43,7 +43,7 @@ export function CardItem({
       </View>
       <Pressable style={styles.productContainer}>
         <Image source={{ uri: url }} style={styles.productImage} />
-        <View>
+        <View style={styles.textContainer}>
           <Text style={styles.productName}>{name}</Text>
           <Text style={styles.productDescription} numberOfLines={2}>
             {description}
@@ -114,6 +114,11 @@ const styles = StyleSheet.create({
     height: 184,
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
+  },
+
+  textContainer:{
+    width: 148,
+    textAlign: "left" 
   },
 
   productName: {
