@@ -10,14 +10,7 @@ export async function fetchItensByCategory(id:string){
 export async function fetchCategories() {
   const response = await axios.get(`https://api.escuelajs.co/api/v1/categories`);
   const data:Category[] = response.data;
-  const categories:Category[] = []
-  data.forEach(item => {
-    if(item.name !== "text"){
-      categories.push(item)
-    }
-  });
-
-  return categories;
+  return data;
 }
 
 export async function fetchItensByTitle(title:string) {
