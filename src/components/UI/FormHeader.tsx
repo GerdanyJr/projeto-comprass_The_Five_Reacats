@@ -5,11 +5,12 @@ import { Colors } from '../../assets/constants/Colors';
 interface FormHeaderProps {
   title: string;
   description?: string;
+  style?: any;
 }
 
-export function FormHeader({ title, description }: FormHeaderProps) {
+export function FormHeader({ title, description, style }: FormHeaderProps) {
   return (
-    <View>
+    <View style={style}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
     </View>
