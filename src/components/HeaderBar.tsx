@@ -1,22 +1,40 @@
-import { View,  Text,  Image,  StyleSheet,  Pressable,  Modal,  TextInput,} from 'react-native';
-import { useState } from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Pressable,
+  Modal,
+  TextInput,
+  FlatList,
+} from 'react-native';
+import { useState, useEffect } from 'react';
+import { CardSearchResult } from './CardSearchResult';
+import { fetchItensByTitle } from '../service/FetchProductsAux';
+import { ProductByTitle } from '../types/Product';
 
-export function HeaderBar({  isAuthenticated,  username}: { isAuthenticated: boolean,  username: string}) {
+export function HeaderBar({
+  isAuthenticated,
+  username,
+}: {
+  isAuthenticated: boolean;
+  username: string;
+}) {
   const [modalVisible, setModalVisible] = useState(false);
-  let cont = 0
-  function modalVisibleHandler(){
-    if(cont === 0){
-      setModalVisible(true)
-      cont++
-    } else {
-      setModalVisible(false)
-      cont--
+  const [fetchSearch, setFetchSearch] = useState<ProductByTitle[]>([]);
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    async function getItensByTitle() {
+      const dados = await fetchItensByTitle(search);
+      setFetchSearch(dados);
     }
-  }
+    getItensByTitle();
+  }, []);
 
   return (
-    <View style={styles.container} >
-      <View style={styles.userContain}>
+    <View style={styles.container}>
+      <View style={isAuthenticated ? styles.userContain : styles.anonymous}>
         <Image
           source={require('../assets/images/user-example.png')}
           style={styles.userImage}
@@ -24,19 +42,44 @@ export function HeaderBar({  isAuthenticated,  username}: { isAuthenticated: boo
         <Text style={styles.username}>Hello, {username}</Text>
       </View>
 
-      <View style={styles.searchContain}>
-        <Pressable style={styles.searchButton} onPress={modalVisibleHandler}>
+      <View>
+        <Pressable
+          style={styles.searchButton}
+          onPress={() => setModalVisible(!modalVisible)}
+        >
           <Image
             source={require('../assets/images/search-icon.png')}
             style={styles.searchIcon}
           />
         </Pressable>
-        <Modal animationType="fade" visible={modalVisible} transparent={true}>
+
+        <Modal
+          animationType="fade"
+          visible={modalVisible}
+          transparent={true}
+          onRequestClose={() => setModalVisible(!modalVisible)}
+        >
           <TextInput
             placeholder="Enter the product name"
             style={styles.inputSearch}
             placeholderTextColor={'#9B9B9B'}
-          
+            onChangeText={setSearch}
+          />
+
+          <FlatList
+            style={
+              search !== '' ? styles.containResultsSearch : styles.emptySearch
+            }
+            data={fetchSearch}
+            renderItem={({ item }) => (
+              <CardSearchResult
+                url={item.images[0]}
+                name={item.title}
+                description={item.description}
+                price={item.price}
+              />
+            )}
+            maxToRenderPerBatch={3}
           />
         </Modal>
       </View>
@@ -46,11 +89,12 @@ export function HeaderBar({  isAuthenticated,  username}: { isAuthenticated: boo
 
 const styles = StyleSheet.create({
   container: {
-    gap: 95,
+    width: 333,
+    justifyContent: 'space-between',
     flexDirection: 'row',
     marginTop: 16,
     left: 10,
-    position: "absolute"
+    position: 'absolute',
   },
 
   userContain: {
@@ -62,8 +106,8 @@ const styles = StyleSheet.create({
     gap: 4,
     backgroundColor: '#fff',
     borderRadius: 12,
-    borderColor: "#000",
-    borderWidth: 1
+    borderColor: '#000',
+    borderWidth: 1,
   },
 
   userImage: {
@@ -79,7 +123,13 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
 
-  searchContain: {},
+  anonymous: {
+    opacity: 0,
+  },
+
+  emptySearch: {
+    display: 'none',
+  },
 
   searchButton: {
     width: 41,
@@ -105,15 +155,26 @@ const styles = StyleSheet.create({
   inputSearch: {
     width: 323,
     height: 38,
-    alignSelf: "center",
+    alignSelf: 'center',
     backgroundColor: '#fff',
     color: '#000',
     fontSize: 12,
     fontWeight: '400',
     borderWidth: 4,
-    borderColor: "#FF0024",
+    borderColor: '#FF0024',
     borderRadius: 16,
     marginTop: 66,
     padding: 12,
+  },
+
+  containResultsSearch: {
+    maxWidth: 315,
+    maxHeight: 201,
+    alignSelf: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    borderColor: '#B6B6B6',
+    borderWidth: 2,
+    marginTop: 8,
   },
 });
