@@ -16,7 +16,9 @@ export function CardSearchResult({
       <Image source={{ uri: url }} style={styles.cardImage} />
       <View style={styles.cardTexts}>
         <Text style={styles.cardTitle}>{name}</Text>
-        <Text style={styles.cardDescription} numberOfLines={1}>{description}</Text>
+        <Text style={styles.cardDescription} numberOfLines={1}>
+          {description}
+        </Text>
       </View>
       <Text style={styles.cardPrice}>{price} R$</Text>
     </Pressable>
@@ -25,13 +27,13 @@ export function CardSearchResult({
 
 const styles = StyleSheet.create({
   cardContainer: {
-    alignSelf: "center",
-    alignItems: "center",
+    alignSelf: 'center',
+    alignItems: 'center',
     width: 315,
     height: 66,
-    justifyContent: "space-evenly",
+    justifyContent: 'space-evenly',
     flexDirection: 'row',
-    borderColor: "#B6B6B6",
+    borderColor: '#B6B6B6',
     borderBottomWidth: 2,
   },
 
