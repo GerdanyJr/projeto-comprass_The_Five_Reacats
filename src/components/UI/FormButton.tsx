@@ -23,7 +23,7 @@ export function FormButton({
       android_ripple={{ foreground: true, color: Colors.gray_100 }}
     >
       {isLoading ? (
-        <ActivityIndicator size={28} color="white" />
+        <ActivityIndicator size={28} color="white" accessibilityHint='Loading' />
       ) : (
         <Text style={styles.title}>{title}</Text>
       )}
