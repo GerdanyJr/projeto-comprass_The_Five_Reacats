@@ -5,6 +5,7 @@ import { InputField } from '../Login/InputField';
 import { FormButton } from '../UI/FormButton';
 import { FormError } from '../Login/FormError';
 import { SignUpInputs } from '../../screens/SignUpScreen';
+import { FormHeader } from '../UI/FormHeader';
 
 interface SignUpFormProps {
   control: Control<SignUpInputs, any>;
@@ -30,7 +31,12 @@ export function SignUpForm({
   isLoading,
 }: SignUpFormProps) {
   return (
-    <View style={styles.formContainer}>
+    <>
+      <FormHeader
+        title="Sign Up"
+        description="Choose a really cool name that only contains spaces as special characters. Oh, and your password must have more than 4 digits! :)"
+        style={styles.formHeader}
+      />
       <View style={styles.inputs}>
         <Controller
           control={control}
@@ -105,19 +111,17 @@ export function SignUpForm({
         onPress={handleSubmit(handleSignUpPress)}
         isLoading={isLoading}
       />
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  formContainer: {
-    width: '90%',
-    alignSelf: 'center',
-    marginTop: 32,
-    gap: 48,
-  },
   inputs: {
-    marginTop: 32,
     gap: 16,
+    marginTop: 32,
+    marginBottom: 48,
+  },
+  formHeader: {
+    marginTop: 26,
   },
 });
