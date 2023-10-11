@@ -11,3 +11,16 @@ export async function login(email: string, password: string) {
   const data = await response.data;
   return data;
 }
+
+export async function getUser(token: string) {
+  const response = await axios.get(
+    'https://api.escuelajs.co/api/v1/auth/profile',
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const data: User = await response.data;
+  return data;
+}
