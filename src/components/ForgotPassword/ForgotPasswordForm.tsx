@@ -1,40 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Control, Controller, UseFormHandleSubmit } from 'react-hook-form';
+import {
+  Control,
+  Controller,
+  UseFormHandleSubmit,
+  useForm,
+} from 'react-hook-form';
 import { InputField } from '../Login/InputField';
 import { FormButton } from '../UI/FormButton';
 import { FormError } from '../Login/FormError';
-import { ForgotPasswordInputs } from '../../screens/ForgotPasswordScreen';
+import {
+  ForgotPasswordEmailInput,
+  ForgotPasswordInputs,
+} from '../../screens/ForgotPasswordScreen';
+import { getForgotPasswordEmailErrorMessage } from '../../util/errors';
 
 interface ForgotPasswordFormProps {
-  control: Control<ForgotPasswordInputs, any>;
-  handleSubmit: UseFormHandleSubmit<ForgotPasswordInputs, undefined>;
-  handleSearchPress: (data: ForgotPasswordInputs) => void;
+  pwcontrol: Control<ForgotPasswordInputs, any>;
+  pwhandleSubmit: UseFormHandleSubmit<ForgotPasswordInputs, undefined>;
+  handleSearchPress: (data: ForgotPasswordEmailInput) => void;
   handleConfirmPress: (data: ForgotPasswordInputs) => void;
   isPasswordVisible: boolean;
   handleIconPress: () => void;
-  errorMessage: string;
+  pwerrorMessage: string;
   isLoading: boolean;
-  isSearchDisabled?: boolean;
-  isConfirmDisabled?: boolean;
-  isPasswordInputDisabled: boolean;
-  isConfirmInputDisabled: boolean;
+  isConfirmButtonDisabled: boolean;
+  isPasswordInputEnabled: boolean;
+  isConfirmInputEnabled: boolean;
 }
 
 export const ForgotPasswordForm = ({
-  control,
-  handleSubmit,
+  pwcontrol,
+  pwhandleSubmit,
   handleSearchPress,
   handleConfirmPress,
   isPasswordVisible,
   handleIconPress,
-  errorMessage,
+  pwerrorMessage,
   isLoading,
-  isSearchDisabled,
-  isConfirmDisabled,
-  isPasswordInputDisabled,
-  isConfirmInputDisabled
+  isConfirmButtonDisabled,
+  isPasswordInputEnabled,
+  isConfirmInputEnabled,
 }: ForgotPasswordFormProps) => {
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ForgotPasswordEmailInput>({
+    mode: 'onChange',
+    defaultValues: {
+      email: '',
+    },
+  });
+  const [isSearchButtonDisabled, setisSearchButtonDisabled] = useState(false);
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+
+  useEffect(() => {
+    setEmailErrorMessage(() => getForgotPasswordEmailErrorMessage(errors));
+  }, [errors.email]);
+
   return (
     <View style={styles.formContainer}>
       <View style={styles.inputs}>
@@ -58,18 +83,19 @@ export const ForgotPasswordForm = ({
             />
           )}
         />
+
         <Controller
-          control={control}
+          control={pwcontrol}
           name="password"
           rules={{
             required: {
-                value: true,
-                message: 'Please complete all fields',
-              },
-              minLength: {
-                value: 6,
-                message: 'Your password must be longer than 6 digits.',
-              },
+              value: true,
+              message: 'Please complete all fields',
+            },
+            minLength: {
+              value: 6,
+              message: 'Your password must be longer than 6 digits.',
+            },
           }}
           render={({ field, fieldState }) => (
             <InputField
@@ -83,23 +109,23 @@ export const ForgotPasswordForm = ({
               onIconPress={handleIconPress}
               error={fieldState.invalid}
               value={field.value}
-              enabledInput={isPasswordInputDisabled}
+              enabledInput={isPasswordInputEnabled}
               onChangeText={field.onChange}
             />
           )}
         />
         <Controller
-          control={control}
+          control={pwcontrol}
           name="confirmPassword"
           rules={{
             required: {
-                value: true,
-                message: 'Please complete all fields',
-              },
-              minLength: {
-                value: 6,
-                message: 'Your password must be longer than 6 digits.',
-              },
+              value: true,
+              message: 'Please complete all fields',
+            },
+            minLength: {
+              value: 6,
+              message: 'Your password must be longer than 6 digits.',
+            },
           }}
           render={({ field, fieldState }) => (
             <InputField
@@ -113,44 +139,43 @@ export const ForgotPasswordForm = ({
               onIconPress={handleIconPress}
               error={fieldState.invalid}
               value={field.value}
-              enabledInput={isConfirmInputDisabled}
+              enabledInput={isConfirmInputEnabled}
               onChangeText={field.onChange}
             />
           )}
         />
-        <FormError message={errorMessage}/>
+        <FormError message={pwerrorMessage} />
+        <FormError message={emailErrorMessage} />
       </View>
       <View style={styles.buttonContainer}>
-      <FormButton
-        title="Search"
-        onPress={handleSubmit(handleSearchPress)}
-        isLoading={isLoading}
-        disabled={isSearchDisabled}
-      />
-      <FormButton
-        title="Confirm"
-        onPress={handleSubmit(handleConfirmPress)}
-        isLoading={isLoading}
-        disabled={isConfirmDisabled}
-      />
+        <FormButton
+          title="Search"
+          onPress={handleSubmit(handleSearchPress)}
+          isLoading={isLoading}
+          disabled={isSearchButtonDisabled}
+        />
+        <FormButton
+          title="Confirm"
+          onPress={pwhandleSubmit(handleConfirmPress)}
+          isLoading={isLoading}
+          disabled={isConfirmButtonDisabled}
+        />
       </View>
     </View>
   );
 };
 
-
 const styles = StyleSheet.create({
-    formContainer: {
-        width: '90%',
-        alignSelf: 'center',
-        marginTop: 32,
-        gap: 64
-      },
-      inputs: {
-        marginTop: 32,
-        gap: 16,
-      },
-      buttonContainer: {
-        gap: 16
-      }
+  formContainer: {
+    width: '90%',
+    alignSelf: 'center',
+    gap: 64,
+  },
+  inputs: {
+    marginTop: 32,
+    gap: 16,
+  },
+  buttonContainer: {
+    gap: 16,
+  },
 });

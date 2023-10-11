@@ -35,3 +35,12 @@ export async function signUp(name: string, email: string, password: string) {
   const data: User = await response.data;
   return data;
 }
+
+export async function checkEmail(email: string) {
+  const response = await axios.post('https://api.escuelajs.co/api/v1/users/is-available', {
+    "email": email
+  });
+
+  const data = await response.data;
+  return data;
+}

@@ -1,7 +1,7 @@
 import { FieldErrors } from 'react-hook-form';
 import { Inputs } from '../screens/LoginScreen';
 import { SignUpInputs } from '../screens/SignUpScreen';
-import { ForgotPasswordInputs } from '../screens/ForgotPasswordScreen';
+import { ForgotPasswordEmailInput, ForgotPasswordInputs } from '../screens/ForgotPasswordScreen';
 
 export function getErrorMessageByCode(httpCode: number): string {
   switch (httpCode) {
@@ -33,12 +33,16 @@ export function getSignUpFormErrorMessage(errors: FieldErrors<SignUpInputs>) {
   } else return '';
 }
 
-export function getForgotPasswordFormErrorMessage(errors: FieldErrors<ForgotPasswordInputs>) {
-  if (errors.email?.message) {
-    return errors.email.message;
-  } else if (errors.password?.message) {
+export function getForgotPasswordInputsErrorMessage(errors: FieldErrors<ForgotPasswordInputs>) {
+  if (errors.password?.message) {
     return errors.password.message;
   } else if (errors.confirmPassword?.message) {
     return errors.confirmPassword.message;
+  } else return '';
+}
+
+export function getForgotPasswordEmailErrorMessage(errors: FieldErrors<ForgotPasswordEmailInput>) {
+  if (errors.email?.message) {
+    return errors.email.message;
   } else return '';
 }
