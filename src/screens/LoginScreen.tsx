@@ -9,6 +9,7 @@ import {
   getLoginFormErrorMessage,
 } from '../util/errors';
 import { LoginForm } from '../components/Login/LoginForm';
+import { useNavigation } from '@react-navigation/native';
 
 export interface Inputs {
   email: string;
@@ -19,6 +20,7 @@ export function LoginScreen() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const navigation = useNavigation<any>();
   const {
     control,
     handleSubmit,
@@ -44,6 +46,8 @@ export function LoginScreen() {
     try {
       const response = await login(data.email, data.password);
       const user = await getUser(response.access_token);
+      //todo set context
+      navigation.navigate('MainPage');
     } catch (error: any) {
       setErrorMessage(() => getErrorMessageByCode(error.response.status));
     } finally {
@@ -70,15 +74,15 @@ export function LoginScreen() {
       <View style={styles.redirectTextContainer}>
         <RedirectText
           title="Not have an account yet? Sign up"
-          onPress={() => console.log('pressed text')}
+          onPress={() => navigation.navigate('SignUp')}
         />
         <RedirectText
           title="I forgot my password"
-          onPress={() => console.log('pressed text')}
+          onPress={() => navigation.navigate('ForgotPassword')}
         />
         <RedirectText
           title="I don't want to login"
-          onPress={() => console.log('pressed text')}
+          onPress={() => navigation.navigate('MainPage')}
         />
       </View>
     </CompassBackground>

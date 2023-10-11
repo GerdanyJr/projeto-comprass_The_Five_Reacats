@@ -11,6 +11,7 @@ import {
 } from '../util/errors';
 import { GoBackButton } from '../components/UI/GoBackButton';
 import { StyleSheet, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export interface SignUpInputs {
   name: string;
@@ -33,6 +34,7 @@ export function SignUpScreen() {
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const navigation = useNavigation<any>();
 
   useEffect(() => {
     setErrorMessage(() => getSignUpFormErrorMessage(errors));
@@ -47,7 +49,8 @@ export function SignUpScreen() {
   async function handleSignUpPress(data: SignUpInputs) {
     setIsLoading(true);
     try {
-      const response = await signUp(data.name, data.email, data.password);
+      await signUp(data.name, data.email, data.password);
+      navigation.navigate('Login');
     } catch (error: any) {
       setErrorMessage(() => getErrorMessageByCode(error.response.status));
     } finally {
@@ -59,7 +62,7 @@ export function SignUpScreen() {
   return (
     <CompassBackground>
       <View style={styles.formContainer}>
-        <GoBackButton onPress={() => console.log('Go back Pressed!')} />
+        <GoBackButton onPress={() => navigation.navigate('Login')} />
         <SignUpForm
           control={control}
           handleSubmit={handleSubmit}
