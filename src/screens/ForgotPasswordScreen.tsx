@@ -15,6 +15,8 @@ export const ForgotPasswordScreen = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isPasswordInputDisabled, setisPasswordInputDisabled] = useState(false);
+  const [isConfirmInputDisabled, setisConfirmInputDisabled] = useState(false);
 
   const {
     control,
@@ -57,6 +59,8 @@ export const ForgotPasswordScreen = () => {
         isLoading={isLoading}
         isPasswordVisible={isPasswordVisible}
         errorMessage={errorMessage}
+        isConfirmInputDisabled={isConfirmInputDisabled}
+        isPasswordInputDisabled={isPasswordInputDisabled}
       />
     </CompassBackground>
   );

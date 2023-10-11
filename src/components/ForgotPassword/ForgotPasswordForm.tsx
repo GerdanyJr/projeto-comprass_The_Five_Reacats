@@ -16,7 +16,9 @@ interface ForgotPasswordFormProps {
   errorMessage: string;
   isLoading: boolean;
   isSearchDisabled?: boolean;
-  isConfirmDisabled?: boolean
+  isConfirmDisabled?: boolean;
+  isPasswordInputDisabled: boolean;
+  isConfirmInputDisabled: boolean;
 }
 
 export const ForgotPasswordForm = ({
@@ -29,7 +31,9 @@ export const ForgotPasswordForm = ({
   errorMessage,
   isLoading,
   isSearchDisabled,
-  isConfirmDisabled
+  isConfirmDisabled,
+  isPasswordInputDisabled,
+  isConfirmInputDisabled
 }: ForgotPasswordFormProps) => {
   return (
     <View style={styles.formContainer}>
@@ -79,7 +83,7 @@ export const ForgotPasswordForm = ({
               onIconPress={handleIconPress}
               error={fieldState.invalid}
               value={field.value}
-              enabledInput={true}
+              enabledInput={isPasswordInputDisabled}
               onChangeText={field.onChange}
             />
           )}
@@ -109,7 +113,7 @@ export const ForgotPasswordForm = ({
               onIconPress={handleIconPress}
               error={fieldState.invalid}
               value={field.value}
-              enabledInput={true}
+              enabledInput={isConfirmInputDisabled}
               onChangeText={field.onChange}
             />
           )}
