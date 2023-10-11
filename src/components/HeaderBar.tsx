@@ -24,13 +24,14 @@ export function HeaderBar({
   const [fetchSearch, setFetchSearch] = useState<ProductByTitle[]>([]);
   const [search, setSearch] = useState('');
 
+
   useEffect(() => {
     async function getItensByTitle() {
       const dados = await fetchItensByTitle(search);
       setFetchSearch(dados);
     }
     getItensByTitle();
-  }, []);
+  }, [search]);
 
   return (
     <View style={styles.container}>
@@ -80,6 +81,7 @@ export function HeaderBar({
               />
             )}
             maxToRenderPerBatch={3}
+            ListEmptyComponent={() => (<Text style={styles.emptyList}>Product not found</Text>)}
           />
         </Modal>
       </View>
@@ -129,6 +131,16 @@ const styles = StyleSheet.create({
 
   emptySearch: {
     display: 'none',
+  },
+
+  emptyList:{
+    width: 315,
+    height: 201,
+    color: "#000",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    textAlignVertical: "center",
   },
 
   searchButton: {
