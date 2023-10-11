@@ -25,19 +25,16 @@ export function Section({ id, title }: { id: string; title: string }) {
       </View>
       <FlatList
         data={produtos}
-        renderItem={({ item }) =>
-          produtos.length !== 0 ? (
-            <CardItem
-              name={item.title}
-              description={item.description}
-              price={item.price}
-              url={item.images[0]}
-            />
-          ) : (
-            <CardItemExemple />
-          )
-        }
+        renderItem={({ item }) => (
+          <CardItem
+            name={item.title}
+            description={item.description}
+            price={item.price}
+            url={item.images[0]}
+          />
+        )}
         horizontal={true}
+        ListEmptyComponent={CardItemExemple}
       />
     </View>
   );
