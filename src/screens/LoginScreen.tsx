@@ -90,10 +90,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 56,
   },
-  imgBackground: {
-    width: '100%',
-    height: 375,
-  },
   redirectTextContainer: {
     marginTop: 32,
     gap: 24,
