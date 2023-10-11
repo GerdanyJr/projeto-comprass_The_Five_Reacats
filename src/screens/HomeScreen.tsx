@@ -12,15 +12,15 @@ import { useState, useEffect } from 'react';
 import { HeaderBar } from '../components/HeaderBar';
 import { CardItem } from '../components/CardItem';
 import { Section } from '../components/Sections';
-import { fetchCategories } from '../service/FetchItensByCategory';
+import { fetchCategories } from '../service/FetchProductsAux';
 import { Category } from '../types/Product';
 
 export function HomeScreen() {
   const [categories, setCategories] = useState<Category[]>([]);
   useEffect(() => {
-    async function getCategories(){
+    async function getCategories() {
       const dados = await fetchCategories();
-      setCategories(dados)
+      setCategories(dados);
     }
     getCategories();
   }, []);
@@ -51,12 +51,7 @@ export function HomeScreen() {
       <FlatList
         ListHeaderComponent={listHeader}
         data={categories}
-        renderItem = {({item}) => item.name !== "text" ? (
-          <Section 
-          id={item.id}
-          title={item.name}
-          />
-          ) : null} 
+        renderItem={({ item }) => <Section id={item.id} title={item.name} />}
       />
       <HeaderBar isAuthenticated={true} username="Juliane Golçalves Freitas" />
     </View>
@@ -65,7 +60,8 @@ export function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff"
+    backgroundColor: '#fff',
+    paddingBottom: 16,
   },
   backgroundImage: {
     height: 374,
@@ -97,10 +93,5 @@ const styles = StyleSheet.create({
   cartIcon: {
     width: 46,
     height: 46,
-  },
-
-  categories: {
-    backgroundColor: '#fff',
-    paddingTop: 25,
   },
 });
