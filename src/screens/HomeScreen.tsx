@@ -9,11 +9,10 @@ import {
 } from 'react-native';
 import { useState, useEffect } from 'react';
 
-import { HeaderBar } from '../components/HeaderBar';
-import { CardItem } from '../components/CardItem';
-import { Section } from '../components/Sections';
+import { HeaderBar } from '../components/Home/HeaderBar';
+import { Section } from '../components/Home/Sections';
 import { fetchCategories } from '../service/FetchProductsAux';
-import { Category } from '../types/Product';
+import { Category } from '../types/interface/Product';
 
 export function HomeScreen() {
   const [categories, setCategories] = useState<Category[]>([]);
