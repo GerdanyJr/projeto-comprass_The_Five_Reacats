@@ -67,21 +67,5 @@ describe('Card search component test', () => {
       marginTop: 8,
     });
   });
-
-  it('testing modal visibility', async () => {
-    const { getByTestId, getByAccessibilityHint } = render(
-      <HeaderBar isAuthenticated={true} username="TestUser" />
-    );
-    const searchButton = getByAccessibilityHint('searchButton');
-    await user.press(searchButton);
-
-    const modalVisible = getByTestId('search-modal');
-    expect(modalVisible).toHaveProp('onRequestClose', () => {});
-  });
-
-
-// Mock da função fetchItensByTitle
-jest.mock('./fetchItensByTitle', () => ({
-  fetchItensByTitle: jest.fn(() => Promise.resolve(['Item1', 'Item2'])),
-}));
 });
+

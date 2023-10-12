@@ -27,7 +27,7 @@ it('renders List when data is empty', () => {
   );
   
   const list = getByAccessibilityHint('productslist')
-  expect(list).to
+  expect(list).toBeOnTheScreen()
 });
 
 })

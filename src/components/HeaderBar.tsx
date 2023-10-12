@@ -32,6 +32,10 @@ export function HeaderBar({
     getItensByTitle();
   }, [search]);
 
+  function navigation(){
+    console.log();
+  }
+
   return (
     <View style={styles.container}>
       <View
@@ -83,7 +87,7 @@ export function HeaderBar({
                 name={item.title}
                 description={item.description}
                 price={item.price}
-                onPress={() => {}}
+                onPress={navigation}
               />
             )}
             maxToRenderPerBatch={3}

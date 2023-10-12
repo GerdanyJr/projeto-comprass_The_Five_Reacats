@@ -15,6 +15,10 @@ export function Section({ id, title }: { id: string; title: string }) {
     getItensByCategory();
   }, []);
 
+  function navigation(){
+    console.log();
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.categoryHeader}>
@@ -32,11 +36,11 @@ export function Section({ id, title }: { id: string; title: string }) {
             description={item.description}
             price={item.price}
             url={item.images[0]}
-            onPress={() => {}}
+            onPress={navigation}
           />
         )}
         horizontal={true}
-        ListEmptyComponent={() => <CardItemExemple onPress={() => {}} />}
+        ListEmptyComponent={() => <CardItemExemple onPress={navigation} />}
       />
     </View>
   );
