@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { CardItem } from './CardItem';
 import { CardItemExemple } from './CardItemExemple';
 import { fetchItensByCategory } from '../../service/FetchProductsAux';
-import { Product } from '../../types/interface/Product';
+import { Product } from '../../types/interfaces/Product';
 
 export function Section({ id, title }: { id: string; title: string }) {
   const [produtos, setProdutos] = useState<Product[]>([]);

@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react';
 import { HeaderBar } from '../components/Home/HeaderBar';
 import { Section } from '../components/Home/Sections';
 import { fetchCategories } from '../service/FetchProductsAux';
-import { Category } from '../types/interface/Product';
+import { Category } from '../types/interfaces/Product';
 
 export function HomeScreen() {
   const [categories, setCategories] = useState<Category[]>([]);

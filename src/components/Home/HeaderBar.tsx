@@ -11,7 +11,7 @@ import {
 import { useState, useEffect } from 'react';
 import { CardSearchResult } from './CardSearchResult';
 import { fetchItensByTitle } from '../../service/FetchProductsAux';
-import { ProductByTitle } from '../../types/interface/Product';
+import { ProductByTitle } from '../../types/interfaces/Product';
 
 export function HeaderBar({
   isAuthenticated,
@@ -51,11 +51,11 @@ export function HeaderBar({
 
       <View>
         <Pressable
-        style={({ pressed }) =>
-        pressed
-          ? [styles.searchButton, styles.pressed]
-          : styles.searchButton}
-
+          style={({ pressed }) =>
+            pressed
+              ? [styles.searchButton, styles.pressed]
+              : styles.searchButton
+          }
           onPress={() => setModalVisible(!modalVisible)}
           accessibilityHint="searchButton"
         >
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   },
 
   pressed: {
-    opacity: 0.75
+    opacity: 0.75,
   },
 
   searchIcon: {

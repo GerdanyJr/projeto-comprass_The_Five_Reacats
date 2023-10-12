@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Product, Category, ProductByTitle} from '../types/interface/Product';
+import {Product, Category, ProductByTitle} from '../types/interfaces/Product';
 
 export async function fetchItensByCategory(id:string){
   const response = await axios.get(`https://api.escuelajs.co/api/v1/categories/${id}/products`);

@@ -11,7 +11,7 @@ import {
   Product,
   Category,
   ProductByTitle,
-} from '../../src/types/interface/Product';
+} from '../../src/types/interfaces/Product';
 import axios from 'axios';
 
 describe('FetchProducts', () => {

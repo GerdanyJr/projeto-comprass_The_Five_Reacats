@@ -22,7 +22,12 @@ export function CardSearchResult({
 }) {
   return (
     <Pressable
-      style={styles.cardContainer}
+      style={({ pressed }) =>
+            pressed
+              ? [styles.cardContainer, styles.pressed]
+              : styles.cardContainer
+          }
+      
       onPress={onPress}
       accessibilityHint="productRedirection"
     >
@@ -48,6 +53,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderColor: '#B6B6B6',
     borderBottomWidth: 2,
+  },
+
+  pressed:{
+    opacity:0.65,
   },
 
   cardImage: {
