@@ -2,8 +2,8 @@ import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
 import { useState, useEffect } from 'react';
 import { CardItem } from './CardItem';
 import { CardItemExemple } from './CardItemExemple';
-import { fetchItensByCategory } from '../service/FetchProductsAux';
-import { Product } from '../types/Product';
+import { fetchItensByCategory } from '../../service/FetchProductsAux';
+import { Product } from '../../types/interface/Product';
 
 export function Section({ id, title }: { id: string; title: string }) {
   const [produtos, setProdutos] = useState<Product[]>([]);
@@ -15,7 +15,7 @@ export function Section({ id, title }: { id: string; title: string }) {
     getItensByCategory();
   }, []);
 
-  function navigation(){
+  function navigation() {
     console.log();
   }
 
@@ -28,7 +28,7 @@ export function Section({ id, title }: { id: string; title: string }) {
         </Pressable>
       </View>
       <FlatList
-        accessibilityHint='productslist'
+        accessibilityHint="productslist"
         data={produtos}
         renderItem={({ item }) => (
           <CardItem

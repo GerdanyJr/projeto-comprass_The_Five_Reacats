@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 import { useState, useEffect } from 'react';
 import { CardSearchResult } from './CardSearchResult';
-import { fetchItensByTitle } from '../service/FetchProductsAux';
-import { ProductByTitle } from '../types/Product';
+import { fetchItensByTitle } from '../../service/FetchProductsAux';
+import { ProductByTitle } from '../../types/interface/Product';
 
 export function HeaderBar({
   isAuthenticated,
@@ -32,7 +32,7 @@ export function HeaderBar({
     getItensByTitle();
   }, [search]);
 
-  function navigation(){
+  function navigation() {
     console.log();
   }
 
@@ -43,7 +43,7 @@ export function HeaderBar({
         testID="userBar"
       >
         <Image
-          source={require('../assets/images/user-example.png')}
+          source={require('../../assets/images/user-example.png')}
           style={styles.userImage}
         />
         <Text style={styles.username}>Hello, {username}</Text>
@@ -51,12 +51,16 @@ export function HeaderBar({
 
       <View>
         <Pressable
-          style={styles.searchButton}
+        style={({ pressed }) =>
+        pressed
+          ? [styles.searchButton, styles.pressed]
+          : styles.searchButton}
+
           onPress={() => setModalVisible(!modalVisible)}
           accessibilityHint="searchButton"
         >
           <Image
-            source={require('../assets/images/search-icon.png')}
+            source={require('../../assets/images/search-icon.png')}
             style={styles.searchIcon}
           />
         </Pressable>
@@ -160,6 +164,10 @@ const styles = StyleSheet.create({
     height: 41,
     backgroundColor: '#FF0024',
     borderRadius: 50,
+  },
+
+  pressed: {
+    opacity: 0.75
   },
 
   searchIcon: {

@@ -8,9 +8,17 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 
-export function CardItemExemple({
+export function CardItem({
+  name,
+  description,
+  price,
+  url,
   onPress,
 }: {
+  name: string;
+  description: string;
+  price: string;
+  url: string;
   onPress: (event: GestureResponderEvent) => void;
 }) {
   const [count, setCount] = useState(0);
@@ -22,11 +30,15 @@ export function CardItemExemple({
           onPress={() => {
             count !== 0 ? setCount(count - 1) : setCount(count);
           }}
-          style={[styles.button, styles.leftCorner]}
+          style={({ pressed }) =>
+            pressed
+              ? [styles.button, styles.pressed, styles.leftCorner]
+              : [styles.button, styles.leftCorner]
+          }
           accessibilityHint="minusButton"
         >
           <Image
-            source={require('../assets/images/minus-icon.png')}
+            source={require('../../assets/images/minus-icon.png')}
             style={styles.minus}
           />
         </Pressable>
@@ -35,30 +47,33 @@ export function CardItemExemple({
           onPress={() => {
             setCount(count + 1);
           }}
-          style={[styles.button, styles.rightCorner]}
+          style={({ pressed }) =>
+            pressed
+              ? [styles.button, styles.pressed, styles.rightCorner]
+              : [styles.button, styles.rightCorner]
+          }
           accessibilityHint="plusButton"
         >
           <Image
-            source={require('../assets/images/plus-icon.png')}
+            source={require('../../assets/images/plus-icon.png')}
             style={styles.plus}
           />
         </Pressable>
       </View>
+
       <Pressable
-        style={styles.productContainer}
+        style={({pressed})=>
+        pressed ? [styles.productContainer, styles.pressed] : styles.productContainer }
         accessibilityHint="productRedirection"
         onPress={onPress}
       >
-        <Image
-          source={require('../assets/images/product-example.png')}
-          style={styles.productImage}
-        />
+        <Image source={{ uri: url }} style={styles.productImage} />
         <View style={styles.textContainer}>
-          <Text style={styles.productName}>name</Text>
+          <Text style={styles.productName}>{name}</Text>
           <Text style={styles.productDescription} numberOfLines={2}>
-            Crafted from the softest, breathable fabric
+            {description}
           </Text>
-          <Text style={styles.productPrice}>30,00 R$</Text>
+          <Text style={styles.productPrice}>{price} R$</Text>
         </View>
       </Pressable>
     </View>
@@ -84,6 +99,10 @@ const styles = StyleSheet.create({
     height: 21,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  pressed: {
+    opacity: 0.75,
   },
 
   leftCorner: {
