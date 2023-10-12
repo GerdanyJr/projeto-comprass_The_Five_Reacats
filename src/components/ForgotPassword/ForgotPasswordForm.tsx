@@ -1,78 +1,62 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
   Control,
   Controller,
+  FieldErrors,
   UseFormHandleSubmit,
-  useForm,
 } from 'react-hook-form';
 import { InputField } from '../Login/InputField';
 import { FormButton } from '../UI/FormButton';
 import { FormError } from '../Login/FormError';
-import {
-  ForgotPasswordEmailInput,
-  ForgotPasswordInputs,
-} from '../../screens/ForgotPasswordScreen';
-import { getForgotPasswordEmailErrorMessage } from '../../util/errors';
+import { FormHeader } from '../UI/FormHeader';
+import { ForgotPasswordInputs } from '../../screens/ForgotPasswordScreen';
 
 interface ForgotPasswordFormProps {
-  pwcontrol: Control<ForgotPasswordInputs, any>;
-  pwhandleSubmit: UseFormHandleSubmit<ForgotPasswordInputs, undefined>;
-  handleSearchPress: (data: ForgotPasswordEmailInput) => void;
-  handleConfirmPress: (data: ForgotPasswordInputs) => void;
-  isPasswordVisible: boolean;
-  handleIconPress: () => void;
-  pwerrorMessage: string;
+  control: Control<ForgotPasswordInputs, any>;
+  errorMessage: string;
   isLoading: boolean;
-  isConfirmButtonDisabled: boolean;
-  isPasswordInputEnabled: boolean;
-  isConfirmInputEnabled: boolean;
+  isPasswordVisible: boolean;
+  isEmailFound: boolean;
+  invalidEmail: boolean;
+  isValid: boolean;
+  isConfirmPasswordVisible: boolean;
+  emailValue: string;
+  errors: FieldErrors<ForgotPasswordInputs>;
+  handleSearchPress: (email: string) => void;
+  handleConfirmPress: (data: ForgotPasswordInputs) => void;
+  handleSubmit: UseFormHandleSubmit<ForgotPasswordInputs, undefined>;
+  handlePasswordIconPress: () => void;
+  handleConfirmPasswordIconPress: () => void;
 }
 
-export const ForgotPasswordForm = ({
-  pwcontrol,
-  pwhandleSubmit,
+export function ForgotPasswordForm({
+  control,
+  errorMessage,
+  isLoading,
+  isPasswordVisible,
+  isConfirmPasswordVisible,
+  isEmailFound,
+  invalidEmail,
+  emailValue,
+  isValid,
+  handleSubmit,
   handleSearchPress,
   handleConfirmPress,
-  isPasswordVisible,
-  handleIconPress,
-  pwerrorMessage,
-  isLoading,
-  isConfirmButtonDisabled,
-  isPasswordInputEnabled,
-  isConfirmInputEnabled,
-}: ForgotPasswordFormProps) => {
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<ForgotPasswordEmailInput>({
-    mode: 'onChange',
-    defaultValues: {
-      email: '',
-    },
-  });
-  const [isSearchButtonDisabled, setisSearchButtonDisabled] = useState(false);
-  const [emailErrorMessage, setEmailErrorMessage] = useState('');
-
-  useEffect(() => {
-    setEmailErrorMessage(() => getForgotPasswordEmailErrorMessage(errors));
-  }, [errors.email]);
-
+  handlePasswordIconPress,
+  handleConfirmPasswordIconPress,
+}: ForgotPasswordFormProps) {
   return (
-    <View style={styles.formContainer}>
+    <>
+      <FormHeader
+        title="Forgot Password"
+        description="Enter your email and let us see if it exists for you to change your password :)"
+        style={styles.formHeader}
+      />
       <View style={styles.inputs}>
         <Controller
           control={control}
           name="email"
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Please insert a valid email',
-            },
-          }}
           render={({ field, fieldState }) => (
             <InputField
               label="Email"
@@ -83,99 +67,76 @@ export const ForgotPasswordForm = ({
             />
           )}
         />
-
         <Controller
-          control={pwcontrol}
+          control={control}
           name="password"
-          rules={{
-            required: {
-              value: true,
-              message: 'Please complete all fields',
-            },
-            minLength: {
-              value: 6,
-              message: 'Your password must be longer than 6 digits.',
-            },
-          }}
           render={({ field, fieldState }) => (
             <InputField
-              label="New Password"
+              label="Password"
               icon={
                 isPasswordVisible
                   ? require('../../assets/images/opened-eye.png')
                   : require('../../assets/images/closed-eye.png')
               }
               secureTextEntry={!isPasswordVisible}
-              onIconPress={handleIconPress}
+              onIconPress={handlePasswordIconPress}
               error={fieldState.invalid}
               value={field.value}
-              enabledInput={isPasswordInputEnabled}
+              enabledInput={isEmailFound && !invalidEmail}
               onChangeText={field.onChange}
             />
           )}
         />
         <Controller
-          control={pwcontrol}
+          control={control}
           name="confirmPassword"
-          rules={{
-            required: {
-              value: true,
-              message: 'Please complete all fields',
-            },
-            minLength: {
-              value: 6,
-              message: 'Your password must be longer than 6 digits.',
-            },
-          }}
           render={({ field, fieldState }) => (
             <InputField
-              label="New Password"
+              label="Confirm Password"
               icon={
-                isPasswordVisible
+                isConfirmPasswordVisible
                   ? require('../../assets/images/opened-eye.png')
                   : require('../../assets/images/closed-eye.png')
               }
-              secureTextEntry={!isPasswordVisible}
-              onIconPress={handleIconPress}
+              secureTextEntry={!isConfirmPasswordVisible}
+              onIconPress={handleConfirmPasswordIconPress}
               error={fieldState.invalid}
               value={field.value}
-              enabledInput={isConfirmInputEnabled}
+              enabledInput={isEmailFound && !invalidEmail}
               onChangeText={field.onChange}
             />
           )}
         />
-        <FormError message={pwerrorMessage} />
-        <FormError message={emailErrorMessage} />
+        <FormError message={errorMessage} />
       </View>
-      <View style={styles.buttonContainer}>
+      <View style={styles.buttons}>
         <FormButton
           title="Search"
-          onPress={handleSubmit(handleSearchPress)}
+          onPress={() => handleSearchPress(emailValue)}
+          disabled={invalidEmail}
           isLoading={isLoading}
-          disabled={isSearchButtonDisabled}
         />
         <FormButton
           title="Confirm"
-          onPress={pwhandleSubmit(handleConfirmPress)}
+          onPress={handleSubmit(handleConfirmPress)}
+          disabled={invalidEmail || !isEmailFound || !isValid}
           isLoading={isLoading}
-          disabled={isConfirmButtonDisabled}
         />
       </View>
-    </View>
+    </>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  formContainer: {
-    width: '90%',
-    alignSelf: 'center',
-    gap: 64,
+  formHeader: {
+    marginTop: 26,
   },
   inputs: {
+    gap: 16,
     marginTop: 32,
-    gap: 16,
   },
-  buttonContainer: {
+  buttons: {
     gap: 16,
+    marginTop: 20,
   },
 });
