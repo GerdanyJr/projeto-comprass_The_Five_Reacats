@@ -1,116 +1,114 @@
 import React, { useEffect, useState } from 'react';
-import { CompassBackground } from '../components/Login/CompassBackground';
-import { View, StyleSheet, Text, SafeAreaView } from 'react-native';
-import { ForgotPasswordForm } from '../components/ForgotPassword/ForgotPasswordForm';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { Colors } from '../assets/constants/Colors';
+import { CompassBackground } from '../components/Login/CompassBackground';
+import { forgotPasswordSchema } from '../util/validationSchemas';
 import {
   getErrorMessageByCode,
-  getForgotPasswordInputsErrorMessage,
+  getSignUpFormErrorMessage,
 } from '../util/errors';
-import { checkEmail } from '../service/auth';
+import { GoBackButton } from '../components/UI/GoBackButton';
+import { StyleSheet, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ForgotPasswordForm } from '../components/ForgotPassword/ForgotPasswordForm';
 
 export interface ForgotPasswordInputs {
+  email: string;
   password: string;
   confirmPassword: string;
 }
 
-export interface ForgotPasswordEmailInput {
-  email: string;
-}
-
-export interface EmailInput {
-  email: string;
-}
-
-export const ForgotPasswordScreen = () => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isPasswordInputEnabled, setisPasswordInputEnabled] = useState(false);
-  const [isConfirmInputEnabled, setisConfirmInputEnabled] = useState(false);
-  const [isConfirmButtonDisabled, setisConfirmButtonDisabled] = useState(true);
-
+export function ForgotPasswordScreen() {
   const {
     control,
     handleSubmit,
-    reset,
-    formState: { errors },
+    getValues,
+    setError,
+    formState: { errors, isValid },
   } = useForm<ForgotPasswordInputs>({
-    mode: 'onChange',
     defaultValues: {
+      email: '',
       password: '',
       confirmPassword: '',
     },
+    resolver: yupResolver(forgotPasswordSchema),
+    mode: 'onChange',
   });
+  const navigation = useNavigation<any>();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmVisible, setIsConfirmVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isEmailFound, setIsEmailFound] = useState(false);
 
   useEffect(() => {
-    setErrorMessage(() => getForgotPasswordInputsErrorMessage(errors));
-  }, [errors.password, errors.confirmPassword]);
+    setErrorMessage(() => getSignUpFormErrorMessage(errors));
+  }, [errors.email, errors.password, errors.confirmPassword]);
 
-  const handleConfirmPress = (data: ForgotPasswordInputs) => {};
+  function handleIconPress(
+    setter: React.Dispatch<React.SetStateAction<boolean>>
+  ) {
+    console.log(errors === undefined);
+    setter((prevState) => !prevState);
+  }
 
-  const handleSearchPress = async (data: ForgotPasswordEmailInput) => {
+  async function handleConfirmPress(data: ForgotPasswordInputs) {
     setIsLoading(true);
     try {
-      const response = await checkEmail(data.email);
-      console.log(response.isAvailable);
-      if (!response.isAvailable) {
-        setIsLoading(false);
-        setisPasswordInputEnabled(true);
-        setisConfirmInputEnabled(true);
-      }
+      navigation.navigate('Login');
     } catch (error: any) {
       setErrorMessage(() => getErrorMessageByCode(error.response.status));
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleIconPress = () => {
-    setIsPasswordVisible((prevState) => !prevState);
-  };
-
+  }
+  async function handleSearchPress(email: string) {
+    setIsLoading(true);
+    if (true) {
+      setIsEmailFound(true);
+    } else {
+      setError('email', { type: 'custom', message: 'Email não encontrado' });
+    }
+    setIsLoading(false);
+  }
   return (
     <CompassBackground>
-      <View>
-        <Text style={style.headerText}>Forgot Password</Text>
-        <Text style={style.instructions}>
-          Enter your email and let us see if it exists for you to change your
-          password :)
-        </Text>
+      <View style={styles.formContainer}>
+        <GoBackButton
+          onPress={() => {
+            navigation.navigate('Login');
+          }}
+        />
+        <ForgotPasswordForm
+          control={control}
+          isPasswordVisible={isPasswordVisible}
+          isConfirmPasswordVisible={isConfirmVisible}
+          errors={errors}
+          isValid={isValid}
+          isEmailFound={isEmailFound}
+          invalidEmail={
+            getValues('email').length == 0 || !!errors.email?.message
+          }
+          emailValue={getValues('email')}
+          handleSubmit={handleSubmit}
+          handleConfirmPress={handleConfirmPress}
+          handleSearchPress={handleSearchPress}
+          handlePasswordIconPress={() => handleIconPress(setIsPasswordVisible)}
+          handleConfirmPasswordIconPress={() =>
+            handleIconPress(setIsConfirmVisible)
+          }
+          errorMessage={errorMessage}
+          isLoading={isLoading}
+        />
       </View>
-
-      <ForgotPasswordForm
-        pwcontrol={control}
-        pwhandleSubmit={handleSubmit}
-        handleConfirmPress={handleConfirmPress}
-        handleSearchPress={handleSearchPress}
-        handleIconPress={handleIconPress}
-        isLoading={isLoading}
-        isPasswordVisible={isPasswordVisible}
-        pwerrorMessage={errorMessage}
-        isConfirmInputEnabled={isConfirmInputEnabled}
-        isPasswordInputEnabled={isPasswordInputEnabled}
-        isConfirmButtonDisabled={isConfirmButtonDisabled}
-      />
     </CompassBackground>
   );
-};
+}
 
-const style = StyleSheet.create({
-  headerText: {
-    color: Colors.white,
-    fontSize: 32,
-    marginLeft: 20,
-    fontWeight: '800',
-    marginTop: 26,
-  },
-  instructions: {
-    width: 312,
-    fontSize: 16,
-    fontWeight: '400',
-    color: Colors.white,
-    marginLeft: 20,
+const styles = StyleSheet.create({
+  formContainer: {
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: 32,
   },
 });
