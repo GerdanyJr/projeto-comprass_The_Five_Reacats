@@ -24,7 +24,6 @@ export function HeaderBar({
   const [fetchSearch, setFetchSearch] = useState<ProductByTitle[]>([]);
   const [search, setSearch] = useState('');
 
-
   useEffect(() => {
     async function getItensByTitle() {
       const dados = await fetchItensByTitle(search);
@@ -35,7 +34,10 @@ export function HeaderBar({
 
   return (
     <View style={styles.container}>
-      <View style={isAuthenticated ? styles.userContain : styles.anonymous}>
+      <View
+        style={isAuthenticated ? styles.userContain : styles.anonymous}
+        testID="userBar"
+      >
         <Image
           source={require('../assets/images/user-example.png')}
           style={styles.userImage}
@@ -47,6 +49,7 @@ export function HeaderBar({
         <Pressable
           style={styles.searchButton}
           onPress={() => setModalVisible(!modalVisible)}
+          accessibilityHint="searchButton"
         >
           <Image
             source={require('../assets/images/search-icon.png')}
@@ -55,6 +58,7 @@ export function HeaderBar({
         </Pressable>
 
         <Modal
+          testID="search-modal"
           animationType="fade"
           visible={modalVisible}
           transparent={true}
@@ -68,6 +72,7 @@ export function HeaderBar({
           />
 
           <FlatList
+            accessibilityHint="listSearch"
             style={
               search !== '' ? styles.containResultsSearch : styles.emptySearch
             }
@@ -78,10 +83,13 @@ export function HeaderBar({
                 name={item.title}
                 description={item.description}
                 price={item.price}
+                onPress={() => {}}
               />
             )}
             maxToRenderPerBatch={3}
-            ListEmptyComponent={() => (<Text style={styles.emptyList}>Product not found</Text>)}
+            ListEmptyComponent={() => (
+              <Text style={styles.emptyList}>Product not found</Text>
+            )}
           />
         </Modal>
       </View>
@@ -133,14 +141,14 @@ const styles = StyleSheet.create({
     display: 'none',
   },
 
-  emptyList:{
+  emptyList: {
     width: 315,
     height: 201,
-    color: "#000",
+    color: '#000',
     fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    textAlignVertical: "center",
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
 
   searchButton: {

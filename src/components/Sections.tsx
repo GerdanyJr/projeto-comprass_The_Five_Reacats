@@ -24,6 +24,7 @@ export function Section({ id, title }: { id: string; title: string }) {
         </Pressable>
       </View>
       <FlatList
+        accessibilityHint='productslist'
         data={produtos}
         renderItem={({ item }) => (
           <CardItem
@@ -31,10 +32,11 @@ export function Section({ id, title }: { id: string; title: string }) {
             description={item.description}
             price={item.price}
             url={item.images[0]}
+            onPress={() => {}}
           />
         )}
         horizontal={true}
-        ListEmptyComponent={CardItemExemple}
+        ListEmptyComponent={() => <CardItemExemple onPress={() => {}} />}
       />
     </View>
   );

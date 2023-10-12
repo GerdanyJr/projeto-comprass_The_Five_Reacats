@@ -1,18 +1,31 @@
-import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Pressable,
+  GestureResponderEvent,
+} from 'react-native';
 
 export function CardSearchResult({
   url,
   name,
   description,
   price,
+  onPress,
 }: {
   url: string;
   name: string;
   description: string;
   price: string;
+  onPress: (event: GestureResponderEvent) => void;
 }) {
   return (
-    <Pressable style={styles.cardContainer} onPress={() => console.log(name)}>
+    <Pressable
+      style={styles.cardContainer}
+      onPress={onPress}
+      accessibilityHint="productRedirection"
+    >
       <Image source={{ uri: url }} style={styles.cardImage} />
       <View style={styles.cardTexts}>
         <Text style={styles.cardTitle}>{name}</Text>

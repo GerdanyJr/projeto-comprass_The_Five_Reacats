@@ -1,4 +1,11 @@
-import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Pressable,
+  GestureResponderEvent,
+} from 'react-native';
 import { useState } from 'react';
 
 export function CardItem({
@@ -6,11 +13,13 @@ export function CardItem({
   description,
   price,
   url,
+  onPress,
 }: {
   name: string;
   description: string;
   price: string;
   url: string;
+  onPress: (event: GestureResponderEvent) => void;
 }) {
   const [count, setCount] = useState(0);
 
@@ -22,6 +31,7 @@ export function CardItem({
             count !== 0 ? setCount(count - 1) : setCount(count);
           }}
           style={[styles.button, styles.leftCorner]}
+          accessibilityHint="minusButton"
         >
           <Image
             source={require('../assets/images/minus-icon.png')}
@@ -34,6 +44,7 @@ export function CardItem({
             setCount(count + 1);
           }}
           style={[styles.button, styles.rightCorner]}
+          accessibilityHint="plusButton"
         >
           <Image
             source={require('../assets/images/plus-icon.png')}
@@ -41,7 +52,11 @@ export function CardItem({
           />
         </Pressable>
       </View>
-      <Pressable style={styles.productContainer}>
+      <Pressable
+        style={styles.productContainer}
+        accessibilityHint="productRedirection"
+        onPress={onPress}
+      >
         <Image source={{ uri: url }} style={styles.productImage} />
         <View style={styles.textContainer}>
           <Text style={styles.productName}>{name}</Text>
@@ -116,9 +131,9 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 12,
   },
 
-  textContainer:{
+  textContainer: {
     width: 148,
-    textAlign: "left" 
+    textAlign: 'left',
   },
 
   productName: {
