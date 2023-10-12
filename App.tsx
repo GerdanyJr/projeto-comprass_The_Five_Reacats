@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { ForgotPasswordScreen } from './src/screens/ForgotPasswordScreen';
+import { RootStack } from './src/routes/RootStack';
 
 function App(): JSX.Element {
   return (  
-    <ForgotPasswordScreen/>
+    <RootStack />
   );
 }
 export default App;
