@@ -6,6 +6,7 @@ export const mainPageOptions = {
     headerShown: false,
     tabBarActiveTintColor: Colors.red_500,
     tabBarLabelStyle: { fontSize: 14 },
+    
   },
   homeOptions: {
     tabBarIcon: ({ color, size, focused }: any) => (

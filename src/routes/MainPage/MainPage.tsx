@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View } from 'react-native';
 import { mainPageOptions } from './MainPageOptions';
+import { HomeScreen } from '../../screens/HomeScreen';
 
 const Tab = createBottomTabNavigator();
 export function MainPage() {
@@ -9,7 +10,7 @@ export function MainPage() {
     <Tab.Navigator screenOptions={mainPageOptions.screenOptions}>
       <Tab.Screen
         name="Home"
-        component={View}
+        component={HomeScreen}
         options={mainPageOptions.homeOptions}
       />
       <Tab.Screen
@@ -21,6 +22,14 @@ export function MainPage() {
         name="Profile"
         component={View}
         options={mainPageOptions.profileOptions}
+      />
+      <Tab.Screen
+        name="Product"
+        component={View}
+        options={{
+          tabBarItemStyle: {display: 'none'},
+          tabBarStyle:{display:'none'}
+        }}
       />
     </Tab.Navigator>
   );
