@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-native/extend-expect';
 import { render, userEvent, fireEvent } from '@testing-library/react-native';
 import { UserEventInstance } from '@testing-library/react-native/build/user-event/setup';
-import { HeaderBar } from '../../src/components/HeaderBar';
+import { HeaderBar } from '../../src/components/Home/HeaderBar';
 describe('Card search component test', () => {
   let user: UserEventInstance;
 
@@ -68,4 +68,3 @@ describe('Card search component test', () => {
     });
   });
 });
-

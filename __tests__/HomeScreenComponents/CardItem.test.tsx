@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-native/extend-expect';
 import { render, userEvent } from '@testing-library/react-native';
 import { UserEventInstance } from '@testing-library/react-native/build/user-event/setup';
-import { CardItem } from '../../src/components/CardItem';
+import { CardItem } from '../../src/components/Home/CardItem';
 
 describe('Card component test', () => {
   let user: UserEventInstance;
