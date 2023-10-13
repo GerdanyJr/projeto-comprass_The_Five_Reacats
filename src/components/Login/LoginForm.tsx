@@ -30,13 +30,6 @@ export function LoginForm({
       <View style={styles.inputs}>
         <Controller
           control={control}
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Please insert a valid email',
-            },
-          }}
           name="email"
           render={({ field, fieldState }) => (
             <InputField
@@ -50,16 +43,6 @@ export function LoginForm({
         />
         <Controller
           control={control}
-          rules={{
-            required: {
-              value: true,
-              message: 'Please complete all fields',
-            },
-            minLength: {
-              value: 6,
-              message: 'Your password must be longer than 6 digits.',
-            },
-          }}
           name="password"
           render={({ field, fieldState }) => (
             <InputField
