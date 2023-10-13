@@ -27,7 +27,7 @@ const PixPaymentSuccessScreen: React.FC = () => {
         </PixBackgroundImage>
         <View style={styles.SuccessText}>
             <SuccessText  />
-            <Text style={styles.thankYouText}>Pay your pix using the QR code above and{'\n'}
+            <Text style={styles.instructionText}>Pay your pix using the QR code above and{'\n'}
                 then follow the steps sent by email.
             </Text>
         </View>
@@ -47,7 +47,7 @@ const PixPaymentSuccessScreen: React.FC = () => {
       backgroundColor: Colors.white,
 
     },
-    thankYouText: {
+    instructionText: {
       color: Colors.black_800,
       lineHeight: 24,
       fontSize: 16,

@@ -19,7 +19,7 @@ const SuccessScreen: React.FC = () => {
   })
   
   const handleContinuePress = () => {
-    //navegação do botão para futura tela home
+    
   };
 
   return (
