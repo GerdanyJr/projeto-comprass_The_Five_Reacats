@@ -11,6 +11,7 @@ import { GoBackButton } from '../components/UI/GoBackButton';
 import { StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ForgotPasswordForm } from '../components/ForgotPassword/ForgotPasswordForm';
+import { checkEmail, updateUserPassword } from '../service/auth';
 
 export interface ForgotPasswordInputs {
   email: string;
@@ -48,13 +49,14 @@ export function ForgotPasswordScreen() {
   function handleIconPress(
     setter: React.Dispatch<React.SetStateAction<boolean>>
   ) {
-    console.log(errors === undefined);
     setter((prevState) => !prevState);
   }
 
   async function handleConfirmPress(data: ForgotPasswordInputs) {
     setIsLoading(true);
     try {
+      // hardcode id, pois nao tem como pegar id pelo email :(
+      const response = await updateUserPassword(4, data.password);
       navigation.navigate('Login');
     } catch (error: any) {
       setErrorMessage(() => getErrorMessageByCode(error.response.status));
@@ -64,10 +66,16 @@ export function ForgotPasswordScreen() {
   }
   async function handleSearchPress(email: string) {
     setIsLoading(true);
-    if (true) {
-      setIsEmailFound(true);
-    } else {
-      setError('email', { type: 'custom', message: 'Email não encontrado' });
+    try {
+      setErrorMessage('');
+      const response = await checkEmail(email);
+      if (!response.isAvailable) {
+        setIsEmailFound(true);
+      } else {
+        setError('email', { type: 'custom', message: 'Email não encontrado' });
+      }
+    } catch (error: any) {
+      setErrorMessage(() => getErrorMessageByCode(error.response.status));
     }
     setIsLoading(false);
   }
