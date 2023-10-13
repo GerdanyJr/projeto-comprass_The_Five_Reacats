@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { CompassBackground } from '../components/Login/CompassBackground';
 import { RedirectText } from '../components/Login/RedirectText';
@@ -12,6 +12,7 @@ import { LoginForm } from '../components/Login/LoginForm';
 import { useNavigation } from '@react-navigation/native';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '../util/validationSchemas';
+import { UserContext } from '../store/UserContext';
 
 export interface Inputs {
   email: string;
@@ -39,6 +40,7 @@ export function LoginScreen() {
   useEffect(() => {
     setErrorMessage(() => getLoginFormErrorMessage(errors));
   }, [errors.email, errors.password]);
+  const userCtx = useContext(UserContext);
 
   function handleIconPress() {
     setIsPasswordVisible((prevState) => !prevState);
@@ -47,9 +49,9 @@ export function LoginScreen() {
   async function handleLoginPress(data: Inputs) {
     setIsLoading(true);
     try {
-      const response = await login(data.email, data.password);
-      const user = await getUser(response.access_token);
-      //todo set context
+      const token = await login(data.email, data.password);
+      const user = await getUser(token.acessToken);
+      userCtx.authenticate(token, user);
       navigation.navigate('MainPage');
     } catch (error: any) {
       setErrorMessage(() => getErrorMessageByCode(error.response.status));
