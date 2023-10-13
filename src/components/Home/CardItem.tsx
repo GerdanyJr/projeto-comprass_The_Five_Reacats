@@ -6,79 +6,84 @@ import {
   Pressable,
   GestureResponderEvent,
 } from 'react-native';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
-export function CardItem({
-  name,
-  description,
-  price,
-  url,
-  onPress,
-}: {
-  name: string;
-  description: string;
-  price: string;
-  url: string;
-  onPress: (event: GestureResponderEvent) => void;
-}) {
-  const [count, setCount] = useState(0);
+export const CardItem = memo(
+  ({
+    name,
+    description,
+    price,
+    url,
+    onPress,
+  }: {
+    name: string;
+    description: string;
+    price: string;
+    url: string;
+    onPress: (event: GestureResponderEvent) => void;
+  }) => {
+    const [count, setCount] = useState(0);
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.countContainer}>
+    return (
+      <View style={styles.container}>
+        <View style={styles.countContainer}>
+          <Pressable
+            onPress={() => {
+              count !== 0 ? setCount(count - 1) : setCount(count);
+            }}
+            style={({ pressed }) =>
+              pressed
+                ? [styles.button, styles.pressed, styles.leftCorner]
+                : [styles.button, styles.leftCorner]
+            }
+            accessibilityHint="minusButton"
+          >
+            <Image
+              source={require('../../assets/images/minus-icon.png')}
+              style={styles.minus}
+            />
+          </Pressable>
+          <Text style={styles.count}>{count}</Text>
+          <Pressable
+            onPress={() => {
+              setCount(count + 1);
+            }}
+            style={({ pressed }) =>
+              pressed
+                ? [styles.button, styles.pressed, styles.rightCorner]
+                : [styles.button, styles.rightCorner]
+            }
+            accessibilityHint="plusButton"
+          >
+            <Image
+              source={require('../../assets/images/plus-icon.png')}
+              style={styles.plus}
+            />
+          </Pressable>
+        </View>
+
         <Pressable
-          onPress={() => {
-            count !== 0 ? setCount(count - 1) : setCount(count);
-          }}
           style={({ pressed }) =>
             pressed
-              ? [styles.button, styles.pressed, styles.leftCorner]
-              : [styles.button, styles.leftCorner]
+              ? [styles.productContainer, styles.pressed]
+              : styles.productContainer
           }
-          accessibilityHint="minusButton"
+          accessibilityHint="productRedirection"
+          onPress={onPress}
         >
-          <Image
-            source={require('../../assets/images/minus-icon.png')}
-            style={styles.minus}
-          />
-        </Pressable>
-        <Text style={styles.count}>{count}</Text>
-        <Pressable
-          onPress={() => {
-            setCount(count + 1);
-          }}
-          style={({ pressed }) =>
-            pressed
-              ? [styles.button, styles.pressed, styles.rightCorner]
-              : [styles.button, styles.rightCorner]
-          }
-          accessibilityHint="plusButton"
-        >
-          <Image
-            source={require('../../assets/images/plus-icon.png')}
-            style={styles.plus}
-          />
+          <Image source={{ uri: url }} style={styles.productImage} />
+          <View style={styles.textContainer}>
+            <Text style={styles.productName}>{name}</Text>
+            <Text style={styles.productDescription} numberOfLines={2}>
+              {description}
+            </Text>
+            <Text style={styles.productPrice}>{price} R$</Text>
+          </View>
         </Pressable>
       </View>
-
-      <Pressable
-        style={({pressed})=>
-        pressed ? [styles.productContainer, styles.pressed] : styles.productContainer }
-        accessibilityHint="productRedirection"
-        onPress={onPress}
-      >
-        <Image source={{ uri: url }} style={styles.productImage} />
-        <View style={styles.textContainer}>
-          <Text style={styles.productName}>{name}</Text>
-          <Text style={styles.productDescription} numberOfLines={2}>
-            {description}
-          </Text>
-          <Text style={styles.productPrice}>{price} R$</Text>
-        </View>
-      </Pressable>
-    </View>
-  );
-}
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
