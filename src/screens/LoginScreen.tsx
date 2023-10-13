@@ -10,6 +10,8 @@ import {
 } from '../util/errors';
 import { LoginForm } from '../components/Login/LoginForm';
 import { useNavigation } from '@react-navigation/native';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { loginSchema } from '../util/validationSchemas';
 
 export interface Inputs {
   email: string;
@@ -28,6 +30,7 @@ export function LoginScreen() {
     formState: { errors },
   } = useForm<Inputs>({
     mode: 'onChange',
+    resolver: yupResolver(loginSchema),
     defaultValues: {
       email: '',
       password: '',
