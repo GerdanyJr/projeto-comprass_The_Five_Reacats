@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import {
   Image,
@@ -17,6 +17,7 @@ interface InputFieldProps {
   error: boolean;
   value: string;
   enabledInput: boolean;
+  style?: any;
   icon?: ImageSourcePropType;
   secureTextEntry?: boolean;
   onChangeText?: (enteredText: string) => void;
@@ -27,6 +28,12 @@ export function InputField(props: InputFieldProps): JSX.Element {
   const [labelStyles, setLabelStyles] = useState(styles.label);
   const [errorLabelStyles, setErrorLabelStyles] = useState(styles.errorLabel);
   const transY = useRef(new Animated.Value(0));
+
+  useEffect(() => {
+    if (props.value.length > 0) {
+      handleFocus();
+    }
+  }, [props.value]);
 
   const handleFocus = () => {
     setLabelStyles(styles.focusedLabel);
@@ -62,6 +69,7 @@ export function InputField(props: InputFieldProps): JSX.Element {
       <View
         style={[
           styles.inputContainer,
+          props.style,
           !props.enabledInput && styles.disabledInput,
           props.error && styles.errorInput,
         ]}
