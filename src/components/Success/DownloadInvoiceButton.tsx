@@ -1,16 +1,30 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps, Linking } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 
 interface DownloadInvoiceButtonProps extends TouchableOpacityProps {
-  onPress: () => void;
+  downloadUrl: string;
   children?: React.ReactNode;
 }
 
-const DownloadInvoiceButton: React.FC<DownloadInvoiceButtonProps> = ({ onPress, children, ...props }) => {
+const DownloadInvoiceButton: React.FC<DownloadInvoiceButtonProps> = ({ downloadUrl, children, ...props }) => {
+  const handleDownloadPress = async () => {
+    try {
+      const supported = await Linking.canOpenURL(downloadUrl);
+
+      if (supported) {
+        await Linking.openURL(downloadUrl);
+      } else {
+        console.error(`Não é possível abrir a URL: ${downloadUrl}`);
+      }
+    } catch (error) {
+      console.error('Erro ao abrir a URL:', error);
+    }
+  };
+
   return (
-    <TouchableOpacity style={styles.continueButton} onPress={onPress} {...props}>
-      <Text style={styles.buttonText}>{children}</Text>
+    <TouchableOpacity style={styles.continueButton} onPress={handleDownloadPress} {...props}>
+      <Text style={styles.buttonText}>{children || 'Download'}</Text>
     </TouchableOpacity>
   );
 };
@@ -23,10 +37,9 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     elevation: 5,
     justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
     bottom: 114,
-    
-    
   },
   buttonText: {
     color: Colors.white,

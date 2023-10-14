@@ -22,9 +22,6 @@ const InvoicePaymentScreen: React.FC = () => {
     const handleContinuePress = () => {
       
     };
-    const downloadInvoicePress = () => {
-
-    };
   
     return (
       <View style={styles.container}>
@@ -38,7 +35,8 @@ const InvoicePaymentScreen: React.FC = () => {
             />
         </View>
         <DownloadInvoiceButton 
-        onPress={downloadInvoicePress}
+        downloadUrl="https://drive.google.com/uc?id=1NMJFDL7lBE86OWwvRBB8GC_JOWrd-F2l&export=download"
+        
         children= 'BAIXAR BOLETO'
         />
           <ContinueShoppingButton
