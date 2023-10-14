@@ -4,6 +4,7 @@ import { Token } from '../types/interfaces/Token';
 import { CartItem } from '../types/interfaces/CartItem';
 import { Product } from '../types/interfaces/Product';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ShippingAddress } from '../types/interfaces/ShippingAddress';
 
 export const UserContext = createContext({
   user: {} as User | null,
@@ -12,6 +13,8 @@ export const UserContext = createContext({
   cart: [] as CartItem[],
   authenticate: (token: Token, user: User) => {},
   addCartItem: (item: Product) => {},
+  addShippingAddress: (item: ShippingAddress) => {},
+  addPaymentForm: (item: Product) => {},
   removeCartItem: (itemId: number) => {},
   setItemQuantity: (itemId: number, itemQuantity: number) => {},
   clearCart: () => {},
@@ -47,6 +50,25 @@ export function UserContextProvider({
   function removeCartItem(itemId: number) {
     setCart((prevState) => prevState.filter(({ item }) => item.id !== itemId));
   }
+  function addShippingAddress(shippingAddress: ShippingAddress) {
+    const newShippings = [...user!.shippingAdresses, shippingAddress];
+    if (user !== null) {
+      setUser((prevState) => {
+        return {
+          ...prevState!,
+          shippingAdresses: newShippings,
+        };
+      });
+    }
+  }
+  function addPaymentForm(paymentForm: any) {
+    const newPaymentForms = [...user!.paymentForms, paymentForm];
+    if (user !== null) {
+      setUser((prevState) => {
+        return { ...prevState!, paymentForms: newPaymentForms };
+      });
+    }
+  }
   function setItemQuantity(itemId: number, itemQuantity: number) {
     setCart((prevState) =>
       prevState.map((cartItem) =>
@@ -74,6 +96,8 @@ export function UserContextProvider({
         isAuthenticated: !!token,
         cart: cart,
         addCartItem: addCartItem,
+        addShippingAddress: addShippingAddress,
+        addPaymentForm: addPaymentForm,
         setItemQuantity: setItemQuantity,
         removeCartItem: removeCartItem,
         clearCart: clearCart,
