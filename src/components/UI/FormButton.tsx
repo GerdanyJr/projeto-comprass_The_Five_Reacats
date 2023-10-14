@@ -4,6 +4,7 @@ import { Colors } from '../../assets/constants/Colors';
 
 interface FormButtonProps {
   title: string;
+  style?: any;
   isLoading?: boolean;
   disabled?: boolean;
   onPress: () => void;
@@ -11,19 +12,24 @@ interface FormButtonProps {
 
 export function FormButton({
   title,
+  style,
   isLoading,
   disabled,
   onPress,
 }: FormButtonProps) {
   return (
     <Pressable
-      style={[styles.button, disabled && styles.disabledButton]}
+      style={[styles.button, style, disabled && styles.disabledButton]}
       onPress={onPress}
       disabled={disabled || isLoading}
       android_ripple={{ foreground: true, color: Colors.gray_100 }}
     >
       {isLoading ? (
-        <ActivityIndicator size={28} color="white" accessibilityHint='Loading' />
+        <ActivityIndicator
+          size={28}
+          color="white"
+          accessibilityHint="Loading"
+        />
       ) : (
         <Text style={styles.title}>{title}</Text>
       )}
@@ -39,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.red_500,
     borderRadius: 25,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   disabledButton: {
     backgroundColor: Colors.gray_900,
