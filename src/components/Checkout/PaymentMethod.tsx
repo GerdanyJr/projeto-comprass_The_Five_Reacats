@@ -1,16 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
+import { useNavigation } from '@react-navigation/native';
 
-export function PaymenMethod() {
+export function PaymentMethod() {
+  const navigation = useNavigation<any>();
+
+  function handlePaymentPress() {
+    navigation.navigate('PaymentMethodForm');
+  }
   return (
-    <View style={styles.paymentMethod}>
+    <Pressable style={styles.paymentMethod} onPress={handlePaymentPress}>
       <Text style={styles.paymentMethodTitle}>Payment Method</Text>
       <View style={styles.addPaymentContainer}>
         <Text style={styles.changeMethods}>Change</Text>
         <Text style={styles.paymentMethods}>None added</Text>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
