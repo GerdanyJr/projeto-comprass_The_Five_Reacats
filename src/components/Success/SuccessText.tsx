@@ -3,7 +3,10 @@ import { Text, StyleSheet } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 
 const SuccessText: React.FC = () => {
-  return <Text style={styles.successText}>Success!</Text>;
+  return <Text 
+  style={styles.successText}
+  accessibilityHint='success text'
+  >Success!</Text>;
 };
 
 const styles = StyleSheet.create({
