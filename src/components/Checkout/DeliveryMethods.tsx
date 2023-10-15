@@ -8,11 +8,11 @@ import {
   View,
 } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
-import { logos } from '../../util/logos';
+import { logos } from '../../util/constants/logos';
 import { CheckoutContext } from '../../store/CheckoutContext';
-import { DeliveryMethod } from '../../types/interfaces/DeliveryMethod';
+import { Brand } from '../../types/interfaces/Brand';
 
-function DeliveryLogo({ item }: { item: DeliveryMethod }) {
+function DeliveryLogo({ item }: { item: Brand }) {
   const checkoutCtx = useContext(CheckoutContext);
   const selected = item.id === checkoutCtx.deliveryMethod?.id;
 

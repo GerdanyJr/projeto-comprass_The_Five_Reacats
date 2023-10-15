@@ -50,9 +50,9 @@ function Address({
         style={[styles.addShippingContainer, styles.addressContainer]}
       >
         <View style={styles.infoContainer}>
-          <Text style={styles.name}>{address.fullName}</Text>
-          <Text style={styles.address}>{address.address}</Text>
-          <Text style={styles.address}>{`${address.city}, ${address.state}`}</Text>
+          <Text style={styles.name} numberOfLines={1} ellipsizeMode='tail'>{address.fullName}</Text>
+          <Text style={styles.address} numberOfLines={1} ellipsizeMode='tail'>{address.address}</Text>
+          <Text style={styles.address} numberOfLines={1} ellipsizeMode='tail'>{`${address.city}, ${address.state} ${address.cep}`}</Text>
         </View>
         <Text style={styles.changeShipping}>Change</Text>
       </Pressable>
