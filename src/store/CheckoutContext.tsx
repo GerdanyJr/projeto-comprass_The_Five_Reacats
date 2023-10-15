@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { ShippingAddress } from '../types/interfaces/ShippingAddress';
 import { CreditCard } from '../types/interfaces/CreditCard';
-import { DeliveryMethod } from '../types/interfaces/Brand';
+import { Brand } from '../types/interfaces/Brand';
 
 type PaymentMethod = 'pix' | 'boleto' | 'creditCard' | null;
 
@@ -12,8 +12,8 @@ export const CheckoutContext = createContext({
   addShippingAddress: (shippingAddress: ShippingAddress) => {},
   paymentMethod: null as PaymentMethod,
   addPaymentMethod: (paymentMethod: PaymentMethod) => {},
-  deliveryMethod: null as DeliveryMethod | null,
-  addDeliveryMethod: (deliveryMethod: DeliveryMethod) => {},
+  deliveryMethod: null as Brand | null,
+  addDeliveryMethod: (deliveryMethod: Brand) => {},
 });
 
 export function CheckoutContextProvider({
@@ -25,9 +25,7 @@ export function CheckoutContextProvider({
     useState<ShippingAddress | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(null);
   const [creditCard, setCreditCard] = useState<CreditCard | null>(null);
-  const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod | null>(
-    null
-  );
+  const [deliveryMethod, setDeliveryMethod] = useState<Brand | null>(null);
 
   function addShippingAddress(shippingAddress: ShippingAddress) {
     setShippingAddress(shippingAddress);
@@ -37,7 +35,7 @@ export function CheckoutContextProvider({
     setPaymentMethod(paymentMethod);
   }
 
-  function addDeliveryMethod(deliveryMethod: DeliveryMethod) {
+  function addDeliveryMethod(deliveryMethod: Brand) {
     setDeliveryMethod(deliveryMethod);
   }
 
