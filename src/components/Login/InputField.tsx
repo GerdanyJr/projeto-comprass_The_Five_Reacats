@@ -11,12 +11,14 @@ import {
   ImageSourcePropType,
 } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
+import { ActivityIndicator } from 'react-native';
 
 interface InputFieldProps {
   label: string;
   error: boolean;
   value: string;
   enabledInput: boolean;
+  isLoading?: boolean;
   style?: any;
   icon?: ImageSourcePropType;
   secureTextEntry?: boolean;
@@ -91,19 +93,22 @@ export function InputField(props: InputFieldProps): JSX.Element {
             {props.label}
           </Animated.Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, props.isLoading && styles.loadingInput]}
             onChangeText={props.onChangeText}
             onFocus={handleFocus}
             onBlur={handleBlur}
             value={props.value}
             secureTextEntry={props.secureTextEntry}
-            editable={props.enabledInput}
+            editable={props.enabledInput && !props.isLoading}
           />
         </View>
-        {props.icon && props.enabledInput && (
+        {props.icon && !props.isLoading && props.enabledInput && (
           <Pressable onPress={props.onIconPress}>
             <Image source={props.icon} accessibilityHint="icon" />
           </Pressable>
+        )}
+        {props.isLoading && (
+          <ActivityIndicator size={28} color={Colors.red_500} />
         )}
       </View>
     </>
@@ -153,5 +158,9 @@ const styles = StyleSheet.create({
     borderColor: Colors.red_500,
     borderWidth: 1,
     borderRadius: 12,
+  },
+  loadingInput: {
+    minWidth: '80%',
+    maxWidth: '80%',
   },
 });
