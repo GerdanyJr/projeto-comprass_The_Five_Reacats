@@ -3,9 +3,11 @@ import { ShippingAddress } from '../types/interfaces/ShippingAddress';
 import { CreditCard } from '../types/interfaces/CreditCard';
 import { DeliveryMethod } from '../types/interfaces/DeliveryMethod';
 
-type PaymentMethod = 'pix' | 'boleto' | CreditCard | null;
+type PaymentMethod = 'pix' | 'boleto' | 'creditCard' | null;
 
 export const CheckoutContext = createContext({
+  creditCard: {} as CreditCard | null,
+  addCreditCard: (creditCard: CreditCard) => {},
   shippingAddress: null as ShippingAddress | null,
   addShippingAddress: (shippingAddress: ShippingAddress) => {},
   paymentMethod: null as PaymentMethod,
@@ -22,6 +24,7 @@ export function CheckoutContextProvider({
   const [shippingAddress, setShippingAddress] =
     useState<ShippingAddress | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(null);
+  const [creditCard, setCreditCard] = useState<CreditCard | null>(null);
   const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod | null>(
     null
   );
@@ -38,9 +41,14 @@ export function CheckoutContextProvider({
     setDeliveryMethod(deliveryMethod);
   }
 
+  function addCreditCard(creditCard: CreditCard) {
+    setCreditCard(creditCard);
+  }
   return (
     <CheckoutContext.Provider
       value={{
+        creditCard: creditCard,
+        addCreditCard: addCreditCard,
         shippingAddress: shippingAddress,
         addShippingAddress: addShippingAddress,
         paymentMethod: paymentMethod,
