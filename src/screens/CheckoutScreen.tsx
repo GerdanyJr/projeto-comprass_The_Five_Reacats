@@ -1,41 +1,39 @@
-import React, { useContext, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useContext } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { Colors } from '../assets/constants/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../store/UserContext';
 import { UnloggedAllert } from '../components/Checkout/UnloggedAllert';
 import { ShippingAddresses } from '../components/Checkout/ShippingAddresses';
-import { PaymenMethod } from '../components/Checkout/PaymentMethod';
-import { DeliveryMethod } from '../components/Checkout/DeliveryMethod';
+import { PaymentMethod } from '../components/Checkout/PaymentMethod';
+import { DeliveryMethods } from '../components/Checkout/DeliveryMethods';
 import { FormButton } from '../components/UI/FormButton';
 import { Summary } from '../components/Checkout/Summary';
+import { CheckoutContext } from '../store/CheckoutContext';
 
 export function CheckoutScreen() {
   const navigation = useNavigation<any>();
   const userCtx = useContext(UserContext);
+  const { deliveryMethod, paymentMethod, shippingAddress } =
+    useContext(CheckoutContext);
 
   function LoggedCheckout() {
-    const [selectedDelivery, setSelectedDelivery] = useState<number | null>(
-      null
-    );
-
-    function handleLogoPress(id: number) {
-      setSelectedDelivery(id);
-    }
-
     return (
       <View>
-        <ShippingAddresses
-          selectedAddress={userCtx.user?.shippingAdresses[0]}
-        />
-        <PaymenMethod />
-        <DeliveryMethod
-          selectedItem={selectedDelivery}
-          onLogoPress={handleLogoPress}
-        />
+        <ShippingAddresses />
+        <PaymentMethod />
+        <DeliveryMethods />
         <View style={styles.footer}>
           <Summary cart={userCtx.cart} />
-          <FormButton title="Submit order" onPress={() => {}} />
+          <FormButton
+            title="Submit order"
+            onPress={() => {}}
+            disabled={
+              deliveryMethod === null ||
+              paymentMethod === null ||
+              shippingAddress === null
+            }
+          />
         </View>
       </View>
     );
@@ -57,5 +55,8 @@ const styles = StyleSheet.create({
   footer: {
     marginTop: 20,
     gap: 38,
+  },
+  translucentBackground: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
   },
 });
