@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { ShippingAddress } from '../types/interfaces/ShippingAddress';
 import { CreditCard } from '../types/interfaces/CreditCard';
-import { DeliveryMethod } from '../types/interfaces/DeliveryMethod';
+import { DeliveryMethod } from '../types/interfaces/Brand';
 
 type PaymentMethod = 'pix' | 'boleto' | 'creditCard' | null;
 

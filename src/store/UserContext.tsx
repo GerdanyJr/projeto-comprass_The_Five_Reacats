@@ -5,6 +5,7 @@ import { CartItem } from '../types/interfaces/CartItem';
 import { Product } from '../types/interfaces/Product';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ShippingAddress } from '../types/interfaces/ShippingAddress';
+import { CreditCard } from '../types/interfaces/CreditCard';
 
 export const UserContext = createContext({
   user: {} as User | null,
@@ -14,7 +15,7 @@ export const UserContext = createContext({
   authenticate: (token: Token, user: User) => {},
   addCartItem: (item: Product) => {},
   addShippingAddress: (item: ShippingAddress) => {},
-  addPaymentForm: (item: Product) => {},
+  addCreditCard: (item: CreditCard) => {},
   removeCartItem: (itemId: number) => {},
   setItemQuantity: (itemId: number, itemQuantity: number) => {},
   clearCart: () => {},
@@ -61,12 +62,14 @@ export function UserContextProvider({
       });
     }
   }
-  function addPaymentForm(paymentForm: any) {
-    const newPaymentForms = [...user!.paymentForms, paymentForm];
-    if (user !== null) {
-      setUser((prevState) => {
-        return { ...prevState!, paymentForms: newPaymentForms };
-      });
+  function addCreditCard(card: CreditCard) {
+    if (!user?.paymentForms.includes(card)) {
+      const newPaymentForms = [...user!.paymentForms, card];
+      if (user !== null) {
+        setUser((prevState) => {
+          return { ...prevState!, paymentForms: newPaymentForms };
+        });
+      }
     }
   }
   function setItemQuantity(itemId: number, itemQuantity: number) {
@@ -97,7 +100,7 @@ export function UserContextProvider({
         cart: cart,
         addCartItem: addCartItem,
         addShippingAddress: addShippingAddress,
-        addPaymentForm: addPaymentForm,
+        addCreditCard: addCreditCard,
         setItemQuantity: setItemQuantity,
         removeCartItem: removeCartItem,
         clearCart: clearCart,
