@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export async function getAddressByCep(cep: string) {
-  console.log(cep);
   const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
   const data = await response.data;
   const address= {
