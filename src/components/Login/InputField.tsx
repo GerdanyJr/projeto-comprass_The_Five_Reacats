@@ -9,6 +9,7 @@ import {
   Easing,
   Pressable,
   ImageSourcePropType,
+  TextInputProps,
 } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 import { ActivityIndicator } from 'react-native';
@@ -18,9 +19,11 @@ interface InputFieldProps {
   error: boolean;
   value: string;
   enabledInput: boolean;
+  inputProps?: TextInputProps;
   isLoading?: boolean;
   style?: any;
   icon?: ImageSourcePropType;
+  iconStyles?: any;
   secureTextEntry?: boolean;
   onChangeText?: (enteredText: string) => void;
   onIconPress?: () => void;
@@ -100,11 +103,16 @@ export function InputField(props: InputFieldProps): JSX.Element {
             value={props.value}
             secureTextEntry={props.secureTextEntry}
             editable={props.enabledInput && !props.isLoading}
+            {...props.inputProps}
           />
         </View>
         {props.icon && !props.isLoading && props.enabledInput && (
           <Pressable onPress={props.onIconPress}>
-            <Image source={props.icon} accessibilityHint="icon" />
+            <Image
+              source={props.icon}
+              accessibilityHint="icon"
+              style={props.iconStyles}
+            />
           </Pressable>
         )}
         {props.isLoading && (
