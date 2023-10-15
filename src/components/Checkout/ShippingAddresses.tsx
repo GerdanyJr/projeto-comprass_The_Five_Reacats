@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { ShippingAddress } from '../../types/interfaces/ShippingAddress';
+import { CheckoutContext } from '../../store/CheckoutContext';
 
-interface ShippingAddressesProps {
-  selectedAddress: ShippingAddress | undefined;
-}
-
-export function ShippingAddresses({ selectedAddress }: ShippingAddressesProps) {
+export function ShippingAddresses() {
+  const { shippingAddress } = useContext(CheckoutContext);
   const navigation = useNavigation<any>();
 
   function handlePress() {
@@ -16,8 +14,8 @@ export function ShippingAddresses({ selectedAddress }: ShippingAddressesProps) {
   }
   return (
     <View style={styles.shippingAddress}>
-      {selectedAddress ? (
-        <Address handlePress={handlePress} address={selectedAddress!} />
+      {shippingAddress ? (
+        <Address handlePress={handlePress} address={shippingAddress} />
       ) : (
         <EmptyAddresses handlePress={handlePress} />
       )}
@@ -54,6 +52,7 @@ function Address({
         <View style={styles.infoContainer}>
           <Text style={styles.name}>{address.fullName}</Text>
           <Text style={styles.address}>{address.address}</Text>
+          <Text style={styles.address}>{`${address.city}, ${address.state}`}</Text>
         </View>
         <Text style={styles.changeShipping}>Change</Text>
       </Pressable>
