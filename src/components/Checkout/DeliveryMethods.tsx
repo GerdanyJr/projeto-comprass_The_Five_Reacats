@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import {
   FlatList,
   Image,
-  ImageSourcePropType,
   Pressable,
   StyleSheet,
   Text,
@@ -10,59 +9,40 @@ import {
 } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 import { logos } from '../../util/logos';
+import { CheckoutContext } from '../../store/CheckoutContext';
+import { DeliveryMethod } from '../../types/interfaces/DeliveryMethod';
 
-function DeliveryLogo({
-  imgPath,
-  onPress,
-  selected,
-}: {
-  imgPath: ImageSourcePropType;
-  onPress: () => void;
-  selected?: boolean;
-}) {
+function DeliveryLogo({ item }: { item: DeliveryMethod }) {
+  const checkoutCtx = useContext(CheckoutContext);
+  const selected = item.id === checkoutCtx.deliveryMethod?.id;
+
+  function onPress() {
+    checkoutCtx.addDeliveryMethod(item);
+  }
   return (
     <View style={{ height: '100%' }}>
       {selected && (
         <Image
           source={require('../../assets/images/check-circle.png')}
-          style={{
-            width: 22,
-            height: 22,
-            position: 'absolute',
-            zIndex: 1,
-            right: -3,
-            top: 10,
-          }}
+          style={styles.check}
         />
       )}
       <Pressable style={styles.deliveryContainer} onPress={onPress}>
-        <Image style={styles.logo} source={imgPath} />
+        <Image style={styles.logo} source={item.logo} />
         <Text style={styles.shippingTime}>2-3 days</Text>
       </Pressable>
     </View>
   );
 }
 
-export function DeliveryMethod({
-  selectedItem,
-  onLogoPress,
-}: {
-  selectedItem: number | null;
-  onLogoPress: (itemId: number) => void;
-}) {
+export function DeliveryMethods() {
   return (
     <View style={styles.deliveryMethod}>
       <Text style={styles.deliveryMethodTitle}>Delivery Method</Text>
       <FlatList
         data={logos}
         horizontal
-        renderItem={({ item }) => (
-          <DeliveryLogo
-            imgPath={item.logo}
-            onPress={() => onLogoPress(item.id)}
-            selected={item.id === selectedItem}
-          />
-        )}
+        renderItem={({ item }) => <DeliveryLogo item={item} />}
         style={{ height: 100 }}
       />
     </View>
@@ -99,5 +79,13 @@ const styles = StyleSheet.create({
     marginTop: 9,
     fontSize: 16,
     textAlign: 'center',
+  },
+  check: {
+    width: 22,
+    height: 22,
+    position: 'absolute',
+    zIndex: 1,
+    right: -3,
+    top: 10,
   },
 });
