@@ -1,6 +1,6 @@
-import { DeliveryMethod } from '../../types/interfaces/DeliveryMethod';
+import { Brand } from '../../types/interfaces/Brand';
 
-export const logos: DeliveryMethod[] = [
+export const logos: Brand[] = [
   {
     id: 0,
     name: 'fedex',
