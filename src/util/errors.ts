@@ -2,6 +2,7 @@ import { FieldErrors } from 'react-hook-form';
 import { Inputs } from '../screens/LoginScreen';
 import { SignUpInputs } from '../screens/SignUpScreen';
 import { ShippingAddressInputs } from '../components/Checkout/ShippingAddressForm';
+import { CardInputs } from '../components/Checkout/CardForm';
 
 export function getErrorMessageByCode(httpCode: number): string {
   switch (httpCode) {
@@ -31,7 +32,9 @@ export function getSignUpFormErrorMessage(errors: FieldErrors<SignUpInputs>) {
     return errors.name.message;
   } else return '';
 }
-export function getShippingsErrorMessage(errors: FieldErrors<ShippingAddressInputs>) {
+export function getShippingsErrorMessage(
+  errors: FieldErrors<ShippingAddressInputs>
+) {
   if (errors.address?.message) {
     return errors.address.message;
   } else if (errors.cep?.message) {
@@ -40,5 +43,16 @@ export function getShippingsErrorMessage(errors: FieldErrors<ShippingAddressInpu
     return errors.city.message;
   } else if (errors.fullName?.message) {
     return errors.fullName.message;
+  } else return '';
+}
+export function getAddCardErrorMessage(errors: FieldErrors<CardInputs>) {
+  if (errors.nameOnCard?.message) {
+    return errors.nameOnCard.message;
+  } else if (errors.cardNumber?.message) {
+    return errors.cardNumber.message;
+  } else if (errors.expireDate?.message) {
+    return errors.expireDate.message;
+  } else if (errors.cvv?.message) {
+    return errors.cvv.message;
   } else return '';
 }
