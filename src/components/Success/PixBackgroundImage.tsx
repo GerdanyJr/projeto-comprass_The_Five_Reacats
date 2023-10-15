@@ -1,13 +1,13 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, ImageBackgroundProps } from 'react-native';
 
-interface PixBackgroundImageProps extends ImageBackgroundProps {
-  children?: React.ReactNode;
-}
-
-const PixBackgroundImage: React.FC<PixBackgroundImageProps> = ({ source, children, ...props }) => {
+const PixBackgroundImage= ({children, ...props } : {children:React.ReactNode}) => {
   return (
-    <ImageBackground source={source} style={styles.backgroundImage} {...props}>
+    <ImageBackground 
+    source={require('../../assets/images/fake-pix-QR.png')} 
+    style={styles.backgroundImage} 
+    accessibilityHint='pix background'
+    {...props}>
       {children}
     </ImageBackground>
   );

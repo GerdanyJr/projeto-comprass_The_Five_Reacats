@@ -1,13 +1,13 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, ImageBackgroundProps } from 'react-native';
 
-interface SuccessBackgroundImageProps extends ImageBackgroundProps {
-  children?: React.ReactNode;
-}
-
-const SuccessBackground: React.FC<SuccessBackgroundImageProps> = ({ source, children, ...props }) => {
+const SuccessBackground= ({children, ...props } : {children:React.ReactNode}) => {
   return (
-    <ImageBackground source={source} style={styles.backgroundImage} {...props}>
+    <ImageBackground 
+    source={require('../../assets/images/success-girl-background.png')} 
+    style={styles.backgroundImage} 
+    accessibilityHint='success background'
+    {...props}>
       {children}
     </ImageBackground>
   );

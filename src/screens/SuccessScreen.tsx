@@ -24,7 +24,7 @@ const SuccessScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <SuccessBackground source={require('../assets/images/success-girl-background.png')}>
+      <SuccessBackground>
         <SuccessText />
         <Text style={styles.thankYouText}>Your order will be delivered soon.{'\n'}
           Thank you for choosing our app!

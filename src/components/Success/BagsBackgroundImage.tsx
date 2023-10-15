@@ -1,15 +1,19 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, ImageBackgroundProps } from 'react-native';
 
-interface BagsBackgroundImageProps extends ImageBackgroundProps {
-  children?: React.ReactNode;
-}
 
-const BagsBackgroundImage: React.FC<BagsBackgroundImageProps> = ({ source, children, ...props }) => {
+const BagsBackgroundImage = ({children, ...props } : {children:React.ReactNode}) => {
   return (
-    <ImageBackground source={source} style={styles.backgroundImage} {...props}>
+    
+    <ImageBackground 
+    source={require('../../assets/images/bags.png')} 
+    style={styles.backgroundImage} 
+    accessibilityHint='bags background'
+    {...props}
+    >
       {children}
     </ImageBackground>
+  
   );
 };
 

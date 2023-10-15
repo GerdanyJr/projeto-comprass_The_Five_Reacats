@@ -25,7 +25,7 @@ const InvoicePaymentScreen: React.FC = () => {
   
     return (
       <View style={styles.container}>
-        <BagsBackgroundImage source={require('../assets/images/bags.png')}>
+        <BagsBackgroundImage>
         </BagsBackgroundImage>
         <View style={styles.SuccessText}>
             <SuccessText  />

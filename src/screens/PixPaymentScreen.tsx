@@ -23,7 +23,7 @@ const PixPaymentSuccessScreen: React.FC = () => {
   
     return (
       <View style={styles.container}>
-        <PixBackgroundImage source={require('../assets/images/fake-pix-QR.png')}>
+        <PixBackgroundImage>
         </PixBackgroundImage>
         <View style={styles.SuccessText}>
             <SuccessText  />
