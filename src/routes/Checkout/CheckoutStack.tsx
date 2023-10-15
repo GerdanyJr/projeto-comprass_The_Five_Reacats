@@ -5,6 +5,7 @@ import { ShippingAddressForm } from '../../components/Checkout/ShippingAddressFo
 import { CardForm } from '../../components/Checkout/CardForm';
 import { checkoutStackOptions } from './CheckoutStackOptions';
 import { CheckoutContextProvider } from '../../store/CheckoutContext';
+import { PaymentMethodForm } from '../../components/Checkout/PaymentMethodForm';
 
 const Stack = createNativeStackNavigator();
 export function CheckoutStack() {
@@ -16,6 +17,11 @@ export function CheckoutStack() {
           name="ShippingAddressForm"
           component={ShippingAddressForm}
           options={checkoutStackOptions.shippingAddress}
+        />
+        <Stack.Screen
+          name="PaymentMethodForm"
+          component={PaymentMethodForm}
+          options={checkoutStackOptions.cardForm}
         />
         <Stack.Screen
           name="CardForm"
