@@ -1,13 +1,18 @@
 import axios from 'axios';
+import { ShippingAddress } from '../types/interfaces/ShippingAddress';
 
-export async function getAddressByCep(cep: string) {
+export async function getAddressByCep(
+  cep: string
+): Promise<{ erro: boolean } | ShippingAddress> {
   const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-  const data = await response.data;
-  const address= {
-    cep: data.cep,
-    address: data.logradouro,
-    city: data.localidade,
-    state: data.uf
+  let addressResponse = await response.data;
+  if (!('erro' in addressResponse)) {
+    addressResponse = {
+      cep: addressResponse.cep,
+      address: addressResponse.logradouro,
+      city: addressResponse.localidade,
+      state: addressResponse.uf,
+    };
   }
-  return address;
+  return addressResponse;
 }

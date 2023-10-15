@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 import { InputField } from '../Login/InputField';
 import { FormButton } from '../UI/FormButton';
@@ -11,6 +11,9 @@ import { getAddressByCep } from '../../service/address';
 import { UserContext } from '../../store/UserContext';
 import { ShippingAddress } from '../../types/interfaces/ShippingAddress';
 import { useNavigation } from '@react-navigation/native';
+import { CheckoutContext } from '../../store/CheckoutContext';
+import { FormError } from '../Login/FormError';
+import { getShippingsErrorMessage } from '../../util/errors';
 
 export interface ShippingAddressInputs {
   cep: string;
@@ -22,33 +25,54 @@ export interface ShippingAddressInputs {
 export function ShippingAddressForm() {
   const navigation = useNavigation<any>();
   const userCtx = useContext(UserContext);
+  const checkoutCtx = useContext(CheckoutContext);
   const [isLoading, setIsLoading] = useState(false);
-  const { control, handleSubmit, watch, getFieldState, setValue } =
-    useForm<ShippingAddressInputs>({
-      mode: 'onChange',
-      resolver: yupResolver(addressSchema),
-      defaultValues: {
-        cep: '',
-        address: '',
-        city: '',
-        state: '',
-        fullName: '',
-      },
-    });
+  const [errorMessage, setErrorMessage] = useState('');
+  const {
+    control,
+    handleSubmit,
+    watch,
+    getFieldState,
+    setValue,
+    clearErrors,
+    setError,
+    formState: { isValid, errors },
+  } = useForm<ShippingAddressInputs>({
+    mode: 'onChange',
+    resolver: yupResolver(addressSchema),
+    defaultValues: {
+      cep: '',
+      address: '',
+      city: '',
+      state: '',
+      fullName: '',
+    },
+  });
   useEffect(() => {
     async function getAddress() {
-      console.log('opa');
       setIsLoading(true);
       const address = await getAddressByCep(watch('cep'));
-      setValue('city', address.city);
-      setValue('state', address.state);
-      setValue('address', address.address);
+      if ('erro' in address) {
+        setError('cep', { message: 'Zip code not found!' });
+      } else {
+        setValue('city', address.city);
+        setValue('state', address.state);
+        setValue('address', address.address);
+        clearErrors('city');
+        clearErrors('state');
+        clearErrors('address');
+      }
       setIsLoading(false);
     }
     if (!getFieldState('cep').invalid && watch('cep').length === 9) {
-      setTimeout(getAddress, 500);
+      try {
+        setTimeout(getAddress, 500);
+      } catch (error) {}
     }
   }, [watch('cep')]);
+  useEffect(() => {
+    setErrorMessage(() => getShippingsErrorMessage(errors));
+  }, [{ ...errors }]);
 
   function handleSave(data: ShippingAddressInputs) {
     const newShippingAddress: ShippingAddress = {
@@ -59,6 +83,7 @@ export function ShippingAddressForm() {
       state: data.state,
     };
     userCtx.addShippingAddress(newShippingAddress);
+    checkoutCtx.addShippingAddress(newShippingAddress);
     navigation.goBack();
   }
   return (
@@ -74,6 +99,7 @@ export function ShippingAddressForm() {
               value={formatCep(field.value)}
               onChangeText={field.onChange}
               enabledInput={true}
+              isLoading={isLoading}
               style={styles.grayBorder}
             />
           )}
@@ -134,13 +160,14 @@ export function ShippingAddressForm() {
             />
           )}
         />
+        <FormError message={errorMessage} />
       </View>
-      <KeyboardAvoidingView style={styles.button} enabled={false}>
-        <FormButton
-          title="Save Address"
-          onPress={handleSubmit((data) => handleSave(data))}
-        />
-      </KeyboardAvoidingView>
+      <FormButton
+        title="Save Address"
+        onPress={handleSubmit((data) => handleSave(data))}
+        style={styles.button}
+        disabled={!isValid}
+      />
     </View>
   );
 }
@@ -162,6 +189,6 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '90%',
-    paddingBottom: 16,
+    marginBottom: 16,
   },
 });
