@@ -1,22 +1,16 @@
-import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { useState, useEffect } from 'react';
 import { ParamListBase, useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-import { CardItem } from './CardItem';
-import { CardItemExemple } from './CardItemExemple';
+import { Item } from '../Product/Item';
 import { fetchItensByCategory } from '../../service/FetchProductsAux';
+import { CardItemExemple } from '../Home/CardItemExemple';
 import { Product } from '../../types/interfaces/Product';
+import { Colors } from '../../assets/constants/Colors';
 
-export function Section({
-  id,
-  title,
-}: {
-  id: string;
-  title: string;
-}) {
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
+export function Section({ id, title }: { id: string; title: string }) {
   const [produtos, setProdutos] = useState<Product[]>([]);
   useEffect(() => {
     async function getItensByCategory() {
@@ -26,25 +20,25 @@ export function Section({
     getItensByCategory();
   }, []);
 
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
   return (
     <View style={styles.container}>
       <View style={styles.categoryHeader}>
         <Text style={styles.categoryTitle}>{title}</Text>
-        <Pressable style={styles.buttonViewAll}>
-          <Text style={styles.buttonViewAllText}>View all</Text>
-        </Pressable>
+        <Text style={styles.itemQuantity}>{(produtos.length === 0) ? "1" : produtos.length} items</Text>
       </View>
       <FlatList
         accessibilityHint="productslist"
         data={produtos}
         renderItem={({ item }) => (
-          <CardItem
+          <Item
             name={item.title}
-            description={item.description}
+            category={item.category.name}
             price={item.price}
             url={item.images[0]}
             onPress={() => {
-              navigation.navigate('Product', {
+              navigation.push('Product', {
                 itemId: item.id,
                 categoryId: item.category.id,
               });
@@ -66,8 +60,9 @@ export function Section({
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 16,
+    paddingTop: 40,
     backgroundColor: '#fff',
+    paddingBottom: 16,
   },
 
   categoryHeader: {
@@ -75,23 +70,19 @@ const styles = StyleSheet.create({
     height: 44,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 16,
+    textAlignVertical: 'center',
   },
 
   categoryTitle: {
-    color: '#000',
     marginLeft: 16,
-    fontSize: 32,
-    fontWeight: '800',
-  },
-
-  buttonViewAll: {
-    justifyContent: 'center',
-  },
-
-  buttonViewAllText: {
     color: '#000',
+    fontSize: 18,
     fontWeight: '400',
-    fontSize: 12,
+  },
+
+  itemQuantity: {
+    color: Colors.gray_500,
+    fontSize: 11,
+    fontWeight: '500',
   },
 });
