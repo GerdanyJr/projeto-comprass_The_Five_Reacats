@@ -7,7 +7,16 @@
     "forgotPassword": "Esqueci a minha senha",
     "iDontWantToLogin": "Não quero me cadastrar"
   },
+  "signUpPage": {
+    "headerDescription": "Escolha um nome muito legal que contenha apenas espaços como caracteres especiais. Ah, e sua senha deve ter mais de 4 dígitos! :)",
+    "name": "Nome",
+    "email": "Email",
+    "password": "Senha",
+    "confirmPassword": "Confirme a sua senha",
+    "signUp": "Cadastre-se"
+  },
   "formErrors": {
+    "emptyNameError": "Por favor, informe seu nome",
     "emptyEmailError": "Por favor, informe seu email",
     "invalidEmailError": "Por favor, insira um email válido",
     "emptyPasswordError": "Por favor, informe sua senha",

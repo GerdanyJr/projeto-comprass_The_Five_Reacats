@@ -1,3 +1,4 @@
+import '../../lib/i18n';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Control, Controller, UseFormHandleSubmit } from 'react-hook-form';
@@ -6,6 +7,7 @@ import { FormButton } from '../UI/FormButton';
 import { FormError } from '../Login/FormError';
 import { SignUpInputs } from '../../screens/SignUpScreen';
 import { FormHeader } from '../UI/FormHeader';
+import { useTranslation } from 'react-i18next';
 
 interface SignUpFormProps {
   control: Control<SignUpInputs, any>;
@@ -30,11 +32,12 @@ export function SignUpForm({
   errorMessage,
   isLoading,
 }: SignUpFormProps) {
+  const { t } = useTranslation();
   return (
     <>
       <FormHeader
-        title="Sign Up"
-        description="Choose a really cool name that only contains spaces as special characters. Oh, and your password must have more than 4 digits! :)"
+        title={t('signUpPage.signUp')}
+        description={t('signUpPage.headerDescription')}
         style={styles.formHeader}
       />
       <View style={styles.inputs}>
@@ -43,7 +46,7 @@ export function SignUpForm({
           name="name"
           render={({ field, fieldState }) => (
             <InputField
-              label="Name"
+              label={t('signUpPage.name')}
               error={fieldState.invalid}
               enabledInput={true}
               value={field.value}
@@ -56,7 +59,7 @@ export function SignUpForm({
           name="email"
           render={({ field, fieldState }) => (
             <InputField
-              label="Email"
+              label={t('signUpPage.email')}
               error={fieldState.invalid}
               enabledInput={true}
               value={field.value}
@@ -69,7 +72,7 @@ export function SignUpForm({
           name="password"
           render={({ field, fieldState }) => (
             <InputField
-              label="Password"
+              label={t('signUpPage.password')}
               icon={
                 isPasswordVisible
                   ? require('../../assets/images/opened-eye.png')
@@ -89,7 +92,7 @@ export function SignUpForm({
           name="confirmPassword"
           render={({ field, fieldState }) => (
             <InputField
-              label="Confirm Password"
+              label={t('signUpPage.confirmPassword')}
               icon={
                 isConfirmPasswordVisible
                   ? require('../../assets/images/opened-eye.png')
@@ -107,7 +110,7 @@ export function SignUpForm({
         <FormError message={errorMessage} />
       </View>
       <FormButton
-        title="Sign Up"
+        title={t('signUpPage.signUp')}
         onPress={handleSubmit(handleSignUpPress)}
         isLoading={isLoading}
       />

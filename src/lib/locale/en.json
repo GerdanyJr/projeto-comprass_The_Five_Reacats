@@ -7,7 +7,16 @@
     "forgotPassword": "I forgot my password",
     "iDontWantToLogin": "I don't want to login"
   },
+  "signUpPage": {
+    "headerDescription": "Choose a really cool name that only contains spaces as special characters. Oh, and your password must have more than 4 digits! :)",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "signUp": "Sign Up"
+  },
   "formErrors": {
+    "emptyNameError": "Please enter your name",
     "emptyEmailError": "Please enter your email",
     "invalidEmailError": "Please insert a valid email",
     "emptyPasswordError": "Please enter your password",

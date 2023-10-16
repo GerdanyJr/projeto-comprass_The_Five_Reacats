@@ -35,7 +35,7 @@ export function InputField(props: InputFieldProps): JSX.Element {
   const transY = useRef(new Animated.Value(0));
 
   useEffect(() => {
-    if (props.value.length > 0) {
+    if (props.value?.length > 0) {
       handleFocus();
     }
   }, [props.value]);
@@ -47,7 +47,7 @@ export function InputField(props: InputFieldProps): JSX.Element {
   };
 
   const handleBlur = () => {
-    if (props.value.length === 0) {
+    if (props.value?.length === 0) {
       animateTransform(0);
       setLabelStyles(styles.label);
       setErrorLabelStyles(styles.errorLabel);
