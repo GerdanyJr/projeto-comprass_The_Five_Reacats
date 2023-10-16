@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { User } from '../types/interfaces/User';
+import { Token } from '../types/interfaces/Token';
 
 export async function login(email: string, password: string) {
   const response = await axios.post(
@@ -9,7 +11,11 @@ export async function login(email: string, password: string) {
     }
   );
   const data = await response.data;
-  return data;
+  const token: Token = {
+    acessToken: data.access_token,
+    refreshToken: data.refresh_token,
+  };
+  return token;
 }
 
 export async function getUser(token: string) {
@@ -22,7 +28,8 @@ export async function getUser(token: string) {
     }
   );
   const data: User = await response.data;
-  return data;
+  const user: User = { ...data, shippingAdresses: [], paymentForms: [] };
+  return user;
 }
 
 export async function signUp(name: string, email: string, password: string) {
