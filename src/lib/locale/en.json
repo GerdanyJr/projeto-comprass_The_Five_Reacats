@@ -15,6 +15,51 @@
     "confirmPassword": "Confirm Password",
     "signUp": "Sign Up"
   },
+  "navigators": {
+    "checkout": "Checkout",
+    "shippingAddress": "Adding Shipping Address",
+    "cardForm": "Add new Card"
+  },
+  "checkoutScreen": {
+    "unloggedAllert": "You need to connect to complete your purchase, come on?",
+    "login": "Login"
+  },
+  "shippingAddresses": {
+    "shippingAddress": "Shipping Address",
+    "change": "Change",
+    "clickToAdd": "Click to add an address",
+    "zipCode": "Zip Code (Postal Code)",
+    "address": "Address",
+    "city": "City",
+    "state": "State/Province/Region",
+    "fullName": "Full name",
+    "saveAddress": "Save Address"
+  },
+  "paymentMethod": {
+    "paymentMethod": "Payment Method",
+    "change": "Change",
+    "noneAdded": "None added",
+    "bankSlip": "Bank Slip",
+    "chooseMethod": "Choose your payment method",
+    "creditCard": "Credit or debit card",
+    "pix": "Pix",
+    "addNewCard": "Add new card",
+    "nameOnCard": "Name on card",
+    "cardNumber": "Card Number",
+    "expDate": "Expire Date",
+    "CVV": "CVV",
+    "addCard": "Add Card"
+  },
+  "deliveryMethod": {
+    "deliveryMethod": "Delivery Method",
+    "days": "days"
+  },
+  "summary": {
+    "order": "Order",
+    "delivery": "Delivery",
+    "summary": "Summary",
+    "submitOrder": "Submit Order"
+  },
   "formErrors": {
     "emptyNameError": "Please enter your name",
     "emptyEmailError": "Please enter your email",
@@ -39,6 +84,7 @@
     "invalidExpDateError": "Expiration date must be in MM/YY format",
     "emptyExpDateError": "Expiration date is required",
     "invalidCVVError": "CVV must contain 3 or 4 digits",
-    "emptyCVVError": "CVV is required"
+    "emptyCVVError": "CVV is required",
+    "zipCodeNotFound": "Zip code not found!"
   }
 }
