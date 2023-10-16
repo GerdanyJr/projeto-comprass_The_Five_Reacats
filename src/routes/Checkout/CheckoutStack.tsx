@@ -12,7 +12,11 @@ export function CheckoutStack() {
   return (
     <CheckoutContextProvider>
       <Stack.Navigator screenOptions={checkoutStackOptions.navigatorOptions}>
-        <Stack.Screen name="Checkout" component={CheckoutScreen} />
+        <Stack.Screen
+          name="Checkout"
+          component={CheckoutScreen}
+          options={checkoutStackOptions.checkout}
+        />
         <Stack.Screen
           name="ShippingAddressForm"
           component={ShippingAddressForm}
