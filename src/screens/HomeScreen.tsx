@@ -13,9 +13,8 @@ import { Section } from '../components/Home/Sections';
 import { fetchCategories } from '../service/FetchProductsAux';
 import { Category } from '../types/interfaces/Product';
 
-export function HomeScreen() {
+export function HomeScreen({navigation}:{navigation:any}) {
   const [categories, setCategories] = useState<Category[]>([]);
-
   useEffect(() => {
     async function getCategories() {
       const dados = await fetchCategories();
@@ -23,8 +22,6 @@ export function HomeScreen() {
     }
     getCategories();
   }, []);
-
-
 
   function listHeader() {
     return (
@@ -52,9 +49,9 @@ export function HomeScreen() {
       <FlatList
         ListHeaderComponent={listHeader}
         data={categories}
-        renderItem={({ item }) => <Section id={item.id} title={item.name}/>}
+        renderItem={({ item }) => <Section id={item.id} title={item.name} navigation={navigation}/>}
       />
-      <HeaderBar isAuthenticated={false} username="Juliane Golçalves Freitas" />
+      <HeaderBar isAuthenticated={true} username="Juliane Golçalves Freitas" navigation={navigation}/>
     </View>
   );
 }

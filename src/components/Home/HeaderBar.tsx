@@ -9,24 +9,19 @@ import {
   FlatList,
 } from 'react-native';
 import { useState, useEffect } from 'react';
-import { ParamListBase, useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-
 import { CardSearchResult } from './CardSearchResult';
 import { fetchItensByTitle } from '../../service/FetchProductsAux';
 import { ProductByTitle } from '../../types/interfaces/Product';
-import { Colors } from '../../assets/constants/Colors';
-
 
 export function HeaderBar({
   isAuthenticated,
-  username
+  username,
+  navigation
 }: {
   isAuthenticated: boolean;
   username: string;
+  navigation: any;
 }) {
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-
   const [modalVisible, setModalVisible] = useState(false);
   const [fetchSearch, setFetchSearch] = useState<ProductByTitle[]>([]);
   const [search, setSearch] = useState('');
@@ -38,6 +33,11 @@ export function HeaderBar({
     }
     getItensByTitle();
   }, [search]);
+
+  function navigatioHandler() {
+    navigation.navigate("Product");
+    setModalVisible(!modalVisible)
+  }
 
   return (
     <View style={styles.container}>
@@ -94,13 +94,7 @@ export function HeaderBar({
                 name={item.title}
                 description={item.description}
                 price={item.price}
-                onPress={() => {
-                  navigation.navigate('Product', {
-                    itemId: item.id,
-                    categoryId: item.category.id,
-                  });
-                  setModalVisible(!modalVisible);
-                }}
+                onPress={navigatioHandler}
               />
             )}
             maxToRenderPerBatch={3}
@@ -116,15 +110,16 @@ export function HeaderBar({
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    paddingHorizontal: 16,
+    width: 333,
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginTop: 16,
+    left: 10,
     position: 'absolute',
   },
 
   userContain: {
+    width: 207,
     height: 22,
     flexDirection: 'row',
     paddingLeft: 1,
@@ -170,7 +165,7 @@ const styles = StyleSheet.create({
   searchButton: {
     width: 41,
     height: 41,
-    backgroundColor: Colors.red_500,
+    backgroundColor: '#FF0024',
     borderRadius: 50,
   },
 
@@ -189,7 +184,7 @@ const styles = StyleSheet.create({
     width: 330,
     height: 55,
     borderWidth: 2,
-    borderColor: Colors.red_500,
+    borderColor: '#FF0024',
   },
 
   inputSearch: {
@@ -201,7 +196,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
     borderWidth: 4,
-    borderColor: Colors.red_500,
+    borderColor: '#FF0024',
     borderRadius: 16,
     marginTop: 66,
     padding: 12,
@@ -213,7 +208,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: '#fff',
     borderRadius: 12,
-    borderColor: Colors.gray_100,
+    borderColor: '#B6B6B6',
     borderWidth: 2,
     marginTop: 8,
   },

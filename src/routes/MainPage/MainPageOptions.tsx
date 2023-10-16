@@ -6,8 +6,9 @@ export const mainPageOptions = {
     headerShown: false,
     tabBarActiveTintColor: Colors.red_500,
     tabBarLabelStyle: { fontSize: 14 },
+    
   },
-  mainOptions: {
+  homeOptions: {
     tabBarIcon: ({ color, size, focused }: any) => (
       <Ionicons
         name={focused ? 'home' : 'home-outline'}
@@ -24,14 +25,9 @@ export const mainPageOptions = {
         size={size}
       />
     ),
-    tabBarBadge: "activated",
-    tabBarBadgeStyle: {
-      maxWidth: 6,
-      maxHeight: 8,
-    },
   },
   profileOptions: {
-    tabBarIcon: ({ color, size, focused }: any) => (
+    tabBarIcon: ({ color, size, focused }:any) => (
       <Ionicons
         name={focused ? 'person' : 'person-outline'}
         color={color}

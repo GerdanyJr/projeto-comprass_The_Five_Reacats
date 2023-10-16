@@ -8,8 +8,6 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 
-import { Colors } from '../../assets/constants/Colors';
-
 export function CardItemExemple({
   onPress,
 }: {
@@ -55,11 +53,8 @@ export function CardItemExemple({
         </Pressable>
       </View>
       <Pressable
-        style={({ pressed }) =>
-          pressed
-            ? [styles.productContainer, styles.pressed]
-            : styles.productContainer
-        }
+        style={({pressed})=>
+        pressed ? [styles.productContainer, styles.pressed] : styles.productContainer }
         accessibilityHint="productRedirection"
         onPress={onPress}
       >
@@ -93,7 +88,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: Colors.red_500,
+    backgroundColor: '#FF0024',
     width: 50,
     height: 21,
     justifyContent: 'center',
@@ -103,6 +98,7 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.75,
   },
+
 
   leftCorner: {
     borderTopLeftRadius: 12,
@@ -119,12 +115,11 @@ const styles = StyleSheet.create({
   },
 
   count: {
-    height: 21,
     width: 46,
     textAlign: 'center',
     color: '#000',
     backgroundColor: '#fff',
-    borderColor: Colors.gray_500,
+    borderColor: '#9B9B9B',
     borderTopWidth: 1,
     borderBottomWidth: 1,
   },
@@ -152,7 +147,7 @@ const styles = StyleSheet.create({
 
   productName: {
     marginTop: 8,
-    color: Colors.gray_500,
+    color: '#9B9B9B',
     fontSize: 14,
     fontWeight: '700',
   },
@@ -164,7 +159,7 @@ const styles = StyleSheet.create({
   },
   productPrice: {
     marginTop: 6,
-    color: Colors.red_500,
+    color: '#FF0024',
     fontSize: 16,
     fontWeight: '800',
   },
