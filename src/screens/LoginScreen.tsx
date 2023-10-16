@@ -1,4 +1,6 @@
+import '../lib/i18n';
 import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Image, StyleSheet, View } from 'react-native';
 import { CompassBackground } from '../components/Login/CompassBackground';
 import { RedirectText } from '../components/Login/RedirectText';
@@ -20,6 +22,7 @@ export interface Inputs {
 }
 
 export function LoginScreen() {
+  const { t } = useTranslation();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -78,15 +81,15 @@ export function LoginScreen() {
       />
       <View style={styles.redirectTextContainer}>
         <RedirectText
-          title="Not have an account yet? Sign up"
+          title={t("loginPage.signUpText")}
           onPress={() => navigation.navigate('SignUp')}
         />
         <RedirectText
-          title="I forgot my password"
+          title={t("loginPage.forgotPassword")}
           onPress={() => navigation.navigate('ForgotPassword')}
         />
         <RedirectText
-          title="I don't want to login"
+          title={t("loginPage.iDontWantToLogin")}
           onPress={() => navigation.navigate('MainPage')}
         />
       </View>
