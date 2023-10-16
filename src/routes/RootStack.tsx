@@ -7,8 +7,8 @@ import { AuthStack } from './Auth/AuthStack';
 const Stack = createNativeStackNavigator();
 export function RootStack(): JSX.Element {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <NavigationContainer >
+      <Stack.Navigator screenOptions={{ headerShown: false }} >
         <Stack.Screen name="AuthStack" component={AuthStack} />
         <Stack.Screen name="MainPage" component={MainPage} />
       </Stack.Navigator>
