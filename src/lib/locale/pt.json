@@ -1,3 +1,35 @@
 {
-
+  "loginPage": {
+    "email": "Email",
+    "password": "Senha",
+    "login": "Entrar",
+    "signUpText": "Não possui uma conta ainda? Cadastre-se",
+    "forgotPassword": "Esqueci a minha senha",
+    "iDontWantToLogin": "Não quero me cadastrar"
+  },
+  "formErrors": {
+    "emptyEmailError": "Por favor, informe seu email",
+    "invalidEmailError": "Por favor, insira um email válido",
+    "emptyPasswordError": "Por favor, informe sua senha",
+    "shortPasswordError": "Sua senha deve ter pelo menos 6 caracteres",
+    "emptyConfirmPasswordError": "Por favor, confirme sua senha",
+    "invalidConfirmPasswordError": "Sua senha de confirmação não corresponde à sua senha",
+    "emptyZipCodeError": "O CEP é obrigatório",
+    "invalidZipCodeError": "CEP inválido",
+    "emptyAddressError": "O endereço é obrigatório",
+    "shortAddressError": "O endereço deve ter pelo menos 10 caracteres",
+    "emptyCityError": "A cidade é obrigatória",
+    "shortCityError": "A cidade deve ter pelo menos 5 caracteres",
+    "emptyStateError": "O estado é obrigatório",
+    "shortStateError": "O estado deve ter pelo menos 2 caracteres",
+    "emptyFullNameError": "O nome completo é obrigatório",
+    "shortFullNameError": "O nome completo deve ter pelo menos 5 caracteres",
+    "emptyNameOnCardError": "O nome no cartão é obrigatório",
+    "invalidCardNumberError": "O número do cartão deve estar no formato XXXX XXXX XXXX XXXX",
+    "emptyCardNumberError": "O número do cartão é obrigatório",
+    "invalidExpDateError": "A data de validade deve estar no formato MM/AA",
+    "emptyExpDateError": "A data de validade é obrigatória",
+    "invalidCVVError": "O CVV deve conter 3 ou 4 dígitos",
+    "emptyCVVError": "O CVV é obrigatório"
+  }
 }
