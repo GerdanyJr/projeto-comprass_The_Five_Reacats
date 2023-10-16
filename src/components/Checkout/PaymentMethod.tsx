@@ -5,10 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 import { CheckoutContext } from '../../store/CheckoutContext';
 import { GenericPaymentMethod } from './GenericPaymentMethod';
 import { hideCardNumber } from '../../util/formatter';
+import { useTranslation } from 'react-i18next';
 
 export function PaymentMethod() {
   const navigation = useNavigation<any>();
   const { paymentMethod, creditCard } = useContext(CheckoutContext);
+  const { t } = useTranslation();
 
   function handlePaymentPress() {
     navigation.navigate('PaymentMethodForm');
@@ -36,7 +38,7 @@ export function PaymentMethod() {
         return (
           <GenericPaymentMethod
             logoPath={require('../../assets/images/bank.png')}
-            name={'Boleto Bancário'}
+            name={t('paymentMethod.bankSlip')}
             onPress={handlePaymentPress}
           />
         );
@@ -48,12 +50,13 @@ export function PaymentMethod() {
 }
 
 function EmptyPaymentMethod({ handlePress }: { handlePress: () => void }) {
+  const { t } = useTranslation();
   return (
     <Pressable style={styles.paymentMethod} onPress={handlePress}>
-      <Text style={styles.paymentMethodTitle}>Payment Method</Text>
+      <Text style={styles.paymentMethodTitle}>{t('paymentMethod.paymentMethod')}</Text>
       <View style={styles.addPaymentContainer}>
-        <Text style={styles.changeMethods}>Change</Text>
-        <Text style={styles.paymentMethods}>None added</Text>
+        <Text style={styles.changeMethods}>{t('paymentMethod.change')}</Text>
+        <Text style={styles.paymentMethods}>{t('paymentMethod.noneAdded')}</Text>
       </View>
     </Pressable>
   );

@@ -4,6 +4,7 @@ import { Colors } from '../../assets/constants/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { NotchHeader } from './NotchHeader';
 import { CheckoutContext } from '../../store/CheckoutContext';
+import { useTranslation } from 'react-i18next';
 
 function PaymentOption({
   title,
@@ -15,7 +16,10 @@ function PaymentOption({
   selected?: boolean;
 }) {
   return (
-    <Pressable android_ripple={{ color: Colors.gray_500, foreground: true }} onPress={onPress}>
+    <Pressable
+      android_ripple={{ color: Colors.gray_500, foreground: true }}
+      onPress={onPress}
+    >
       <Text style={[styles.optionTitle, selected && styles.selectedOption]}>
         {title}
       </Text>
@@ -26,6 +30,7 @@ function PaymentOption({
 export function PaymentMethodForm() {
   const navigation = useNavigation<any>();
   const checkoutCtx = useContext(CheckoutContext);
+  const { t } = useTranslation();
 
   function handlePress(payload: string) {
     switch (payload) {
@@ -46,20 +51,20 @@ export function PaymentMethodForm() {
   }
   return (
     <View style={styles.container}>
-      <NotchHeader title="Choose your payment method" />
+      <NotchHeader title={t('paymentMethod.chooseMethod')} />
       <View style={styles.optionsContainer}>
         <PaymentOption
-          title="Cartão de crédito ou débito"
+          title={t('paymentMethod.creditCard')}
           onPress={() => handlePress('creditCard')}
           selected={checkoutCtx.paymentMethod === 'creditCard'}
         />
         <PaymentOption
-          title="Pix"
+          title={t('paymentMethod.pix')}
           onPress={() => handlePress('pix')}
           selected={checkoutCtx.paymentMethod === 'pix'}
         />
         <PaymentOption
-          title="Boleto Bancário"
+          title={t('paymentMethod.bankSlip')}
           onPress={() => handlePress('boleto')}
           selected={checkoutCtx.paymentMethod === 'boleto'}
         />
