@@ -1,22 +1,11 @@
 import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
 import { useState, useEffect } from 'react';
-import { ParamListBase, useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-
 import { CardItem } from './CardItem';
 import { CardItemExemple } from './CardItemExemple';
 import { fetchItensByCategory } from '../../service/FetchProductsAux';
 import { Product } from '../../types/interfaces/Product';
 
-export function Section({
-  id,
-  title,
-}: {
-  id: string;
-  title: string;
-}) {
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-
+export function Section({ id, title, navigation }: { id: string; title: string, navigation:any }) {
   const [produtos, setProdutos] = useState<Product[]>([]);
   useEffect(() => {
     async function getItensByCategory() {
@@ -25,6 +14,10 @@ export function Section({
     }
     getItensByCategory();
   }, []);
+
+  function navigationHandler() {
+    navigation.navigate("Product")
+  }
 
   return (
     <View style={styles.container}>
@@ -43,22 +36,11 @@ export function Section({
             description={item.description}
             price={item.price}
             url={item.images[0]}
-            onPress={() => {
-              navigation.navigate('Product', {
-                itemId: item.id,
-                categoryId: item.category.id,
-              });
-            }}
+            onPress={navigationHandler}
           />
         )}
         horizontal={true}
-        ListEmptyComponent={() => (
-          <CardItemExemple
-            onPress={() => {
-              navigation.navigate('Product', { itemId: 0, categoryId: 0 });
-            }}
-          />
-        )}
+        ListEmptyComponent={() => <CardItemExemple onPress={navigationHandler} />}
       />
     </View>
   );
