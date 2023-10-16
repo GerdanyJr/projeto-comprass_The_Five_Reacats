@@ -3,16 +3,16 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { FormButton } from '../UI/FormButton';
+import { useTranslation } from 'react-i18next';
 
 export function UnloggedAllert() {
   const navigation = useNavigation<any>();
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        You need to connect to complete your purchase, come on?
-      </Text>
+      <Text style={styles.title}>{t('checkoutScreen.unloggedAllert')}</Text>
       <FormButton
-        title="Login"
+        title={t('checkoutScreen.login')}
         style={styles.button}
         onPress={() => navigation.navigate('AuthStack')}
       />
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.white
+    backgroundColor: Colors.white,
   },
   title: {
     color: Colors.black,

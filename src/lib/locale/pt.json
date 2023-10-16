@@ -1,0 +1,90 @@
+{
+  "loginPage": {
+    "email": "Email",
+    "password": "Senha",
+    "login": "Entrar",
+    "signUpText": "Não possui uma conta ainda? Cadastre-se",
+    "forgotPassword": "Esqueci a minha senha",
+    "iDontWantToLogin": "Não quero me cadastrar"
+  },
+  "signUpPage": {
+    "headerDescription": "Escolha um nome muito legal que contenha apenas espaços como caracteres especiais. Ah, e sua senha deve ter mais de 4 dígitos! :)",
+    "name": "Nome",
+    "email": "Email",
+    "password": "Senha",
+    "confirmPassword": "Confirme a sua senha",
+    "signUp": "Cadastre-se"
+  },
+  "navigators": {
+    "checkout": "Finalizar compra",
+    "shippingAddress": "Adicionar endereço de entrega",
+    "cardForm": "Adicionar novo cartão"
+  },
+  "checkoutScreen": {
+    "unloggedAllert": "Você precisa entrar para completar a sua compra, vamos?",
+    "login": "Entrar"
+  },
+  "shippingAddresses": {
+    "shippingAddress": "Endereço de entrega",
+    "change": "Trocar",
+    "clickToAdd": "Clique para adicionar um endereço",
+    "zipCode": "CEP",
+    "address": "Endereço",
+    "city": "Cidade",
+    "state": "Estado",
+    "fullName": "Nome completo",
+    "saveAddress": "Salvar endereço"
+  },
+  "paymentMethod": {
+    "paymentMethod": "Forma de pagamento",
+    "change": "Trocar",
+    "noneAdded": "Nenhum adicionado",
+    "bankSlip": "Boleto Bancário",
+    "chooseMethod": "Escolha a forma de pagamento",
+    "creditCard": "Cartão de crédito ou débito",
+    "pix": "Pix",
+    "addNewCard": "Adicionar cartão",
+    "nameOnCard": "Nome no cartão",
+    "cardNumber": "Número no cartão",
+    "expDate": "Data de expiração",
+    "CVV": "Código de segurança",
+    "addCard": "Adicionar Cartão"
+  },
+  "deliveryMethod": {
+    "deliveryMethod":"Método de entrega",
+    "days": "dias"
+  },
+  "summary": {
+    "order": "Pedido",
+    "delivery": "Frete",
+    "summary": "Total",
+    "submitOrder": "Finalizar compra"
+  },
+  "formErrors": {
+    "emptyNameError": "Por favor, informe seu nome",
+    "emptyEmailError": "Por favor, informe seu email",
+    "invalidEmailError": "Por favor, insira um email válido",
+    "emptyPasswordError": "Por favor, informe sua senha",
+    "shortPasswordError": "Sua senha deve ter pelo menos 6 caracteres",
+    "emptyConfirmPasswordError": "Por favor, confirme sua senha",
+    "invalidConfirmPasswordError": "Sua senha de confirmação não corresponde à sua senha",
+    "emptyZipCodeError": "O CEP é obrigatório",
+    "invalidZipCodeError": "CEP inválido",
+    "emptyAddressError": "O endereço é obrigatório",
+    "shortAddressError": "O endereço deve ter pelo menos 10 caracteres",
+    "emptyCityError": "A cidade é obrigatória",
+    "shortCityError": "A cidade deve ter pelo menos 5 caracteres",
+    "emptyStateError": "O estado é obrigatório",
+    "shortStateError": "O estado deve ter pelo menos 2 caracteres",
+    "emptyFullNameError": "O nome completo é obrigatório",
+    "shortFullNameError": "O nome completo deve ter pelo menos 5 caracteres",
+    "emptyNameOnCardError": "O nome no cartão é obrigatório",
+    "invalidCardNumberError": "O número do cartão deve estar no formato XXXX XXXX XXXX XXXX",
+    "emptyCardNumberError": "O número do cartão é obrigatório",
+    "invalidExpDateError": "A data de validade deve estar no formato MM/AA",
+    "emptyExpDateError": "A data de validade é obrigatória",
+    "invalidCVVError": "O CVV deve conter 3 ou 4 dígitos",
+    "emptyCVVError": "O CVV é obrigatório",
+    "zipCodeNotFound": "CEP não encontrado!"
+  }
+}

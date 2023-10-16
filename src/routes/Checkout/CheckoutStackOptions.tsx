@@ -4,6 +4,7 @@ import {
 } from '@react-navigation/native-stack';
 import { GoBackButton } from '../../components/UI/GoBackButton';
 import { ParamListBase } from '@react-navigation/native';
+import i18n from '../../lib/i18n';
 
 export const checkoutStackOptions = {
   navigatorOptions: ({
@@ -24,13 +25,16 @@ export const checkoutStackOptions = {
       headerTitleAlign: 'center',
       headerTitleStyle: { fontSize: 22, fontWeight: '700' },
     } as NativeStackNavigationOptions),
+  checkout: {
+    title: i18n.t('navigators.checkout')
+  },
   shippingAddress: {
-    title: 'Adding Shipping Address',
+    title: i18n.t('navigators.shippingAddress'),
     presentation: 'modal',
     animation: 'slide_from_bottom',
   } as NativeStackNavigationOptions,
   cardForm: {
-    title: 'Add new Card',
+    title: i18n.t('navigators.cardForm'),
     headerShown: false,
     presentation: 'transparentModal',
     animation: 'slide_from_bottom',

@@ -14,7 +14,7 @@ export function RootStack(): JSX.Element {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="MainPage" component={MainPage} />
           <Stack.Screen name="AuthStack" component={AuthStack} />
-          <Stack.Screen name='CheckoutStack' component={CheckoutStack} />
+          <Stack.Screen name="CheckoutStack" component={CheckoutStack} />
         </Stack.Navigator>
       </NavigationContainer>
     </UserContextProvider>

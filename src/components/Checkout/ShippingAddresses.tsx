@@ -4,6 +4,7 @@ import { Colors } from '../../assets/constants/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { ShippingAddress } from '../../types/interfaces/ShippingAddress';
 import { CheckoutContext } from '../../store/CheckoutContext';
+import { useTranslation } from 'react-i18next';
 
 export function ShippingAddresses() {
   const { shippingAddress } = useContext(CheckoutContext);
@@ -24,12 +25,13 @@ export function ShippingAddresses() {
 }
 
 function EmptyAddresses({ handlePress }: { handlePress: () => void }) {
+  const { t } = useTranslation();
   return (
     <>
-      <Text style={styles.shippingAddressTitle}>Shipping Address</Text>
+      <Text style={styles.shippingAddressTitle}>{t('shippingAddresses.shippingAddress')}</Text>
       <Pressable onPress={handlePress} style={styles.addShippingContainer}>
-        <Text style={styles.changeShipping}>Change</Text>
-        <Text style={styles.clickToAddShipping}>Click to add an address</Text>
+        <Text style={styles.changeShipping}>{t('shippingAddresses.change')}</Text>
+        <Text style={styles.clickToAddShipping}>{t('shippingAddresses.clickToAdd')}</Text>
       </Pressable>
     </>
   );
@@ -42,6 +44,7 @@ function Address({
   address: ShippingAddress;
   handlePress: () => void;
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <Text style={styles.shippingAddressTitle}>Shipping Address</Text>
@@ -50,11 +53,19 @@ function Address({
         style={[styles.addShippingContainer, styles.addressContainer]}
       >
         <View style={styles.infoContainer}>
-          <Text style={styles.name} numberOfLines={1} ellipsizeMode='tail'>{address.fullName}</Text>
-          <Text style={styles.address} numberOfLines={1} ellipsizeMode='tail'>{address.address}</Text>
-          <Text style={styles.address} numberOfLines={1} ellipsizeMode='tail'>{`${address.city}, ${address.state} ${address.cep}`}</Text>
+          <Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
+            {address.fullName}
+          </Text>
+          <Text style={styles.address} numberOfLines={1} ellipsizeMode="tail">
+            {address.address}
+          </Text>
+          <Text
+            style={styles.address}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >{`${address.city}, ${address.state} ${address.cep}`}</Text>
         </View>
-        <Text style={styles.changeShipping}>Change</Text>
+        <Text style={styles.changeShipping}>{t('shippingAddresses.change')}</Text>
       </Pressable>
     </>
   );
