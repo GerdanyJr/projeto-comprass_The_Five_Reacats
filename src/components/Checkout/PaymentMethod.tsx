@@ -1,16 +1,55 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 import { useNavigation } from '@react-navigation/native';
+import { CheckoutContext } from '../../store/CheckoutContext';
+import { GenericPaymentMethod } from './GenericPaymentMethod';
+import { hideCardNumber } from '../../util/formatter';
 
 export function PaymentMethod() {
   const navigation = useNavigation<any>();
+  const { paymentMethod, creditCard } = useContext(CheckoutContext);
 
   function handlePaymentPress() {
     navigation.navigate('PaymentMethodForm');
   }
+
+  function renderPaymentMethod() {
+    switch (paymentMethod) {
+      case 'pix':
+        return (
+          <GenericPaymentMethod
+            logoPath={require('../../assets/images/pix-logo.png')}
+            name={'Pix'}
+            onPress={handlePaymentPress}
+          />
+        );
+      case 'creditCard':
+        return (
+          <GenericPaymentMethod
+            logoPath={creditCard!.brand.logo}
+            name={hideCardNumber(creditCard!.cardNumber)}
+            onPress={handlePaymentPress}
+          />
+        );
+      case 'boleto':
+        return (
+          <GenericPaymentMethod
+            logoPath={require('../../assets/images/bank.png')}
+            name={'Boleto Bancário'}
+            onPress={handlePaymentPress}
+          />
+        );
+      default:
+        return <EmptyPaymentMethod handlePress={handlePaymentPress} />;
+    }
+  }
+  return <View>{renderPaymentMethod()}</View>;
+}
+
+function EmptyPaymentMethod({ handlePress }: { handlePress: () => void }) {
   return (
-    <Pressable style={styles.paymentMethod} onPress={handlePaymentPress}>
+    <Pressable style={styles.paymentMethod} onPress={handlePress}>
       <Text style={styles.paymentMethodTitle}>Payment Method</Text>
       <View style={styles.addPaymentContainer}>
         <Text style={styles.changeMethods}>Change</Text>
