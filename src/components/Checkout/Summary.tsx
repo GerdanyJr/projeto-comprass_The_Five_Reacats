@@ -2,13 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 import { CartItem } from '../../types/interfaces/CartItem';
+import { useTranslation } from 'react-i18next';
 
-export function Summary({cart}:{cart:CartItem[]}) {
+export function Summary({ cart }: { cart: CartItem[] }) {
+  const { t } = useTranslation();
   return (
     <View>
       <View style={styles.container}>
         <View>
-          <Text style={styles.summaryItem}>Order:</Text>
+          <Text style={styles.summaryItem}>{t('summary.order')}:</Text>
         </View>
         <View>
           <Text style={styles.summaryPrice}>112,00 R$</Text>
@@ -16,7 +18,7 @@ export function Summary({cart}:{cart:CartItem[]}) {
       </View>
       <View style={styles.container}>
         <View>
-          <Text style={styles.summaryItem}>Delivery:</Text>
+          <Text style={styles.summaryItem}>{t('summary.delivery')}:</Text>
         </View>
         <View>
           <Text style={styles.summaryPrice}>0 R$</Text>
@@ -25,7 +27,7 @@ export function Summary({cart}:{cart:CartItem[]}) {
       <View style={styles.container}>
         <View>
           <Text style={[styles.summaryItem, { fontWeight: 'bold' }]}>
-            Summary:
+            {t('summary.summary')}:
           </Text>
         </View>
         <View>
