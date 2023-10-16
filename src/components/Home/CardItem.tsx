@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import { memo, useState } from 'react';
 
+import { Colors } from '../../assets/constants/Colors';
+
 export const CardItem = memo(
   ({
     name,
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: '#FF0024',
+    backgroundColor: Colors.red_500,
     width: 50,
     height: 21,
     justifyContent: 'center',
@@ -125,11 +127,12 @@ const styles = StyleSheet.create({
   },
 
   count: {
+    height: 21,
     width: 46,
     textAlign: 'center',
     color: '#000',
     backgroundColor: '#fff',
-    borderColor: '#9B9B9B',
+    borderColor: Colors.gray_500,
     borderTopWidth: 1,
     borderBottomWidth: 1,
   },
@@ -157,7 +160,7 @@ const styles = StyleSheet.create({
 
   productName: {
     marginTop: 8,
-    color: '#9B9B9B',
+    color: Colors.gray_500,
     fontSize: 14,
     fontWeight: '700',
   },
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
   },
   productPrice: {
     marginTop: 6,
-    color: '#FF0024',
+    color: Colors.red_500,
     fontSize: 16,
     fontWeight: '800',
   },
