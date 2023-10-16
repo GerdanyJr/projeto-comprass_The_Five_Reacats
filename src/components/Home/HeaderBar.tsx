@@ -16,10 +16,12 @@ import { ProductByTitle } from '../../types/interfaces/Product';
 export function HeaderBar({
   isAuthenticated,
   username,
-  navigation
+  userImg,
+  navigation,
 }: {
   isAuthenticated: boolean;
-  username: string;
+  username: string | undefined;
+  userImg: string | undefined;
   navigation: any;
 }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -35,8 +37,8 @@ export function HeaderBar({
   }, [search]);
 
   function navigatioHandler() {
-    navigation.navigate("Product");
-    setModalVisible(!modalVisible)
+    navigation.navigate('Product');
+    setModalVisible(!modalVisible);
   }
 
   return (
@@ -45,10 +47,7 @@ export function HeaderBar({
         style={isAuthenticated ? styles.userContain : styles.anonymous}
         testID="userBar"
       >
-        <Image
-          source={require('../../assets/images/user-example.png')}
-          style={styles.userImage}
-        />
+        <Image source={{ uri: userImg }} style={styles.userImage} />
         <Text style={styles.username}>Hello, {username}</Text>
       </View>
 
