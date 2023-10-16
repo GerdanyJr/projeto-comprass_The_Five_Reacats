@@ -15,6 +15,7 @@ import { getAddCardErrorMessage } from '../../util/errors';
 import { CheckoutContext } from '../../store/CheckoutContext';
 import { CreditCard } from '../../types/interfaces/CreditCard';
 import { getCardBrand } from '../../util/getCardBrand';
+import { useTranslation } from 'react-i18next';
 
 export interface CardInputs {
   nameOnCard: string;
@@ -26,6 +27,7 @@ export function CardForm() {
   const navigation = useNavigation<any>();
   const userCtx = useContext(UserContext);
   const checkoutCtx = useContext(CheckoutContext);
+  const { t } = useTranslation();
   const [errorMessage, setErrorMessage] = useState('');
   const {
     control,
@@ -63,14 +65,14 @@ export function CardForm() {
   return (
     <View style={styles.container}>
       <View>
-        <NotchHeader title="Add new card" />
+        <NotchHeader title={t("paymentMethod.addNewCard")} />
         <View style={styles.inputsContainer}>
           <Controller
             control={control}
             name="nameOnCard"
             render={({ field, fieldState }) => (
               <InputField
-                label={'Name on card'}
+                label={t("paymentMethod.nameOnCard")}
                 error={fieldState.invalid}
                 value={field.value}
                 onChangeText={field.onChange}
@@ -84,7 +86,7 @@ export function CardForm() {
             name="cardNumber"
             render={({ field, fieldState }) => (
               <InputField
-                label={'Card Number'}
+                label={t("paymentMethod.cardNumber")}
                 error={fieldState.invalid}
                 value={formatCardNumber(field.value)}
                 onChangeText={field.onChange}
@@ -93,7 +95,7 @@ export function CardForm() {
                 iconStyles={styles.cardBrand}
                 style={styles.input}
                 inputProps={{
-                  keyboardType: 'number-pad'
+                  keyboardType: 'number-pad',
                 }}
               />
             )}
@@ -103,14 +105,14 @@ export function CardForm() {
             name="expireDate"
             render={({ field, fieldState }) => (
               <InputField
-                label={'Expire Date'}
+                label={t("paymentMethod.expDate")}
                 error={fieldState.invalid}
                 value={formatExpireDate(field.value)}
                 onChangeText={field.onChange}
                 enabledInput={true}
                 style={styles.input}
                 inputProps={{
-                  keyboardType: 'number-pad'
+                  keyboardType: 'number-pad',
                 }}
               />
             )}
@@ -120,14 +122,14 @@ export function CardForm() {
             name="cvv"
             render={({ field, fieldState }) => (
               <InputField
-                label={'CVV'}
+                label={t("paymentMethod.CVV")}
                 error={fieldState.invalid}
                 value={field.value}
                 onChangeText={field.onChange}
                 enabledInput={true}
                 style={styles.input}
                 inputProps={{
-                  keyboardType: 'number-pad'
+                  keyboardType: 'number-pad',
                 }}
               />
             )}
@@ -138,7 +140,7 @@ export function CardForm() {
         </View>
       </View>
       <FormButton
-        title="Add Card"
+        title={t("paymentMethod.addCard")}
         onPress={handleSubmit((data) => handleSave(data))}
         disabled={!isValid}
         style={styles.button}
