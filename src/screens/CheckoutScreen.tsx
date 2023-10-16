@@ -10,9 +10,11 @@ import { DeliveryMethods } from '../components/Checkout/DeliveryMethods';
 import { FormButton } from '../components/UI/FormButton';
 import { Summary } from '../components/Checkout/Summary';
 import { CheckoutContext } from '../store/CheckoutContext';
+import { useTranslation } from 'react-i18next';
 
 export function CheckoutScreen() {
   const navigation = useNavigation<any>();
+  const { t } = useTranslation();
   const userCtx = useContext(UserContext);
   const { deliveryMethod, paymentMethod, shippingAddress } =
     useContext(CheckoutContext);
@@ -26,7 +28,7 @@ export function CheckoutScreen() {
         <View style={styles.footer}>
           <Summary cart={userCtx.cart} />
           <FormButton
-            title="Submit order"
+            title={t('summary.submitOrder')}
             onPress={() => {}}
             disabled={
               deliveryMethod === null ||
