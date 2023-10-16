@@ -11,9 +11,11 @@ import { Colors } from '../../assets/constants/Colors';
 import { logos } from '../../util/constants/logos';
 import { CheckoutContext } from '../../store/CheckoutContext';
 import { Brand } from '../../types/interfaces/Brand';
+import { useTranslation } from 'react-i18next';
 
 function DeliveryLogo({ item }: { item: Brand }) {
   const checkoutCtx = useContext(CheckoutContext);
+  const { t } = useTranslation();
   const selected = item.id === checkoutCtx.deliveryMethod?.id;
 
   function onPress() {
@@ -29,16 +31,21 @@ function DeliveryLogo({ item }: { item: Brand }) {
       )}
       <Pressable style={styles.deliveryContainer} onPress={onPress}>
         <Image style={styles.logo} source={item.logo} />
-        <Text style={styles.shippingTime}>2-3 days</Text>
+        <Text style={styles.shippingTime}>
+          2-3 {t('deliveryMethod.days')}
+        </Text>
       </Pressable>
     </View>
   );
 }
 
 export function DeliveryMethods() {
+  const { t } = useTranslation();
   return (
     <View style={styles.deliveryMethod}>
-      <Text style={styles.deliveryMethodTitle}>Delivery Method</Text>
+      <Text style={styles.deliveryMethodTitle}>
+        {t('deliveryMethod.deliveryMethod')}
+      </Text>
       <FlatList
         data={logos}
         horizontal
