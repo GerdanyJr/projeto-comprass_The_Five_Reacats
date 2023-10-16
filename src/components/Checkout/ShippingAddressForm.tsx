@@ -14,6 +14,7 @@ import { useNavigation } from '@react-navigation/native';
 import { CheckoutContext } from '../../store/CheckoutContext';
 import { FormError } from '../Login/FormError';
 import { getShippingsErrorMessage } from '../../util/errors';
+import { useTranslation } from 'react-i18next';
 
 export interface ShippingAddressInputs {
   cep: string;
@@ -23,6 +24,7 @@ export interface ShippingAddressInputs {
   fullName: string;
 }
 export function ShippingAddressForm() {
+  const { t } = useTranslation();
   const navigation = useNavigation<any>();
   const userCtx = useContext(UserContext);
   const checkoutCtx = useContext(CheckoutContext);
@@ -53,7 +55,7 @@ export function ShippingAddressForm() {
       setIsLoading(true);
       const address = await getAddressByCep(watch('cep'));
       if ('erro' in address) {
-        setError('cep', { message: 'Zip code not found!' });
+        setError('cep', { message: t('formErrors.zipCodeNotFound') });
       } else {
         setValue('city', address.city);
         setValue('state', address.state);
@@ -94,7 +96,7 @@ export function ShippingAddressForm() {
           name="cep"
           render={({ field, fieldState }) => (
             <InputField
-              label={'Zip Code (Postal Code)'}
+              label={t('shippingAddresses.zipCode')}
               error={fieldState.invalid}
               value={formatCep(field.value)}
               onChangeText={field.onChange}
@@ -109,7 +111,7 @@ export function ShippingAddressForm() {
           name="address"
           render={({ field, fieldState }) => (
             <InputField
-              label={'Address'}
+              label={t('shippingAddresses.address')}
               error={fieldState.invalid}
               value={field.value}
               onChangeText={field.onChange}
@@ -123,7 +125,7 @@ export function ShippingAddressForm() {
           name="city"
           render={({ field, fieldState }) => (
             <InputField
-              label={'City'}
+              label={t('shippingAddresses.city')}
               error={fieldState.invalid}
               value={field.value}
               onChangeText={field.onChange}
@@ -137,7 +139,7 @@ export function ShippingAddressForm() {
           name="state"
           render={({ field, fieldState }) => (
             <InputField
-              label={'State/Province/Region'}
+              label={t('shippingAddresses.state')}
               error={fieldState.invalid}
               value={field.value}
               onChangeText={field.onChange}
@@ -151,7 +153,7 @@ export function ShippingAddressForm() {
           name="fullName"
           render={({ field, fieldState }) => (
             <InputField
-              label={'Full name'}
+              label={t('shippingAddresses.fullName')}
               error={fieldState.invalid}
               value={field.value}
               onChangeText={field.onChange}
@@ -163,7 +165,7 @@ export function ShippingAddressForm() {
         <FormError message={errorMessage} />
       </View>
       <FormButton
-        title="Save Address"
+        title={t('shippingAddresses.saveAddress')}
         onPress={handleSubmit((data) => handleSave(data))}
         style={styles.button}
         disabled={!isValid}
