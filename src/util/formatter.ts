@@ -40,3 +40,11 @@ export function formatExpireDate(date: string) {
     return expireDate;
   }
 }
+export function hideCardNumber(cardNumber: string) {
+  const groups = cardNumber.split(' ');
+  const hiddenGroups = groups.map((group, index) =>
+    index < 3 ? '****' : group
+  );
+  const formattedCard = hiddenGroups.join(' ');
+  return formattedCard;
+}
