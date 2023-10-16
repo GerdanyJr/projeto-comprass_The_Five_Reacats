@@ -6,14 +6,15 @@ import {
   ImageBackground,
   FlatList,
 } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { HeaderBar } from '../components/Home/HeaderBar';
 import { Section } from '../components/Home/Sections';
 import { fetchCategories } from '../service/FetchProductsAux';
 import { Category } from '../types/interfaces/Product';
+import { UserContext } from '../store/UserContext';
 
-export function HomeScreen({navigation}:{navigation:any}) {
+export function HomeScreen({ navigation }: { navigation: any }) {
   const [categories, setCategories] = useState<Category[]>([]);
   useEffect(() => {
     async function getCategories() {
@@ -22,6 +23,7 @@ export function HomeScreen({navigation}:{navigation:any}) {
     }
     getCategories();
   }, []);
+  const userCtx = useContext(UserContext);
 
   function listHeader() {
     return (
@@ -49,9 +51,16 @@ export function HomeScreen({navigation}:{navigation:any}) {
       <FlatList
         ListHeaderComponent={listHeader}
         data={categories}
-        renderItem={({ item }) => <Section id={item.id} title={item.name} navigation={navigation}/>}
+        renderItem={({ item }) => (
+          <Section id={item.id} title={item.name} navigation={navigation} />
+        )}
       />
-      <HeaderBar isAuthenticated={true} username="Juliane Golçalves Freitas" navigation={navigation}/>
+      <HeaderBar
+        isAuthenticated={userCtx.isAuthenticated}
+        userImg={userCtx.user?.avatar}
+        username={userCtx.user?.name}
+        navigation={navigation}
+      />
     </View>
   );
 }
