@@ -1,5 +1,5 @@
 export interface Product {
-  id: number;
+  id: string;
   title: string;
   price: string;
   description: string;
@@ -7,7 +7,7 @@ export interface Product {
   creationAt: string;
   updatedAt: string;
   category: {
-      id: number;
+      id: string;
       name: string;
       image: string;
       creationAt: string;
@@ -32,7 +32,7 @@ export interface ProductByTitle {
   creationAt: string;
   updatedAt: string;
   category: {
-      id: number;
+      id: string;
       name: string;
       image: string;
       creationAt: string;
