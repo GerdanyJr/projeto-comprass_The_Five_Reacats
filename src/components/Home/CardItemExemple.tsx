@@ -28,7 +28,12 @@ export function CardItemExemple({
       <View style={styles.countContainer}>
         <Pressable
           onPress={() => {
-            count !== 0 ? setCount(count - 1) : setCount(count);
+            if(count !== 0){
+              setCount(count - 1)
+              userCtx.setItem(Data, count - 1);
+            } else{
+              setCount(count);
+            }
           }}
           style={({ pressed }) =>
             pressed

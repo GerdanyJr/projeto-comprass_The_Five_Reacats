@@ -57,13 +57,14 @@ function CartScreen(): JSX.Element {
         <Text style={style.header}>{t('cartScreen.cart')}</Text>
       </View>
       <FlatList
-        style={{ height: 520 }}
+        style={style.listContainer}
         contentContainerStyle={style.itemsList}
         data={userContext.cart}
         renderItem={({ item }) => (
           <CartItemCard
-            cartItem={item}
+            data={item.item}
             removeProductFromCart={userContext.removeCartItem}
+            quantity={item.quantity}
           />
         )}
       />
@@ -72,11 +73,7 @@ function CartScreen(): JSX.Element {
         <Text style={style.price}>{formatCurrency(cartTotalValue(), i18n.language)}</Text>
       </View>
       <View style={style.button}>
-        <FormButton
-          title={t('cartScreen.buy')}
-          disabled={totalItens() === 0}
-          onPress={() => navigation.navigate('CheckoutStack')}
-        />
+        <FormButton title="BUY" disabled={totalItens() === 0} onPress={()=> {navigation.navigate("CheckoutStack")}} />
       </View>
     </View>
   );
@@ -89,6 +86,11 @@ const style = StyleSheet.create({
     color: 'black',
     marginLeft: 16,
     marginTop: 70,
+  },
+
+  listContainer: {
+    alignSelf: "center",
+    height: "65%",
   },
 
   itemsList: {
@@ -126,7 +128,7 @@ const style = StyleSheet.create({
   },
 
   emptyCart: {
-    height: 520,
+    height: "65%",
     alignItems: 'center',
     justifyContent: 'center',
   },
