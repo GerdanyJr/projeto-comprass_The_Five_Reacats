@@ -1,3 +1,5 @@
+import '../lib/i18n';
+import { useTranslation } from 'react-i18next';
 import {
   View,
   Text,
@@ -5,23 +7,40 @@ import {
   StyleSheet,
   ImageBackground,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import { useState, useEffect } from 'react';
-
 import { HeaderBar } from '../components/Home/HeaderBar';
 import { Section } from '../components/Home/Sections';
 import { fetchCategories } from '../service/FetchProductsAux';
 import { Category } from '../types/interfaces/Product';
 
-export function HomeScreen({navigation}:{navigation:any}) {
+export function HomeScreen() {
+  const { t } = useTranslation();
   const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    async function getCategories() {
-      const dados = await fetchCategories();
-      setCategories(dados);
-    }
-    getCategories();
+    loadApi();
   }, []);
+
+  async function loadApi() {
+    if (loading) return;
+
+    setLoading(true);
+    const dados = await fetchCategories();
+    setCategories(dados);
+    setLoading(false)
+  }
+
+  function LoadingLayer(){
+    if(!loading) return;
+    return (
+      <View>
+        <ActivityIndicator size={100} color="red" />
+      </View>
+    )
+  }
 
   function listHeader() {
     return (
@@ -34,7 +53,7 @@ export function HomeScreen({navigation}:{navigation:any}) {
           style={styles.logoApp}
         />
         <View style={styles.paragraphContainer}>
-          <Text style={styles.paragraph}>Aqui você sempre ganha!</Text>
+          <Text style={styles.paragraph}>{t("homeScreen.paragraph")}</Text>
           <Image
             source={require('../assets/images/cart-icon.png')}
             style={styles.cartIcon}
@@ -49,9 +68,10 @@ export function HomeScreen({navigation}:{navigation:any}) {
       <FlatList
         ListHeaderComponent={listHeader}
         data={categories}
-        renderItem={({ item }) => <Section id={item.id} title={item.name} navigation={navigation}/>}
+        renderItem={({ item }) => <Section id={item.id} title={item.name} />}
+        ListFooterComponent={LoadingLayer}
       />
-      <HeaderBar isAuthenticated={true} username="Juliane Golçalves Freitas" navigation={navigation}/>
+      <HeaderBar isAuthenticated={false} username="Juliane Golçalves Freitas" />
     </View>
   );
 }
