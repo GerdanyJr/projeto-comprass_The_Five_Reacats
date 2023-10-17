@@ -13,6 +13,7 @@ import { CheckoutContext } from '../store/CheckoutContext';
 import { useTranslation } from 'react-i18next';
 
 export function CheckoutScreen() {
+
   const navigation = useNavigation<any>();
   const { t } = useTranslation();
   const userCtx = useContext(UserContext);
@@ -20,6 +21,7 @@ export function CheckoutScreen() {
     useContext(CheckoutContext);
 
   function LoggedCheckout() {
+    
     return (
       <View>
         <ShippingAddresses />
@@ -29,7 +31,8 @@ export function CheckoutScreen() {
           <Summary cart={userCtx.cart} />
           <FormButton
             title={t('summary.submitOrder')}
-            onPress={() => {}}
+            onPress={() => { navigation.navigate('CheckoutStack', {screen: 'SuccessScreen', paymentMethod: 'paymentMethod' })
+            }}
             disabled={
               deliveryMethod === null ||
               paymentMethod === null ||
