@@ -14,6 +14,7 @@ import { HeaderBar } from '../components/Home/HeaderBar';
 import { Section } from '../components/Home/Sections';
 import { fetchCategories } from '../service/FetchProductsAux';
 import { Category } from '../types/interfaces/Product';
+import { UserContext } from '../store/UserContext';
 
 export function HomeScreen({ navigation }: { navigation: any }) {
   const { t } = useTranslation();
@@ -80,7 +81,7 @@ export function HomeScreen({ navigation }: { navigation: any }) {
         isAuthenticated={userCtx.isAuthenticated}
         userImg={userCtx.user?.avatar}
         username={userCtx.user?.name}
-        navigation={navigation}
+        navigationProp={navigation}
       />
     </View>
   );

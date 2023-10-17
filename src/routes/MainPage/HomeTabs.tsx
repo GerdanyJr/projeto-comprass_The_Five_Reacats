@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View } from 'react-native';
 import { mainPageOptions } from './MainPageOptions';
 import { HomeScreen } from '../../screens/HomeScreen';
 import { UserContext } from '../../store/UserContext';
 import { ProfileScreen } from '../../screens/ProfileScreen';
-import { CartScreen } from '../../screens/CartScreen';
+import CartScreen from '../../screens/CartScreen';
+
 import { useContext } from 'react';
 
 const Tab = createBottomTabNavigator();
