@@ -51,7 +51,7 @@
     "addCard": "Adicionar Cartão"
   },
   "deliveryMethod": {
-    "deliveryMethod":"Método de entrega",
+    "deliveryMethod": "Método de entrega",
     "days": "dias"
   },
   "summary": {
@@ -85,6 +85,25 @@
     "emptyExpDateError": "A data de validade é obrigatória",
     "invalidCVVError": "O CVV deve conter 3 ou 4 dígitos",
     "emptyCVVError": "O CVV é obrigatório",
-    "zipCodeNotFound": "CEP não encontrado!"
+    "zipCodeNotFound": "CEP não encontrado!",
+    "401Error": "Seu email ou senha estão incorretos",
+    "403Error": "Proibido, você não tem permissão para acessar esse recurso",
+    "genericError": "Algo deu errado, tente novamente"
+  },
+  "profileScreen": {
+    "myProfile": "Meu Perfil",
+    "editInfo": "Editar informações",
+    "language": "Idioma",
+    "logout": "Sair",
+    "warning": "Aviso",
+    "logoutMessage": "Você realmente quer sair?",
+    "abortChanges": "Você quer descartar as alterações?",
+    "yes": "Sim",
+    "no": "No",
+    "Languages": "Idiomas",
+    "english": "Inglês",
+    "portuguese": "Português - Brasileiro",
+    "unloggedMessage": "Você precisa entrar para ver seus dados",
+    "login": "Entrar"
   }
 }

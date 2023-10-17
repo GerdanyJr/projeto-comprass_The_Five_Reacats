@@ -85,6 +85,25 @@
     "emptyExpDateError": "Expiration date is required",
     "invalidCVVError": "CVV must contain 3 or 4 digits",
     "emptyCVVError": "CVV is required",
-    "zipCodeNotFound": "Zip code not found!"
+    "zipCodeNotFound": "Zip code not found!",
+    "401Error": "Your email or password is incorrect",
+    "403Error": "Forbidden. You do not have permission to access this resource.",
+    "genericError": "Something happened, try again later"
+  },
+  "profileScreen":{
+    "myProfile": "My Profile",
+    "editInfo": "Edit informations",
+    "language": "Language",
+    "logout": "Log out",
+    "warning": "Warning",
+    "logoutMessage": "Do you really want to leave?",
+    "abortChanges": "Do you want to abandon your changes?",
+    "yes": "Yes",
+    "no": "No",
+    "Languages": "Languages",
+    "english": "English",
+    "portuguese": "Portuguese - Brazil",
+    "unloggedMessage":"You need to login to see your details",
+    "login": "Login"
   }
 }

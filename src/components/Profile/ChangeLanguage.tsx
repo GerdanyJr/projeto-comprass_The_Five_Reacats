@@ -28,12 +28,12 @@ export function ChangeLanguage({
         <NotchHeader title={'Languages'} />
         <View style={styles.optionsContainer}>
           <Option
-            title={t('deliveryMethod.deliveryMethod')}
+            title={t('profileScreen.english')}
             onPress={handleEnglishPress}
             selected={false}
           />
           <Option
-            title={'Português'}
+            title={t("profileScreen.portuguese")}
             onPress={handlePortuguesePress}
             selected={false}
           />

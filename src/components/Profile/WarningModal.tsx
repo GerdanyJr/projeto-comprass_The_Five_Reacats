@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
+import { useTranslation } from 'react-i18next';
 
 export function WarningModal({
   visible,
@@ -13,19 +14,20 @@ export function WarningModal({
   onYesPress: () => void;
   onNoPress: () => void;
 }) {
+  const { t } = useTranslation();
   return (
     <View style={styles.centeredView}>
       <Modal animationType="slide" transparent={true} visible={visible}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.title}>Warning</Text>
+            <Text style={styles.title}>{t("profileScreen.warning")}</Text>
             <Text style={styles.message}>{message}</Text>
             <View style={styles.optionsContainer}>
               <Text style={styles.option} onPress={onYesPress}>
-                Yes
+                {t('profileScreen.yes')}
               </Text>
               <Text style={styles.option} onPress={onNoPress}>
-                No
+                {t('profileScreen.no')}
               </Text>
             </View>
           </View>

@@ -1,32 +1,42 @@
 import React, { useState } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Pressable } from 'react-native';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 import { FormButton } from '../../components/UI/FormButton';
 import { ChangeLanguage } from './ChangeLanguage';
+import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 
 export function UnloggedProfile() {
   const [isLanguageModalVisible, setIsLanguageModalVisible] = useState(false);
+  const navigation = useNavigation<any>();
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>My Profile</Text>
+      <Text style={styles.header}>{t('profileScreen.myProfile')}</Text>
       <View style={styles.loginContainer}>
-        <Text style={styles.loginText}>
-          You need to login to see your details
-        </Text>
+        <Text style={styles.loginText}>{t('profileScreen.unloggedMessage')}</Text>
         <FormButton
-          title="Login"
-          onPress={() => {}}
+          title={t('profileScreen.login')}
+          onPress={() => {
+            navigation.navigate('AuthStack');
+          }}
           style={styles.loginButton}
         />
         <View>
-          <View style={styles.optionsContainer}>
-            <Text style={styles.optionName}>Language</Text>
+          <Pressable
+            style={styles.optionsContainer}
+            onPress={() => setIsLanguageModalVisible(true)}
+          >
+            <Text style={styles.optionName}>{t('profileScreen.language')}</Text>
             <Image source={require('../../assets/images/arrow-bottom.png')} />
-          </View>
+          </Pressable>
         </View>
       </View>
-      <ChangeLanguage visible={isLanguageModalVisible} setter={setIsLanguageModalVisible} />
+      <ChangeLanguage
+        visible={isLanguageModalVisible}
+        setter={setIsLanguageModalVisible}
+      />
     </View>
   );
 }
