@@ -1,6 +1,7 @@
 import { FieldErrors } from 'react-hook-form';
 import { Inputs } from '../screens/LoginScreen';
 import { SignUpInputs } from '../screens/SignUpScreen';
+import { ForgotPasswordInputs } from '../screens/ForgotPasswordScreen';
 import { ShippingAddressInputs } from '../components/Checkout/ShippingAddressForm';
 import { CardInputs } from '../components/Checkout/CardForm';
 import i18n from '../lib/i18n';
@@ -34,6 +35,15 @@ export function getSignUpFormErrorMessage(errors: FieldErrors<SignUpInputs>) {
     return errors.name.message;
   } else return '';
 }
+
+export function getForgotPasswordInputsErrorMessage(errors: FieldErrors<ForgotPasswordInputs>) {
+  if (errors.password?.message) {
+    return errors.password.message;
+  } else if (errors.confirmPassword?.message) {
+    return errors.confirmPassword.message;
+  } else return '';
+}
+
 export function getShippingsErrorMessage(
   errors: FieldErrors<ShippingAddressInputs>
 ) {
@@ -57,4 +67,4 @@ export function getAddCardErrorMessage(errors: FieldErrors<CardInputs>) {
   } else if (errors.cvv?.message) {
     return errors.cvv.message;
   } else return '';
-}
+

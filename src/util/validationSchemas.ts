@@ -3,6 +3,7 @@ import '../lib/i18n';
 import i18n from '../lib/i18n';
 
 export const signUpSchema = yup.object({
+
   name: yup.string().required(i18n.t('formErrors.emptyNameError')),
   email: yup
     .string()
