@@ -1,15 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import SuccessBackground from '../components/Success/SuccessBackground';
 import SuccessText from '../components/Success/SuccessText';
 import ContinueButton from '../components/Success/ContinueButton';
 import { Colors } from '../assets/constants/Colors';
 import { useNavigation } from '@react-navigation/native';
-
+import { CheckoutContext } from '../store/CheckoutContext'
 
 const SuccessScreen: React.FC = () => {
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
+  const { paymentMethod } = useContext(CheckoutContext);
 
   useEffect(() => {
     navigation.setOptions({
@@ -18,9 +19,22 @@ const SuccessScreen: React.FC = () => {
 
   })
   
-  const handleContinuePress = () => {
-    
-  };
+    const handleContinuePress = () => {
+      switch (paymentMethod) {
+        case 'pix':
+          navigation.navigate('SuccessStack', {screen: 'PixPaymentScreen'});
+          break;
+        case 'boleto':
+          navigation.navigate('SuccessStack', {screen: 'InvoicePaymentScreen'});
+          break;
+        case 'creditCard':
+          navigation.navigate('SuccessStack', {screen: 'CardPaymentSuccessScreen'});
+          break;
+        default:
+          navigation.navigate('MainPage', {screen: 'Cart'})
+          break;
+      }
+    }
 
   return (
     <View style={styles.container}>
