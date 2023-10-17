@@ -18,10 +18,6 @@ const InvoicePaymentScreen: React.FC = () => {
       });
   
     })
-    
-    const handleContinuePress = () => {
-      
-    };
   
     return (
       <View style={styles.container}>
@@ -40,7 +36,6 @@ const InvoicePaymentScreen: React.FC = () => {
         children= 'BAIXAR BOLETO'
         />
           <ContinueShoppingButton
-          onPress={handleContinuePress}
           children= 'CONTINUE SHOPPING'
           />
       </View>
