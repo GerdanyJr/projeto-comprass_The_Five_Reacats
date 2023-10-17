@@ -86,5 +86,13 @@
     "invalidCVVError": "O CVV deve conter 3 ou 4 dígitos",
     "emptyCVVError": "O CVV é obrigatório",
     "zipCodeNotFound": "CEP não encontrado!"
+  },
+  "successScreen": {
+    "successText": "Successo!",
+    "thankYouText": "Seu pedido será entregue em breve. \nObrigado por escolher nosso aplicativo!",
+    "continueShopping": "CONTINUE COMPRANDO",
+    "instructionText": "Pague seu pix usando o código QR acima e \nsiga os passos enviados por e-mail.",
+    "downloadInvoice": "BAIXAR BOLETO",
+    "invoiceText": "Pague a fatura até {{date}} e \nsiga as etapas enviadas por e-mail."
   }
 }

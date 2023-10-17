@@ -86,5 +86,13 @@
     "invalidCVVError": "CVV must contain 3 or 4 digits",
     "emptyCVVError": "CVV is required",
     "zipCodeNotFound": "Zip code not found!"
-  }
+  },
+  "successScreen": {
+    "successText": "Success!",
+    "thankYouText": "Your order will be delivered soon. \nThank you for choosing our app!",
+    "continueShopping": "CONTINUE SHOPPING",
+    "instructionText": "Pay your pix using the QR code above and \nthen follow the steps sent by email.",
+    "downloadInvoice": "DOWNLOAD INVOICE",
+    "invoiceText": "Pay the invoice by {{date}} and then \nfollow the steps sent by email."
+}
 }

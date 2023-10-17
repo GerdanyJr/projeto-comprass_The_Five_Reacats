@@ -6,9 +6,12 @@ import ContinueButton from '../components/Success/ContinueButton';
 import { Colors } from '../assets/constants/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { CheckoutContext } from '../store/CheckoutContext'
+import { useTranslation } from 'react-i18next';
+import { use } from 'i18next';
 
 const SuccessScreen: React.FC = () => {
 
+  const { t } = useTranslation();
   const navigation = useNavigation<any>();
   const { paymentMethod } = useContext(CheckoutContext);
 
@@ -40,8 +43,8 @@ const SuccessScreen: React.FC = () => {
     <View style={styles.container}>
       <SuccessBackground>
         <SuccessText />
-        <Text style={styles.thankYouText}>Your order will be delivered soon.{'\n'}
-          Thank you for choosing our app!
+        <Text style={styles.thankYouText}>
+          {t('successScreen.thankYouText')}
         </Text>
         <ContinueButton
         onPress={handleContinuePress}

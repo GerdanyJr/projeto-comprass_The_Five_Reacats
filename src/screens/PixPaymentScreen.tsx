@@ -5,9 +5,11 @@ import PixBackgroundImage from "../components/Success/PixBackgroundImage";
 import SuccessText from "../components/Success/SuccessText";
 import { Colors } from "../assets/constants/Colors"; 
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from 'react-i18next';
 
 const PixPaymentSuccessScreen: React.FC = () => {
 
+    const { t } = useTranslation();
     const navigation = useNavigation();
   
     useEffect(() => {
@@ -24,12 +26,12 @@ const PixPaymentSuccessScreen: React.FC = () => {
         </PixBackgroundImage>
         <View style={styles.SuccessText}>
             <SuccessText  />
-            <Text style={styles.instructionText}>Pay your pix using the QR code above and{'\n'}
-                then follow the steps sent by email.
+            <Text style={styles.instructionText}>
+              {t('successScreen.instructionText')}
             </Text>
         </View>
           <ContinueShoppingButton
-          children= 'CONTINUE SHOPPING'
+          children= {t('successScreen.continueShopping')}
           />
       </View>
     );
