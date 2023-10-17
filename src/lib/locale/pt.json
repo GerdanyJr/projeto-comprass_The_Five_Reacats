@@ -114,5 +114,21 @@
     "portuguese": "Português - Brasileiro",
     "unloggedMessage": "Você precisa entrar para ver seus dados",
     "login": "Entrar"
+  },
+
+  "homeScreen": {
+    "paragraph": "Aqui você sempre ganha!",
+    "searchBar": "Insira o nome do produto",
+    "productNotFound": "Produto não encontrado",
+    "viewAll": "Ver todos"
+  },
+
+  "productScreen": {
+    "youCanAlsoLike": "Você também pode gostar disso.",
+    "details": "detalhes",
+    "shippingInfo": "Informações de envio",
+    "shippingDescription": "É um fato há muito estabelecido que um leitor será distraído pelo conteúdo legível de uma página ao analisar seu layout. O objetivo ao usar o Lorem Ipsum é que ele tem uma distribuição de letras mais ou menos normal",
+    "support": "Suporte",
+    "suportDetails": "É um fato há muito estabelecido que um leitor será distraído pelo conteúdo legível de uma página ao analisar seu layout. O objetivo ao usar o Lorem Ipsum é que ele tem uma distribuição de letras mais ou menos normal"
   }
 }
