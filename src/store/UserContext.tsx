@@ -13,6 +13,7 @@ export const UserContext = createContext({
   isAuthenticated: false,
   cart: [] as CartItem[],
   authenticate: (token: Token, user: User) => {},
+  updateUser: (user: User) => {},
   addCartItem: (item: Product) => {},
   addShippingAddress: (item: ShippingAddress) => {},
   addCreditCard: (item: CreditCard) => {},
@@ -44,6 +45,10 @@ export function UserContextProvider({
     setToken(null);
     setUser(null);
     AsyncStorage.multiRemove(['token', 'user']);
+  }
+  function updateUser(newUser: User) {
+    setUser(prevState => { return {...prevState, ...newUser}; });
+    AsyncStorage.setItem('user', JSON.stringify(user));
   }
   function addCartItem(item: Product) {
     setCart((prevState) => [...prevState, { item: item, quantity: 0 }]);
@@ -98,6 +103,7 @@ export function UserContextProvider({
         token: token,
         isAuthenticated: !!token,
         cart: cart,
+        updateUser: updateUser,
         addCartItem: addCartItem,
         addShippingAddress: addShippingAddress,
         addCreditCard: addCreditCard,
