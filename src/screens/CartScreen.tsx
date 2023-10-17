@@ -11,11 +11,12 @@ function CartScreen(): JSX.Element {
   const cartTotalValue = () => {
     let total = 0;
     userContext.cart.map(
-      (item) => (total = Number(item.item.price) * item.quantity)
+      item => (total += Number(item.item.price) * item.quantity)
     );
     return total;
   };
-  
+
+
   if (userContext.cart.length == 0) {
     return (
       <View>
@@ -45,7 +46,7 @@ function CartScreen(): JSX.Element {
         <Text style={style.header}>Cart</Text>
       </View>
       <FlatList
-        style={{ width: 520 }}
+        style={{height: 520}}
         contentContainerStyle={style.itemsList}
         data={userContext.cart}
         renderItem={({ item }) => (
@@ -61,7 +62,7 @@ function CartScreen(): JSX.Element {
       />
       <View style={style.totalAmountContainer}>
         <Text style={style.totalAmount}>Total amount:</Text>
-        <Text style={style.price}>{} R$</Text>
+        <Text style={style.price}>{0} R$</Text>
       </View>
       <View style={style.button}>
         <FormButton title="BUY" onPress={() => {}} />
@@ -80,7 +81,7 @@ const style = StyleSheet.create({
   },
 
   itemsList: {
-    alignItems: 'center',
+    alignItems: 'center'
   },
 
   headerContainer: {
