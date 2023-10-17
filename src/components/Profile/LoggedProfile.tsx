@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Dimensions, Pressable, Switch, TextInput } from 'react-native';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
@@ -26,15 +26,16 @@ export function LoggedProfile({
   const [name, setName] = useState(user?.name);
   const [avatar, setAvatar] = useState<any>(user?.avatar);
 
-  function handleTextChange(enteredText: string) {
-    setName(enteredText);
+  useEffect(() => {
     setChanges({ name: name });
-  }
+  }, [name]);
 
   function toggleSwitch() {
-    if (changes !== undefined) {
+    if (changes !== undefined && isEditing) {
       setIsChangesModalVisible(true);
-    } else setIsEditing((prevState) => !prevState);
+    } else {
+      setIsEditing((prevState) => !prevState);
+    }
   }
 
   async function handleImageChangePress() {
@@ -53,12 +54,13 @@ export function LoggedProfile({
   }
 
   function handleSubmitPress() {
-    userCtx.updateUser(changes);
     setIsEditing((prevState) => !prevState);
+    userCtx.updateUser(changes);
+    setChanges(undefined);
   }
 
   function handleYesChangesPress() {
-    userCtx.updateUser(changes);
+    setChanges(undefined);
     setIsEditing(false);
     setIsChangesModalVisible(false);
   }
@@ -85,14 +87,14 @@ export function LoggedProfile({
             source={require('../../assets/images/edit.png')}
             style={[styles.editingPen, !isEditing && styles.hidden]}
           />
-          <Image source={{ uri: avatar }} style={styles.avatar} />
+          {user.avatar && <Image source={{ uri: avatar }} style={styles.avatar} />}
         </Pressable>
         <View style={styles.userInfoContainer}>
           <View>
             {isEditing ? (
               <TextInput
                 value={name}
-                onChangeText={handleTextChange}
+                onChangeText={(enteredText) => setName(enteredText)}
                 style={styles.input}
               />
             ) : (
