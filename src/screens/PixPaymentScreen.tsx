@@ -17,9 +17,6 @@ const PixPaymentSuccessScreen: React.FC = () => {
   
     })
     
-    const handleContinuePress = () => {
-      
-    };
   
     return (
       <View style={styles.container}>
@@ -32,7 +29,6 @@ const PixPaymentSuccessScreen: React.FC = () => {
             </Text>
         </View>
           <ContinueShoppingButton
-          onPress={handleContinuePress}
           children= 'CONTINUE SHOPPING'
           />
       </View>

@@ -16,10 +16,6 @@ const CardPaymentSuccessScreen: React.FC = () => {
       });
   
     })
-    
-    const handleContinuePress = () => {
-      
-    };
   
     return (
       <View style={styles.container}>
@@ -32,7 +28,6 @@ const CardPaymentSuccessScreen: React.FC = () => {
             </Text>
         </View>
           <ContinueShoppingButton
-          onPress={handleContinuePress}
           children= 'CONTINUE SHOPPING'
           />
       </View>
