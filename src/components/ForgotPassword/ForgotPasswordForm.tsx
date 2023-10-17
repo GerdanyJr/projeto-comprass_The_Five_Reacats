@@ -11,6 +11,7 @@ import { FormButton } from '../UI/FormButton';
 import { FormError } from '../Login/FormError';
 import { FormHeader } from '../UI/FormHeader';
 import { ForgotPasswordInputs } from '../../screens/ForgotPasswordScreen';
+import { useTranslation } from 'react-i18next';
 
 interface ForgotPasswordFormProps {
   control: Control<ForgotPasswordInputs, any>;
@@ -46,11 +47,12 @@ export function ForgotPasswordForm({
   handlePasswordIconPress,
   handleConfirmPasswordIconPress,
 }: ForgotPasswordFormProps) {
+  const { t } = useTranslation();
   return (
     <>
       <FormHeader
-        title="Forgot Password"
-        description="Enter your email and let us see if it exists for you to change your password :)"
+        title={t('forgotPasswordPage.forgotPassword')}
+        description={t('forgotPasswordPage.instructions')}
         style={styles.formHeader}
       />
       <View style={styles.inputs}>
@@ -59,7 +61,7 @@ export function ForgotPasswordForm({
           name="email"
           render={({ field, fieldState }) => (
             <InputField
-              label="Email"
+              label={t('forgotPasswordPage.email')}
               error={fieldState.invalid}
               enabledInput={true}
               value={field.value}
@@ -72,7 +74,7 @@ export function ForgotPasswordForm({
           name="password"
           render={({ field, fieldState }) => (
             <InputField
-              label="Password"
+              label={t('forgotPasswordPage.password')}
               icon={
                 isPasswordVisible
                   ? require('../../assets/images/opened-eye.png')
@@ -92,7 +94,7 @@ export function ForgotPasswordForm({
           name="confirmPassword"
           render={({ field, fieldState }) => (
             <InputField
-              label="Confirm Password"
+              label={t('forgotPasswordPage.confirmPassword')}
               icon={
                 isConfirmPasswordVisible
                   ? require('../../assets/images/opened-eye.png')
@@ -111,13 +113,13 @@ export function ForgotPasswordForm({
       </View>
       <View style={styles.buttons}>
         <FormButton
-          title="Search"
+          title={t('forgotPasswordPage.search')}
           onPress={() => handleSearchPress(emailValue)}
           disabled={invalidEmail}
           isLoading={isLoading}
         />
         <FormButton
-          title="Confirm"
+          title={t('forgotPasswordPage.confirm')}
           onPress={handleSubmit(handleConfirmPress)}
           disabled={invalidEmail || !isEmailFound || !isValid}
           isLoading={isLoading}

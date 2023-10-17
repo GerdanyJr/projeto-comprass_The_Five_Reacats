@@ -12,6 +12,7 @@ import { StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ForgotPasswordForm } from '../components/ForgotPassword/ForgotPasswordForm';
 import { checkEmail, updateUserPassword } from '../service/auth';
+import { useTranslation } from 'react-i18next';
 
 export interface ForgotPasswordInputs {
   email: string;
@@ -35,6 +36,7 @@ export function ForgotPasswordScreen() {
     resolver: yupResolver(forgotPasswordSchema),
     mode: 'onChange',
   });
+  const { t } = useTranslation();
   const navigation = useNavigation<any>();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);

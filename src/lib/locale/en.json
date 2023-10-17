@@ -15,6 +15,15 @@
     "confirmPassword": "Confirm Password",
     "signUp": "Sign Up"
   },
+  "forgotPasswordPage": {
+    "forgotPassword": "Forgot Password",
+    "instructions": "Enter your email and let us see if it exists for you to change your password :)",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "search": "Search",
+    "confirm": "Confirm"
+  },
   "navigators": {
     "checkout": "Checkout",
     "shippingAddress": "Adding Shipping Address",

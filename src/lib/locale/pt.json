@@ -15,6 +15,15 @@
     "confirmPassword": "Confirme a sua senha",
     "signUp": "Cadastre-se"
   },
+  "forgotPasswordPage": {
+    "forgotPassword": "Esqueceu a senha",
+    "instructions": "Digite seu e-mail e vamos ver se ele existe para você mudar sua senha :)",
+    "email": "Email",
+    "password": "Senha",
+    "confirmPassword": "Confirme a sua senha",
+    "search": "Pesquisar",
+    "confirm": "Confirmar"
+  },
   "navigators": {
     "checkout": "Finalizar compra",
     "shippingAddress": "Adicionar endereço de entrega",
