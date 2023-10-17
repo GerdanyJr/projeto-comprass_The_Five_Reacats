@@ -14,7 +14,7 @@ export function getErrorMessageByCode(httpCode: number): string {
     case 403:
       return i18n.t('formErrors.403Error');
     default:
-      return i18n.t('formErrors.defaultError');
+      return i18n.t('formErrors.genericError');
   }
 }
 export function getLoginFormErrorMessage(errors: FieldErrors<Inputs>) {
