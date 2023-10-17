@@ -42,7 +42,7 @@ export function UserContextProvider({
     AsyncStorage.multiRemove(['token', 'user']);
   }
   function addCartItem(item: Product) {
-    setCart((prevState) => [...prevState, { item: item, quantity: 0 }]);
+    setCart((prevState) => [...prevState, { item: item, quantity: 1 }]);
   }
   function removeCartItem(itemId: number) {
     setCart((prevState) => prevState.filter(({ item }) => item.id !== itemId));

@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View } from 'react-native';
 import { mainPageOptions } from './MainPageOptions';
 import { HomeScreen } from '../../screens/HomeScreen';
+import CartScreen from '../../screens/CartScreen';
 
 const Tab = createBottomTabNavigator();
 export function MainPage() {
@@ -15,7 +16,7 @@ export function MainPage() {
       />
       <Tab.Screen
         name="Cart"
-        component={View}
+        component={CartScreen}
         options={mainPageOptions.cartOptions}
       />
       <Tab.Screen
