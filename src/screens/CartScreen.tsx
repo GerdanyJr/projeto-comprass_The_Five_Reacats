@@ -1,13 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
 import CartItemCard from '../components/Cart/CartItemCard';
 import { FormButton } from '../components/UI/FormButton';
 import { UserContext } from '../store/UserContext';
-import { Product } from '../types/interfaces/Product';
+import { useNavigation } from '@react-navigation/native';
 
 function CartScreen(): JSX.Element {
   const userContext = useContext(UserContext);
 
+  const navigation = useNavigation<any>();
   const cartTotalValue = () => {
     let total = 0;
     userContext.cart.map(
@@ -56,7 +57,7 @@ function CartScreen(): JSX.Element {
             price={item.item.price}
             url={item.item.images[0]}
             removeProductFromCart={userContext.removeCartItem}
-            setItemQuantity={userContext.setItemQuantity}
+            quantity={item.quantity}
           />
         )}
       />
@@ -65,7 +66,7 @@ function CartScreen(): JSX.Element {
         <Text style={style.price}>{0} R$</Text>
       </View>
       <View style={style.button}>
-        <FormButton title="BUY" onPress={() => {}} />
+        <FormButton title="BUY" onPress={()=>{}} />
       </View>
     </View>
   );

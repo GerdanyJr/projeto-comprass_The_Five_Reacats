@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import { Image, View, Pressable, Text, StyleSheet } from 'react-native';
 import Counter from './Counter';
 
@@ -6,14 +6,14 @@ interface CartItemCardProps {
   name: string,
   price: string,
   url: string,
-  id: number,
-  removeProductFromCart: (itemId: number) => void,
-  setItemQuantity: (itemId: number, itemQuantity: number) => void
+  id: string,
+  removeProductFromCart: (itemId: string) => void
+  quantity: number
 }
 
 
-const CartItemCard = ({name, price, url, id, removeProductFromCart, setItemQuantity} : CartItemCardProps) => {
-  const [count, setCount] = useState<number>(1);
+const CartItemCard = ({name, price, url, id, removeProductFromCart, quantity} : CartItemCardProps) => {
+  const [count, setCount] = useState<number>(quantity);
 
   const onPressDelete = () => {
     removeProductFromCart(id);
@@ -21,12 +21,11 @@ const CartItemCard = ({name, price, url, id, removeProductFromCart, setItemQuant
 
   const onPressMinus = () => {
     count !== 0 ? setCount(count - 1) : setCount(count);
-    setItemQuantity(id, count);
+    
   }
 
   const onPressPlus = () => {
     setCount(count + 1);
-    setItemQuantity(id, count);
   }
 
 

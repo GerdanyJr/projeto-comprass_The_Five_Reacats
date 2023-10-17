@@ -1,0 +1,125 @@
+{
+  "loginPage": {
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "signUpText": "Not have an account yet? Sign up",
+    "forgotPassword": "I forgot my password",
+    "iDontWantToLogin": "I don't want to login"
+  },
+  "signUpPage": {
+    "headerDescription": "Choose a really cool name that only contains spaces as special characters. Oh, and your password must have more than 4 digits! :)",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "signUp": "Sign Up"
+  },
+  "navigators": {
+    "checkout": "Checkout",
+    "shippingAddress": "Adding Shipping Address",
+    "cardForm": "Add new Card"
+  },
+  "checkoutScreen": {
+    "unloggedAllert": "You need to connect to complete your purchase, come on?",
+    "login": "Login"
+  },
+  "shippingAddresses": {
+    "shippingAddress": "Shipping Address",
+    "change": "Change",
+    "clickToAdd": "Click to add an address",
+    "zipCode": "Zip Code (Postal Code)",
+    "address": "Address",
+    "city": "City",
+    "state": "State/Province/Region",
+    "fullName": "Full name",
+    "saveAddress": "Save Address"
+  },
+  "paymentMethod": {
+    "paymentMethod": "Payment Method",
+    "change": "Change",
+    "noneAdded": "None added",
+    "bankSlip": "Bank Slip",
+    "chooseMethod": "Choose your payment method",
+    "creditCard": "Credit or debit card",
+    "pix": "Pix",
+    "addNewCard": "Add new card",
+    "nameOnCard": "Name on card",
+    "cardNumber": "Card Number",
+    "expDate": "Expire Date",
+    "CVV": "CVV",
+    "addCard": "Add Card"
+  },
+  "deliveryMethod": {
+    "deliveryMethod": "Delivery Method",
+    "days": "days"
+  },
+  "summary": {
+    "order": "Order",
+    "delivery": "Delivery",
+    "summary": "Summary",
+    "submitOrder": "Submit Order"
+  },
+  "formErrors": {
+    "emptyNameError": "Please enter your name",
+    "emptyEmailError": "Please enter your email",
+    "invalidEmailError": "Please insert a valid email",
+    "emptyPasswordError": "Please enter your password",
+    "shortPasswordError": "Your password must have at least 6 characters",
+    "emptyConfirmPasswordError": "Please confirm your password",
+    "invalidConfirmPasswordError": "Your password is not the same as your confirmation",
+    "emptyZipCodeError": "ZIP code is required",
+    "invalidZipCodeError": "Invalid ZIP code",
+    "emptyAddressError": "Address is required",
+    "shortAddressError": "Address must be at least 10 characters long",
+    "emptyCityError": "City is required",
+    "shortCityError": "City must be at least 5 characters long",
+    "emptyStateError": "State is required",
+    "shortStateError": "State must be at least 2 characters long",
+    "emptyFullNameError": "Full name is required",
+    "shortFullNameError": "Full name must be at least 5 characters long",
+    "emptyNameOnCardError": "Name on card is required",
+    "invalidCardNumberError": "Card number must be in the format XXXX XXXX XXXX XXXX",
+    "emptyCardNumberError": "Card number is required",
+    "invalidExpDateError": "Expiration date must be in MM/YY format",
+    "emptyExpDateError": "Expiration date is required",
+    "invalidCVVError": "CVV must contain 3 or 4 digits",
+    "emptyCVVError": "CVV is required",
+    "zipCodeNotFound": "Zip code not found!",
+    "401Error": "Your email or password is incorrect",
+    "403Error": "Forbidden. You do not have permission to access this resource.",
+    "genericError": "Something happened, try again later"
+  },
+  "profileScreen":{
+    "myProfile": "My Profile",
+    "editInfo": "Edit informations",
+    "language": "Language",
+    "logout": "Log out",
+    "warning": "Warning",
+    "logoutMessage": "Do you really want to leave?",
+    "abortChanges": "Do you want to abandon your changes?",
+    "yes": "Yes",
+    "no": "No",
+    "Languages": "Languages",
+    "english": "English",
+    "portuguese": "Portuguese - Brazil",
+    "unloggedMessage":"You need to login to see your details",
+    "login": "Login"
+  },
+
+  "homeScreen": {
+    "paragraph": "Here you always win!",
+    "searchBar": "Enter the product name",
+    "productNotFound": "Product not found",
+    "viewAll": "viewAll"
+  },
+
+  "productScreen": {
+    "youCanAlsoLike": "You can also like this",
+    "details": "details",
+    "shippingInfo": "Shipping info",
+    "shippingDescription": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters",
+    "support": "Support",
+    "suportDetails": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters"
+  }
+}

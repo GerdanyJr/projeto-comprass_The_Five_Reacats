@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import {
   Image,
@@ -9,15 +9,21 @@ import {
   Easing,
   Pressable,
   ImageSourcePropType,
+  TextInputProps,
 } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
+import { ActivityIndicator } from 'react-native';
 
 interface InputFieldProps {
   label: string;
   error: boolean;
   value: string;
   enabledInput: boolean;
+  inputProps?: TextInputProps;
+  isLoading?: boolean;
+  style?: any;
   icon?: ImageSourcePropType;
+  iconStyles?: any;
   secureTextEntry?: boolean;
   onChangeText?: (enteredText: string) => void;
   onIconPress?: () => void;
@@ -28,6 +34,12 @@ export function InputField(props: InputFieldProps): JSX.Element {
   const [errorLabelStyles, setErrorLabelStyles] = useState(styles.errorLabel);
   const transY = useRef(new Animated.Value(0));
 
+  useEffect(() => {
+    if (props.value?.length > 0) {
+      handleFocus();
+    }
+  }, [props.value]);
+
   const handleFocus = () => {
     setLabelStyles(styles.focusedLabel);
     setErrorLabelStyles(styles.errorFocusedLabel);
@@ -35,7 +47,7 @@ export function InputField(props: InputFieldProps): JSX.Element {
   };
 
   const handleBlur = () => {
-    if (props.value.length === 0) {
+    if (props.value?.length === 0) {
       animateTransform(0);
       setLabelStyles(styles.label);
       setErrorLabelStyles(styles.errorLabel);
@@ -62,6 +74,7 @@ export function InputField(props: InputFieldProps): JSX.Element {
       <View
         style={[
           styles.inputContainer,
+          props.style,
           !props.enabledInput && styles.disabledInput,
           props.error && styles.errorInput,
         ]}
@@ -83,19 +96,27 @@ export function InputField(props: InputFieldProps): JSX.Element {
             {props.label}
           </Animated.Text>
           <TextInput
-            style={styles.input}
+            style={[styles.input, props.isLoading && styles.loadingInput]}
             onChangeText={props.onChangeText}
             onFocus={handleFocus}
             onBlur={handleBlur}
             value={props.value}
             secureTextEntry={props.secureTextEntry}
-            editable={props.enabledInput}
+            editable={props.enabledInput && !props.isLoading}
+            {...props.inputProps}
           />
         </View>
-        {props.icon && props.enabledInput && (
+        {props.icon && !props.isLoading && props.enabledInput && (
           <Pressable onPress={props.onIconPress}>
-            <Image source={props.icon} accessibilityHint="icon" />
+            <Image
+              source={props.icon}
+              accessibilityHint="icon"
+              style={props.iconStyles}
+            />
           </Pressable>
+        )}
+        {props.isLoading && (
+          <ActivityIndicator size={28} color={Colors.red_500} />
         )}
       </View>
     </>
@@ -145,5 +166,9 @@ const styles = StyleSheet.create({
     borderColor: Colors.red_500,
     borderWidth: 1,
     borderRadius: 12,
+  },
+  loadingInput: {
+    minWidth: '80%',
+    maxWidth: '80%',
   },
 });
