@@ -1,4 +1,6 @@
+import '../../lib/i18n';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { View, StyleSheet } from 'react-native';
 import { Control, Controller, UseFormHandleSubmit } from 'react-hook-form';
 import { InputField } from './InputField';
@@ -8,7 +10,7 @@ import { Inputs } from '../../screens/LoginScreen';
 
 interface LoginFormProps {
   control: Control<Inputs, any>;
-  handleSubmit:  UseFormHandleSubmit<Inputs, undefined>; 
+  handleSubmit: UseFormHandleSubmit<Inputs, undefined>;
   handleLoginPress: (data: Inputs) => void;
   isPasswordVisible: boolean;
   handleIconPress: () => void;
@@ -25,22 +27,16 @@ export function LoginForm({
   errorMessage,
   isLoading,
 }: LoginFormProps) {
+  const { t } = useTranslation();
   return (
     <View style={styles.formContainer}>
       <View style={styles.inputs}>
         <Controller
           control={control}
-          rules={{
-            required: true,
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Please insert a valid email',
-            },
-          }}
           name="email"
           render={({ field, fieldState }) => (
             <InputField
-              label="Email"
+              label={t('loginPage.email')}
               error={fieldState.invalid}
               enabledInput={true}
               value={field.value}
@@ -50,20 +46,10 @@ export function LoginForm({
         />
         <Controller
           control={control}
-          rules={{
-            required: {
-              value: true,
-              message: 'Please complete all fields',
-            },
-            minLength: {
-              value: 6,
-              message: 'Your password must be longer than 6 digits.',
-            },
-          }}
           name="password"
           render={({ field, fieldState }) => (
             <InputField
-              label="Senha"
+              label={t('loginPage.password')}
               icon={
                 isPasswordVisible
                   ? require('../../assets/images/opened-eye.png')
@@ -81,7 +67,7 @@ export function LoginForm({
         <FormError message={errorMessage} />
       </View>
       <FormButton
-        title="Login"
+        title={t('loginPage.login')}
         onPress={handleSubmit(handleLoginPress)}
         isLoading={isLoading}
       />

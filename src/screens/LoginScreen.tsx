@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import '../lib/i18n';
+import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Image, StyleSheet, View } from 'react-native';
 import { CompassBackground } from '../components/Login/CompassBackground';
 import { RedirectText } from '../components/Login/RedirectText';
@@ -10,6 +12,9 @@ import {
 } from '../util/errors';
 import { LoginForm } from '../components/Login/LoginForm';
 import { useNavigation } from '@react-navigation/native';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { loginSchema } from '../util/validationSchemas';
+import { UserContext } from '../store/UserContext';
 
 export interface Inputs {
   email: string;
@@ -17,6 +22,7 @@ export interface Inputs {
 }
 
 export function LoginScreen() {
+  const { t } = useTranslation();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -28,6 +34,7 @@ export function LoginScreen() {
     formState: { errors },
   } = useForm<Inputs>({
     mode: 'onChange',
+    resolver: yupResolver(loginSchema),
     defaultValues: {
       email: '',
       password: '',
@@ -36,6 +43,7 @@ export function LoginScreen() {
   useEffect(() => {
     setErrorMessage(() => getLoginFormErrorMessage(errors));
   }, [errors.email, errors.password]);
+  const userCtx = useContext(UserContext);
 
   function handleIconPress() {
     setIsPasswordVisible((prevState) => !prevState);
@@ -44,9 +52,9 @@ export function LoginScreen() {
   async function handleLoginPress(data: Inputs) {
     setIsLoading(true);
     try {
-      const response = await login(data.email, data.password);
-      const user = await getUser(response.access_token);
-      //todo set context
+      const token = await login(data.email, data.password);
+      const user = await getUser(token.acessToken);
+      userCtx.authenticate(token, user);
       navigation.navigate('MainPage');
     } catch (error: any) {
       setErrorMessage(() => getErrorMessageByCode(error.response.status));
@@ -73,15 +81,15 @@ export function LoginScreen() {
       />
       <View style={styles.redirectTextContainer}>
         <RedirectText
-          title="Not have an account yet? Sign up"
+          title={t("loginPage.signUpText")}
           onPress={() => navigation.navigate('SignUp')}
         />
         <RedirectText
-          title="I forgot my password"
+          title={t("loginPage.forgotPassword")}
           onPress={() => navigation.navigate('ForgotPassword')}
         />
         <RedirectText
-          title="I don't want to login"
+          title={t("loginPage.iDontWantToLogin")}
           onPress={() => navigation.navigate('MainPage')}
         />
       </View>
