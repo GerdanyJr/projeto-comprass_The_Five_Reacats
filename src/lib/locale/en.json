@@ -105,5 +105,21 @@
     "portuguese": "Portuguese - Brazil",
     "unloggedMessage":"You need to login to see your details",
     "login": "Login"
+  },
+
+  "homeScreen": {
+    "paragraph": "Here you always win!",
+    "searchBar": "Enter the product name",
+    "productNotFound": "Product not found",
+    "viewAll": "viewAll"
+  },
+
+  "productScreen": {
+    "youCanAlsoLike": "You can also like this",
+    "details": "details",
+    "shippingInfo": "Shipping info",
+    "shippingDescription": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters",
+    "support": "Support",
+    "suportDetails": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters"
   }
 }

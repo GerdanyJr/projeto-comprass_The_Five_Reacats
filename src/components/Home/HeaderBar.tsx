@@ -1,3 +1,5 @@
+import '../../lib/i18n';
+import { useTranslation } from 'react-i18next';
 import {
   View,
   Text,
@@ -9,9 +11,13 @@ import {
   FlatList,
 } from 'react-native';
 import { useState, useEffect } from 'react';
+import { ParamListBase, useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { CardSearchResult } from './CardSearchResult';
 import { fetchItensByTitle } from '../../service/FetchProductsAux';
 import { ProductByTitle } from '../../types/interfaces/Product';
+import { Colors } from '../../assets/constants/Colors';
+
 
 export function HeaderBar({
   isAuthenticated,
@@ -24,9 +30,12 @@ export function HeaderBar({
   userImg: string | undefined;
   navigation: any;
 }) {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
   const [modalVisible, setModalVisible] = useState(false);
   const [fetchSearch, setFetchSearch] = useState<ProductByTitle[]>([]);
   const [search, setSearch] = useState('');
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function getItensByTitle() {
@@ -35,11 +44,6 @@ export function HeaderBar({
     }
     getItensByTitle();
   }, [search]);
-
-  function navigatioHandler() {
-    navigation.navigate('Product');
-    setModalVisible(!modalVisible);
-  }
 
   return (
     <View style={styles.container}>
@@ -75,7 +79,7 @@ export function HeaderBar({
           onRequestClose={() => setModalVisible(!modalVisible)}
         >
           <TextInput
-            placeholder="Enter the product name"
+            placeholder={t("homeScreen.searchBar")}
             style={styles.inputSearch}
             placeholderTextColor={'#9B9B9B'}
             onChangeText={setSearch}
@@ -93,12 +97,18 @@ export function HeaderBar({
                 name={item.title}
                 description={item.description}
                 price={item.price}
-                onPress={navigatioHandler}
+                onPress={() => {
+                  navigation.navigate('Product', {
+                    itemId: item.id,
+                    categoryId: item.category.id,
+                  });
+                  setModalVisible(!modalVisible);
+                }}
               />
             )}
             maxToRenderPerBatch={3}
             ListEmptyComponent={() => (
-              <Text style={styles.emptyList}>Product not found</Text>
+              <Text style={styles.emptyList}>{t("homeScreen.productNotFound")}</Text>
             )}
           />
         </Modal>
@@ -109,16 +119,15 @@ export function HeaderBar({
 
 const styles = StyleSheet.create({
   container: {
-    width: 333,
+    width: '100%',
+    paddingHorizontal: 16,
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginTop: 16,
-    left: 10,
     position: 'absolute',
   },
 
   userContain: {
-    width: 207,
     height: 22,
     flexDirection: 'row',
     paddingLeft: 1,
@@ -164,7 +173,7 @@ const styles = StyleSheet.create({
   searchButton: {
     width: 41,
     height: 41,
-    backgroundColor: '#FF0024',
+    backgroundColor: Colors.red_500,
     borderRadius: 50,
   },
 
@@ -183,7 +192,7 @@ const styles = StyleSheet.create({
     width: 330,
     height: 55,
     borderWidth: 2,
-    borderColor: '#FF0024',
+    borderColor: Colors.red_500,
   },
 
   inputSearch: {
@@ -195,7 +204,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
     borderWidth: 4,
-    borderColor: '#FF0024',
+    borderColor: Colors.red_500,
     borderRadius: 16,
     marginTop: 66,
     padding: 12,
@@ -207,7 +216,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: '#fff',
     borderRadius: 12,
-    borderColor: '#B6B6B6',
+    borderColor: Colors.gray_100,
     borderWidth: 2,
     marginTop: 8,
   },
