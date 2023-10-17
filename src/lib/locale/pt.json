@@ -102,7 +102,16 @@
     "invalidExpDateError": "A data de validade deve estar no formato MM/AA",
     "emptyExpDateError": "A data de validade é obrigatória",
     "invalidCVVError": "O CVV deve conter 3 ou 4 dígitos",
-    "emptyCVVError": "O CVV é obrigatório",
+    "emptyCVVError": "O CVV é obrigatório"
+    "zipCodeNotFound": "CEP não encontrado!"
+  },
+  "successScreen": {
+    "successText": "Successo!",
+    "thankYouText": "Seu pedido será entregue em breve. \nObrigado por escolher nosso aplicativo!",
+    "continueShopping": "CONTINUE COMPRANDO",
+    "instructionText": "Pague seu pix usando o código QR acima e \nsiga os passos enviados por e-mail.",
+    "downloadInvoice": "BAIXAR BOLETO",
+    "invoiceText": "Pague a fatura até {{date}} e \nsiga as etapas enviadas por e-mail."
     "zipCodeNotFound": "CEP não encontrado!",
     "401Error": "Seu email ou senha estão incorretos",
     "403Error": "Proibido, você não tem permissão para acessar esse recurso",

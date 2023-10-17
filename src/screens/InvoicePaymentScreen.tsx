@@ -7,9 +7,11 @@ import DownloadInvoiceButton from "../components/Success/DownloadInvoiceButton";
 import InvoicePaymentText from "../components/Success/InvoicePaymentText";
 import { Colors } from "../assets/constants/Colors"; 
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from 'react-i18next';
 
 const InvoicePaymentScreen: React.FC = () => {
 
+    const { t } = useTranslation();
     const navigation = useNavigation();
   
     useEffect(() => {
@@ -33,10 +35,10 @@ const InvoicePaymentScreen: React.FC = () => {
         <DownloadInvoiceButton 
         downloadUrl="https://drive.google.com/uc?id=1NMJFDL7lBE86OWwvRBB8GC_JOWrd-F2l&export=download"
         
-        children= 'BAIXAR BOLETO'
+        children= {t('successScreen.downloadInvoice')}
         />
           <ContinueShoppingButton
-          children= 'CONTINUE SHOPPING'
+          children= {t('successScreen.continueShopping')}
           />
       </View>
     );

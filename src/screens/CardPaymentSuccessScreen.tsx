@@ -5,9 +5,11 @@ import BagsBackgroundImage from "../components/Success/BagsBackgroundImage";
 import SuccessText from "../components/Success/SuccessText";
 import { Colors } from "../assets/constants/Colors"; 
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from 'react-i18next';
 
 const CardPaymentSuccessScreen: React.FC = () => {
 
+    const { t } = useTranslation();
     const navigation = useNavigation();
   
     useEffect(() => {
@@ -23,12 +25,11 @@ const CardPaymentSuccessScreen: React.FC = () => {
         </BagsBackgroundImage>
         <View style={styles.SuccessText}>
             <SuccessText  />
-            <Text style={styles.thankYouText}>Your order will be delivered soon.{'\n'}
-                Thank you for choosing our app!
+            <Text style={styles.thankYouText}> {t('successScreen.thankYouText')}
             </Text>
         </View>
           <ContinueShoppingButton
-          children= 'CONTINUE SHOPPING'
+          children= {t('successScreen.continueShopping')}
           />
       </View>
     );
