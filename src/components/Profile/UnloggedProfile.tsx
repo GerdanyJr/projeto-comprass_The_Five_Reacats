@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions } from 'react-native';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 import { FormButton } from '../../components/UI/FormButton';
+import { ChangeLanguage } from './ChangeLanguage';
 
 export function UnloggedProfile() {
+  const [isLanguageModalVisible, setIsLanguageModalVisible] = useState(false);
   return (
     <View style={styles.container}>
       <Text style={styles.header}>My Profile</Text>
@@ -20,10 +22,11 @@ export function UnloggedProfile() {
         <View>
           <View style={styles.optionsContainer}>
             <Text style={styles.optionName}>Language</Text>
-            <Image source={require('../../assets/images/arrow-top.png')} />
+            <Image source={require('../../assets/images/arrow-bottom.png')} />
           </View>
         </View>
       </View>
+      <ChangeLanguage visible={isLanguageModalVisible} setter={setIsLanguageModalVisible} />
     </View>
   );
 }
