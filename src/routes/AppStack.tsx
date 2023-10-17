@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SplashScreen } from '../screens/SplashScreen';
 import { Token } from '../types/interfaces/Token';
 import { User } from '../types/interfaces/User';
+import { SuccessStack } from './Success/SuccessStack';
 
 const Stack = createNativeStackNavigator();
 export function AppStack(): JSX.Element {
@@ -35,6 +36,7 @@ export function AppStack(): JSX.Element {
           <Stack.Screen name="MainPage" component={MainPage} />
           <Stack.Screen name="AuthStack" component={AuthStack} />
           <Stack.Screen name="CheckoutStack" component={CheckoutStack} />
+          <Stack.Screen name="SuccessStack" component= {SuccessStack} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
