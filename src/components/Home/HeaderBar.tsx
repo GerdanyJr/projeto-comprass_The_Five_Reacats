@@ -23,12 +23,10 @@ export function HeaderBar({
   isAuthenticated,
   username,
   userImg,
-  navigation,
 }: {
   isAuthenticated: boolean;
   username: string | undefined;
   userImg: string | undefined;
-  navigation: any;
 }) {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
