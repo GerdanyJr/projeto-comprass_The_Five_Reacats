@@ -7,6 +7,8 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 
+import { Colors } from '../../assets/constants/Colors';
+
 export function CardSearchResult({
   url,
   name,
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     height: 66,
     justifyContent: 'space-evenly',
     flexDirection: 'row',
-    borderColor: '#B6B6B6',
+    borderColor: Colors.gray_100,
     borderBottomWidth: 2,
   },
 
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
   },
 
   cardPrice: {
-    color: '#FF0024',
+    color: Colors.red_500,
     fontSize: 16,
     fontWeight: '800',
   },
