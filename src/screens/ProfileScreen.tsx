@@ -4,6 +4,10 @@ import { UserContext } from '../store/UserContext';
 import { UnloggedProfile } from '../components/Profile/UnloggedProfile';
 
 export function ProfileScreen() {
-  const { isAuthenticated } = useContext(UserContext);
-  return isAuthenticated ? <LoggedProfile /> : <UnloggedProfile />;
+  const { logout, user } = useContext(UserContext);
+  return user ? (
+    <LoggedProfile logout={logout} user={user} />
+  ) : (
+    <UnloggedProfile />
+  );
 }

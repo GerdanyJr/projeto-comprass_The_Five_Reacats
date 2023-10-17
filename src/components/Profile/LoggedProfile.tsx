@@ -1,126 +1,143 @@
 import React, { useContext, useState } from 'react';
 import { Dimensions, Pressable, Switch, TextInput } from 'react-native';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import { launchImageLibrary } from 'react-native-image-picker';
 import { Colors } from '../../assets/constants/Colors';
 import { WarningModal } from './WarningModal';
 import { ChangeLanguage } from './ChangeLanguage';
-import { UserContext } from '../../store/UserContext';
 import { useTranslation } from 'react-i18next';
+import { User } from '../../types/interfaces/User';
 
-export function LoggedProfile() {
-  const { logout, user } = useContext(UserContext);
+export function LoggedProfile({
+  logout,
+  user,
+}: {
+  logout: () => void;
+  user: User;
+}) {
   const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const [isChangesModalVisible, setIsChangesModalVisible] = useState(false);
   const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false);
   const [isLanguageModalVisible, setIsLanguageModalVisible] = useState(false);
+  const [changes, setChanges] = useState<any>();
   const [name, setName] = useState(user?.name);
+  const [avatar, setAvatar] = useState<any>(user?.avatar);
+
+  function handleTextChange(enteredText: string) {
+    setName(enteredText);
+    setChanges({ name: name });
+  }
 
   function toggleSwitch() {
     setIsEditing((prevState) => !prevState);
   }
 
+  async function handleImageChangePress() {
+    const response = await launchImageLibrary({
+      mediaType: 'photo',
+      maxHeight: 256,
+      maxWidth: 256,
+    });
+    if(response.assets) {
+        setAvatar(response.assets[0].uri);
+    }
+  }
   function handleYesLogoutPress() {
     setIsLogoutModalVisible(false);
     logout();
   }
   return (
-    user && (
-      <View style={styles.container}>
-        <Pressable
-          style={styles.checkContainer}
-          onPress={() => console.log('foda')}
-          disabled={!isEditing}
-        >
+    <View style={styles.container}>
+      <Pressable
+        style={styles.checkContainer}
+        onPress={() => console.log('foda')}
+        disabled={!isEditing}
+      >
+        <Image
+          source={require('../../assets/images/check-circle.png')}
+          style={!isEditing && styles.hidden}
+        />
+      </Pressable>
+      <Text style={styles.header}>{t('profileScreen.myProfile')}</Text>
+      <View style={styles.loginContainer}>
+        <Pressable disabled={!isEditing} onPress={handleImageChangePress}>
           <Image
-            source={require('../../assets/images/check-circle.png')}
-            style={!isEditing && styles.hidden}
+            source={require('../../assets/images/edit.png')}
+            style={[styles.editingPen, !isEditing && styles.hidden]}
           />
+          <Image source={{ uri: avatar }} style={styles.avatar} />
         </Pressable>
-        <Text style={styles.header}>{t('profileScreen.myProfile')}</Text>
-        <View style={styles.loginContainer}>
-          <Pressable>
-            <Image
-              source={require('../../assets/images/edit.png')}
-              style={[styles.editingPen, !isEditing && styles.hidden]}
-            />
-            <Image source={{ uri: user.avatar }} style={styles.avatar} />
-          </Pressable>
-          <View style={styles.userInfoContainer}>
-            <View>
-              {isEditing ? (
-                <TextInput
-                  value={name}
-                  onChangeText={(enteredText) => setName(enteredText)}
-                  style={styles.input}
-                />
-              ) : (
-                <Text
-                  style={styles.username}
-                  numberOfLines={1}
-                  ellipsizeMode="tail"
-                >
-                  {user.name}
-                </Text>
-              )}
-              <Text style={styles.email}>{user.email}</Text>
-            </View>
-          </View>
-          <View style={styles.optionsContainer}>
-            <View style={styles.option}>
-              <Text style={styles.optionName}>
-                {t('profileScreen.editInfo')}
-              </Text>
-              <Switch
-                trackColor={{ false: Colors.gray_500, true: Colors.red_500 }}
-                onChange={toggleSwitch}
-                value={isEditing}
+        <View style={styles.userInfoContainer}>
+          <View>
+            {isEditing ? (
+              <TextInput
+                value={name}
+                onChangeText={handleTextChange}
+                style={styles.input}
               />
-            </View>
-            <Pressable
-              style={styles.option}
-              android_ripple={{ foreground: true, color: Colors.gray_200 }}
-              onPress={() => setIsLanguageModalVisible(true)}
-            >
-              <Text style={styles.optionName}>
-                {t('profileScreen.language')}
+            ) : (
+              <Text
+                style={styles.username}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {user.name}
               </Text>
-              <Image source={require('../../assets/images/arrow-bottom.png')} />
-            </Pressable>
-            <Pressable
-              style={styles.option}
-              android_ripple={{ foreground: true, color: Colors.gray_200 }}
-              onPress={() => setIsLogoutModalVisible(true)}
-            >
-              <Text style={styles.optionName}>{t('profileScreen.logout')}</Text>
-              <Image source={require('../../assets/images/logout.png')} />
-            </Pressable>
+            )}
+            <Text style={styles.email}>{user.email}</Text>
           </View>
         </View>
-        <WarningModal
-          visible={isChangesModalVisible}
-          message={t('profileScreen.abortChanges')}
-          onYesPress={() => {
-            setIsChangesModalVisible(false);
-          }}
-          onNoPress={() => {
-            console.log('no');
-          }}
-        />
-        <WarningModal
-          visible={isLogoutModalVisible}
-          message={t('profileScreen.logoutMessage')}
-          onYesPress={handleYesLogoutPress}
-          onNoPress={() => {
-            setIsLogoutModalVisible(false);
-          }}
-        />
-        <ChangeLanguage
-          visible={isLanguageModalVisible}
-          setter={setIsLanguageModalVisible}
-        />
+        <View style={styles.optionsContainer}>
+          <View style={styles.option}>
+            <Text style={styles.optionName}>{t('profileScreen.editInfo')}</Text>
+            <Switch
+              trackColor={{ false: Colors.gray_500, true: Colors.red_500 }}
+              onChange={toggleSwitch}
+              value={isEditing}
+            />
+          </View>
+          <Pressable
+            style={styles.option}
+            android_ripple={{ foreground: true, color: Colors.gray_200 }}
+            onPress={() => setIsLanguageModalVisible(true)}
+          >
+            <Text style={styles.optionName}>{t('profileScreen.language')}</Text>
+            <Image source={require('../../assets/images/arrow-bottom.png')} />
+          </Pressable>
+          <Pressable
+            style={styles.option}
+            android_ripple={{ foreground: true, color: Colors.gray_200 }}
+            onPress={() => setIsLogoutModalVisible(true)}
+          >
+            <Text style={styles.optionName}>{t('profileScreen.logout')}</Text>
+            <Image source={require('../../assets/images/logout.png')} />
+          </Pressable>
+        </View>
       </View>
-    )
+      <WarningModal
+        visible={isChangesModalVisible}
+        message={t('profileScreen.abortChanges')}
+        onYesPress={() => {
+          setIsChangesModalVisible(false);
+        }}
+        onNoPress={() => {
+          console.log('no');
+        }}
+      />
+      <WarningModal
+        visible={isLogoutModalVisible}
+        message={t('profileScreen.logoutMessage')}
+        onYesPress={handleYesLogoutPress}
+        onNoPress={() => {
+          setIsLogoutModalVisible(false);
+        }}
+      />
+      <ChangeLanguage
+        visible={isLanguageModalVisible}
+        setter={setIsLanguageModalVisible}
+      />
+    </View>
   );
 }
 
