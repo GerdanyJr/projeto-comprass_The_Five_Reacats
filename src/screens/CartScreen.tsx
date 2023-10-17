@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
 import CartItemCard from '../components/Cart/CartItemCard';
 import { FormButton } from '../components/UI/FormButton';
@@ -7,8 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 
 function CartScreen(): JSX.Element {
   const userContext = useContext(UserContext);
-
   const navigation = useNavigation<any>();
+
   const cartTotalValue = () => {
     let total = 0;
     userContext.cart.map(
@@ -17,6 +17,11 @@ function CartScreen(): JSX.Element {
     return total;
   };
 
+  const totalItens = () => {
+    let itensCount = 0;
+    userContext.cart.forEach(item => (itensCount += item.quantity));
+    return itensCount;
+  }
 
   if (userContext.cart.length == 0) {
     return (
@@ -40,6 +45,8 @@ function CartScreen(): JSX.Element {
       </View>
     );
   }
+
+  
 
   return (
     <View>
@@ -66,7 +73,7 @@ function CartScreen(): JSX.Element {
         <Text style={style.price}>{0} R$</Text>
       </View>
       <View style={style.button}>
-        <FormButton title="BUY" onPress={()=>{}} />
+        <FormButton title="BUY" disabled={totalItens() === 0} onPress={navigation.navigate("CheckoutStack")} />
       </View>
     </View>
   );
