@@ -87,7 +87,7 @@ export function LoggedProfile({
             source={require('../../assets/images/edit.png')}
             style={[styles.editingPen, !isEditing && styles.hidden]}
           />
-          <Image source={{ uri: avatar }} style={styles.avatar} />
+          {user.avatar && <Image source={{ uri: avatar }} style={styles.avatar} />}
         </Pressable>
         <View style={styles.userInfoContainer}>
           <View>
