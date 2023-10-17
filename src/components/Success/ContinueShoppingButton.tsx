@@ -1,16 +1,27 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Colors } from '../../assets/constants/Colors';
 
 interface ContinueShoppingButtonProps extends TouchableOpacityProps {
-  onPress: () => void;
   children?: React.ReactNode;
 }
 
-const ContinueShoppingButton: React.FC<ContinueShoppingButtonProps> = ({ onPress, children, ...props }) => {
+const ContinueShoppingButton: React.FC<ContinueShoppingButtonProps> = ({ children, ...props }) => {
+  const navigation = useNavigation<any>();
+
+  const handleContinuePress = () => {
+    navigation.navigate('HomeScreen');
+  };
+
   return (
-    <TouchableOpacity style={styles.continueButton} onPress={onPress} {...props}>
-      <Text style={styles.buttonText}>{children}</Text>
+    <TouchableOpacity 
+    style={styles.continueButton} 
+    onPress={handleContinuePress} 
+    {...props}>
+      <Text 
+      style={styles.buttonText}>
+      {children}  </Text>
     </TouchableOpacity>
   );
 };
@@ -25,8 +36,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     bottom: 50,
-    
-    
   },
   buttonText: {
     color: Colors.white,
