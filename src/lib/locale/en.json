@@ -27,7 +27,16 @@
   "navigators": {
     "checkout": "Checkout",
     "shippingAddress": "Adding Shipping Address",
-    "cardForm": "Add new Card"
+    "cardForm": "Add new Card",
+    "Home": "Home",
+    "cart": "Cart",
+    "Profile": "Profile"
+  },
+  "cartScreen": {
+    "cart": "Cart",
+    "emptyMessage": "Your cart is so empty and abandoned...",
+    "totalAmount": "Total amount",
+    "buy": "buy"
   },
   "checkoutScreen": {
     "unloggedAllert": "You need to connect to complete your purchase, come on?",
@@ -99,7 +108,7 @@
     "403Error": "Forbidden. You do not have permission to access this resource.",
     "genericError": "Something happened, try again later"
   },
-  "profileScreen":{
+  "profileScreen": {
     "myProfile": "My Profile",
     "editInfo": "Edit informations",
     "language": "Language",
@@ -112,7 +121,7 @@
     "Languages": "Languages",
     "english": "English",
     "portuguese": "Portuguese - Brazil",
-    "unloggedMessage":"You need to login to see your details",
+    "unloggedMessage": "You need to login to see your details",
     "login": "Login"
   },
 

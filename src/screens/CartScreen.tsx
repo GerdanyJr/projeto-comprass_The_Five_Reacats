@@ -1,79 +1,82 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
 import CartItemCard from '../components/Cart/CartItemCard';
 import { FormButton } from '../components/UI/FormButton';
 import { UserContext } from '../store/UserContext';
 import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
+import { formatCurrency } from '../util/formatter';
 
 function CartScreen(): JSX.Element {
   const userContext = useContext(UserContext);
+  const { t, i18n } = useTranslation();
   const navigation = useNavigation<any>();
 
   const cartTotalValue = () => {
-    let total = 0;
-    userContext.cart.map(
-      item => (total += Number(item.item.price) * item.quantity)
-    );
+    const total = userContext.cart
+      .map((item) => Number(item.item.price) * item.quantity)
+      .reduce((price, x) => price + x);
     return total;
   };
 
   const totalItens = () => {
     let itensCount = 0;
-    userContext.cart.forEach(item => (itensCount += item.quantity));
+    userContext.cart.forEach((item) => (itensCount += item.quantity));
     return itensCount;
-  }
-
+  };
   if (userContext.cart.length == 0) {
     return (
       <View>
         <View style={style.headerContainer}>
-          <Text style={style.header}>Cart</Text>
+          <Text style={style.header}>{t('cartScreen.cart')}</Text>
         </View>
         <View style={style.emptyCart}>
           <Image source={require('../../src/assets/images/empty-cart.png')} />
           <Text style={style.emptyCartText}>
-            Your cart is so empty and abandoned...
+            {t('cartScreen.emptyMessage')}
           </Text>
         </View>
         <View style={style.totalAmountContainer}>
-          <Text style={style.totalAmount}>Total amount:</Text>
-          <Text style={style.price}>0 R$</Text>
+          <Text style={style.totalAmount}>{t('cartScreen.totalAmount')}</Text>
+          <Text style={style.price}>{formatCurrency(0, i18n.language)}</Text>
         </View>
         <View style={style.button}>
-          <FormButton title="BUY" disabled={true} onPress={() => {}} />
+          <FormButton
+            title={t('cartScreen.buy')}
+            disabled={true}
+            onPress={() => {}}
+          />
         </View>
       </View>
     );
   }
 
-  
-
   return (
     <View>
       <View style={style.headerContainer}>
-        <Text style={style.header}>Cart</Text>
+        <Text style={style.header}>{t('cartScreen.cart')}</Text>
       </View>
       <FlatList
-        style={{height: 520}}
+        style={{ height: 520 }}
         contentContainerStyle={style.itemsList}
         data={userContext.cart}
         renderItem={({ item }) => (
           <CartItemCard
-            id={item.item.id}
-            name={item.item.title}
-            price={item.item.price}
-            url={item.item.images[0]}
+            cartItem={item}
             removeProductFromCart={userContext.removeCartItem}
-            quantity={item.quantity}
           />
         )}
       />
       <View style={style.totalAmountContainer}>
-        <Text style={style.totalAmount}>Total amount:</Text>
-        <Text style={style.price}>{0} R$</Text>
+        <Text style={style.totalAmount}>{t('cartScreen.cart')}</Text>
+        <Text style={style.price}>{formatCurrency(cartTotalValue(), i18n.language)}</Text>
       </View>
       <View style={style.button}>
-        <FormButton title="BUY" disabled={totalItens() === 0} onPress={navigation.navigate("CheckoutStack")} />
+        <FormButton
+          title={t('cartScreen.buy')}
+          disabled={totalItens() === 0}
+          onPress={() => navigation.navigate('CheckoutStack')}
+        />
       </View>
     </View>
   );
@@ -89,7 +92,7 @@ const style = StyleSheet.create({
   },
 
   itemsList: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   headerContainer: {

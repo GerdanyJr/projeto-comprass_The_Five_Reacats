@@ -4,10 +4,10 @@ export function formatCep(cep: string) {
   } else return cep;
 }
 
-export function formatCurrency(amount: number) {
+export function formatCurrency(amount: number, lang: string) {
   const formattedAmount = amount.toLocaleString(undefined, {
     style: 'currency',
-    currency: 'USD',
+    currency: lang === 'pt' ? 'BRL' : 'USD',
   });
   return formattedAmount;
 }

@@ -27,7 +27,16 @@
   "navigators": {
     "checkout": "Finalizar compra",
     "shippingAddress": "Adicionar endereço de entrega",
-    "cardForm": "Adicionar novo cartão"
+    "cardForm": "Adicionar novo cartão",
+    "Home": "Início",
+    "cart": "Carrinho",
+    "Profile": "Pefil"
+  },
+  "cartScreen": {
+    "cart": "Carrinho",
+    "emptyMessage": "Seu carrinho está tão vazio e abandonado...",
+    "totalAmount": "Preço total",
+    "buy": "Comprar"
   },
   "checkoutScreen": {
     "unloggedAllert": "Você precisa entrar para completar a sua compra, vamos?",
