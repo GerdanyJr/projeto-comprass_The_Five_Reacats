@@ -3,7 +3,6 @@ import '../lib/i18n';
 import i18n from '../lib/i18n';
 
 export const signUpSchema = yup.object({
-
   name: yup.string().required(i18n.t('formErrors.emptyNameError')),
   email: yup
     .string()
@@ -54,6 +53,23 @@ export const addressSchema = yup.object({
     .string()
     .required(i18n.t('formErrors.emptyFullNameError'))
     .min(5, i18n.t('formErrors.shortFullNameError')),
+});
+export const forgotPasswordSchema = yup.object({
+  email: yup
+    .string()
+    .required(i18n.t('formErrors.emptyEmailError'))
+    .email(i18n.t('formErrors.invalidEmailError')),
+    password: yup
+    .string()
+    .required(i18n.t('formErrors.emptyPasswordError'))
+    .min(6, i18n.t('formErrors.shortPasswordError')),
+  confirmPassword: yup
+    .string()
+    .required(i18n.t('formErrors.emptyConfirmPasswordError'))
+    .oneOf(
+      [yup.ref('password')],
+      i18n.t('formErrors.invalidConfirmPasswordError')
+    ),
 });
 export const cardSchema = yup.object({
   nameOnCard: yup.string().required(i18n.t('formErrors.emptyNameOnCardError')),
