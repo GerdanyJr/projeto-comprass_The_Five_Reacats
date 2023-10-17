@@ -6,6 +6,7 @@ import { CardForm } from '../../components/Checkout/CardForm';
 import { checkoutStackOptions } from './CheckoutStackOptions';
 import { CheckoutContextProvider } from '../../store/CheckoutContext';
 import { PaymentMethodForm } from '../../components/Checkout/PaymentMethodForm';
+import SuccessScreen from '../../screens/SuccessScreen';
 
 const Stack = createNativeStackNavigator();
 export function CheckoutStack() {
@@ -32,6 +33,10 @@ export function CheckoutStack() {
           component={CardForm}
           options={checkoutStackOptions.cardForm}
         />
+        <Stack.Screen
+                name= "SuccessScreen"
+                component={SuccessScreen} />
+
       </Stack.Navigator>
     </CheckoutContextProvider>
   );
