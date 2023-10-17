@@ -1,22 +1,43 @@
-import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native';
+import '../../lib/i18n';
+import { useTranslation } from 'react-i18next';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import { useState, useEffect } from 'react';
+import { ParamListBase, useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { CardItem } from './CardItem';
 import { CardItemExemple } from './CardItemExemple';
 import { fetchItensByCategory } from '../../service/FetchProductsAux';
 import { Product } from '../../types/interfaces/Product';
 
-export function Section({ id, title, navigation }: { id: string; title: string, navigation:any }) {
-  const [produtos, setProdutos] = useState<Product[]>([]);
+export function Section({ id, title }: { id: string; title: string }) {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [limit, setLimit] = useState(5);
+  const { t } = useTranslation();
+
+
   useEffect(() => {
-    async function getItensByCategory() {
-      const dados = await fetchItensByCategory(id);
-      setProdutos(dados);
-    }
-    getItensByCategory();
+    loadApi();
   }, []);
 
-  function navigationHandler() {
-    navigation.navigate("Product")
+  async function loadApi() {
+    if (loading) return;
+    if(products.length !== 0){
+      setLoading(true);
+    }
+    const dados = await fetchItensByCategory(id, limit);
+    setProducts([...products, ...dados]);
+    setLimit((prev) => prev + 5);
+    setLoading(false);
   }
 
   return (
@@ -24,23 +45,42 @@ export function Section({ id, title, navigation }: { id: string; title: string, 
       <View style={styles.categoryHeader}>
         <Text style={styles.categoryTitle}>{title}</Text>
         <Pressable style={styles.buttonViewAll}>
-          <Text style={styles.buttonViewAllText}>View all</Text>
+          <Text style={styles.buttonViewAllText}>{t("homeScreen.viewAll")}</Text>
         </Pressable>
       </View>
       <FlatList
         accessibilityHint="productslist"
-        data={produtos}
-        renderItem={({ item }) => (
+        data={products}
+        renderItem={({ item }: { item: Product }) => (
           <CardItem
-            name={item.title}
-            description={item.description}
-            price={item.price}
-            url={item.images[0]}
-            onPress={navigationHandler}
+            data={item}
+            onPress={() => {
+              navigation.navigate('Product', {
+                itemId: item.id,
+                categoryId: item.category.id,
+              });
+            }}
           />
         )}
+        onEndReached={loadApi}
+        onEndReachedThreshold={0.8}
         horizontal={true}
-        ListEmptyComponent={() => <CardItemExemple onPress={navigationHandler} />}
+        keyExtractor={(item) => String(item.id)}
+        ListEmptyComponent={() => (
+          <CardItemExemple
+              onPress={() => {
+                navigation.navigate('Product', { itemId: 0, categoryId: 0 });
+              }}
+            />
+        )}
+        ListFooterComponent={() => {
+          if (!loading) return;
+          return (
+            <View>
+              <ActivityIndicator size={25} color="#000" />
+            </View>
+          );
+        }}
       />
     </View>
   );
