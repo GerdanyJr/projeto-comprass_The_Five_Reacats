@@ -15,6 +15,15 @@
     "confirmPassword": "Confirme a sua senha",
     "signUp": "Cadastre-se"
   },
+  "forgotPasswordPage": {
+    "forgotPassword": "Esqueceu a senha",
+    "instructions": "Digite seu e-mail e vamos ver se ele existe para você mudar sua senha :)",
+    "email": "Email",
+    "password": "Senha",
+    "confirmPassword": "Confirme a sua senha",
+    "search": "Pesquisar",
+    "confirm": "Confirmar"
+  },
   "navigators": {
     "checkout": "Finalizar compra",
     "shippingAddress": "Adicionar endereço de entrega",
@@ -51,7 +60,7 @@
     "addCard": "Adicionar Cartão"
   },
   "deliveryMethod": {
-    "deliveryMethod":"Método de entrega",
+    "deliveryMethod": "Método de entrega",
     "days": "dias"
   },
   "summary": {
@@ -84,7 +93,7 @@
     "invalidExpDateError": "A data de validade deve estar no formato MM/AA",
     "emptyExpDateError": "A data de validade é obrigatória",
     "invalidCVVError": "O CVV deve conter 3 ou 4 dígitos",
-    "emptyCVVError": "O CVV é obrigatório",
+    "emptyCVVError": "O CVV é obrigatório"
     "zipCodeNotFound": "CEP não encontrado!"
   },
   "successScreen": {
@@ -94,5 +103,41 @@
     "instructionText": "Pague seu pix usando o código QR acima e \nsiga os passos enviados por e-mail.",
     "downloadInvoice": "BAIXAR BOLETO",
     "invoiceText": "Pague a fatura até {{date}} e \nsiga as etapas enviadas por e-mail."
+    "zipCodeNotFound": "CEP não encontrado!",
+    "401Error": "Seu email ou senha estão incorretos",
+    "403Error": "Proibido, você não tem permissão para acessar esse recurso",
+    "genericError": "Algo deu errado, tente novamente"
+  },
+  "profileScreen": {
+    "myProfile": "Meu Perfil",
+    "editInfo": "Editar informações",
+    "language": "Idioma",
+    "logout": "Sair",
+    "warning": "Aviso",
+    "logoutMessage": "Você realmente quer sair?",
+    "abortChanges": "Você quer descartar as alterações?",
+    "yes": "Sim",
+    "no": "No",
+    "Languages": "Idiomas",
+    "english": "Inglês",
+    "portuguese": "Português - Brasileiro",
+    "unloggedMessage": "Você precisa entrar para ver seus dados",
+    "login": "Entrar"
+  },
+
+  "homeScreen": {
+    "paragraph": "Aqui você sempre ganha!",
+    "searchBar": "Insira o nome do produto",
+    "productNotFound": "Produto não encontrado",
+    "viewAll": "Ver todos"
+  },
+
+  "productScreen": {
+    "youCanAlsoLike": "Você também pode gostar disso.",
+    "details": "detalhes",
+    "shippingInfo": "Informações de envio",
+    "shippingDescription": "É um fato há muito estabelecido que um leitor será distraído pelo conteúdo legível de uma página ao analisar seu layout. O objetivo ao usar o Lorem Ipsum é que ele tem uma distribuição de letras mais ou menos normal",
+    "support": "Suporte",
+    "suportDetails": "É um fato há muito estabelecido que um leitor será distraído pelo conteúdo legível de uma página ao analisar seu layout. O objetivo ao usar o Lorem Ipsum é que ele tem uma distribuição de letras mais ou menos normal"
   }
 }

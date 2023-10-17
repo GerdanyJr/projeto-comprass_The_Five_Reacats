@@ -15,6 +15,15 @@
     "confirmPassword": "Confirm Password",
     "signUp": "Sign Up"
   },
+  "forgotPasswordPage": {
+    "forgotPassword": "Forgot Password",
+    "instructions": "Enter your email and let us see if it exists for you to change your password :)",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "search": "Search",
+    "confirm": "Confirm"
+  },
   "navigators": {
     "checkout": "Checkout",
     "shippingAddress": "Adding Shipping Address",
@@ -94,5 +103,42 @@
     "instructionText": "Pay your pix using the QR code above and \nthen follow the steps sent by email.",
     "downloadInvoice": "DOWNLOAD INVOICE",
     "invoiceText": "Pay the invoice by {{date}} and then \nfollow the steps sent by email."
+    "zipCodeNotFound": "Zip code not found!",
+    "401Error": "Your email or password is incorrect",
+    "403Error": "Forbidden. You do not have permission to access this resource.",
+    "genericError": "Something happened, try again later"
+  },
+  "profileScreen":{
+    "myProfile": "My Profile",
+    "editInfo": "Edit informations",
+    "language": "Language",
+    "logout": "Log out",
+    "warning": "Warning",
+    "logoutMessage": "Do you really want to leave?",
+    "abortChanges": "Do you want to abandon your changes?",
+    "yes": "Yes",
+    "no": "No",
+    "Languages": "Languages",
+    "english": "English",
+    "portuguese": "Portuguese - Brazil",
+    "unloggedMessage":"You need to login to see your details",
+    "login": "Login"
+  },
+
+  "homeScreen": {
+    "paragraph": "Here you always win!",
+    "searchBar": "Enter the product name",
+    "productNotFound": "Product not found",
+    "viewAll": "viewAll"
+  },
+
+  "productScreen": {
+    "youCanAlsoLike": "You can also like this",
+    "details": "details",
+    "shippingInfo": "Shipping info",
+    "shippingDescription": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters",
+    "support": "Support",
+    "suportDetails": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters"
+  }
 }
 }

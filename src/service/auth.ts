@@ -42,3 +42,20 @@ export async function signUp(name: string, email: string, password: string) {
   const data: User = await response.data;
   return data;
 }
+
+export async function checkEmail(email: string) {
+  const response = await axios.post('https://api.escuelajs.co/api/v1/users/is-available', {
+    "email": email
+  });
+  const data: {isAvailable: boolean} = await response.data;
+  return data;
+}
+
+export async function updateUserPassword(id: number, password: string) {
+  const response = await axios.put(`https://api.escuelajs.co/api/v1/users/${id}`, {
+    "password": password
+  })
+
+  const data : User = await response.data;
+  return data;
+}

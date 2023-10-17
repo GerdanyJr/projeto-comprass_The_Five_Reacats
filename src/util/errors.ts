@@ -1,17 +1,20 @@
 import { FieldErrors } from 'react-hook-form';
 import { Inputs } from '../screens/LoginScreen';
 import { SignUpInputs } from '../screens/SignUpScreen';
+import { ForgotPasswordInputs } from '../screens/ForgotPasswordScreen';
 import { ShippingAddressInputs } from '../components/Checkout/ShippingAddressForm';
 import { CardInputs } from '../components/Checkout/CardForm';
+import i18n from '../lib/i18n';
+import '../lib/i18n';
 
 export function getErrorMessageByCode(httpCode: number): string {
   switch (httpCode) {
     case 401:
-      return 'Your email or password is incorrect';
+      return i18n.t('formErrors.401Error');
     case 403:
-      return 'Forbidden. You do not have permission to access this resource.';
+      return i18n.t('formErrors.403Error');
     default:
-      return 'Something happened, try again later';
+      return i18n.t('formErrors.genericError');
   }
 }
 export function getLoginFormErrorMessage(errors: FieldErrors<Inputs>) {
@@ -32,6 +35,15 @@ export function getSignUpFormErrorMessage(errors: FieldErrors<SignUpInputs>) {
     return errors.name.message;
   } else return '';
 }
+
+export function getForgotPasswordInputsErrorMessage(errors: FieldErrors<ForgotPasswordInputs>) {
+  if (errors.password?.message) {
+    return errors.password.message;
+  } else if (errors.confirmPassword?.message) {
+    return errors.confirmPassword.message;
+  } else return '';
+}
+
 export function getShippingsErrorMessage(
   errors: FieldErrors<ShippingAddressInputs>
 ) {
