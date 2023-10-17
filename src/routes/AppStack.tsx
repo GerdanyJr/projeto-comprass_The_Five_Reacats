@@ -36,7 +36,7 @@ export function AppStack(): JSX.Element {
           <Stack.Screen name="MainPage" component={MainPage} />
           <Stack.Screen name="AuthStack" component={AuthStack} />
           <Stack.Screen name="CheckoutStack" component={CheckoutStack} />
-          <Stack.Screen name="SuccessStack" component= {SuccessStack} />
+          <Stack.Screen name="SuccessStack" component={SuccessStack} />
         </Stack.Navigator>
       )}
     </NavigationContainer>

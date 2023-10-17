@@ -22,16 +22,16 @@ const SuccessScreen: React.FC = () => {
     const handleContinuePress = () => {
       switch (paymentMethod) {
         case 'pix':
-          navigation.navigate('PixPaymentScreen');
+          navigation.navigate('SuccessStack', {screen: 'PixPaymentScreen'});
           break;
         case 'boleto':
-          navigation.navigate('InvoicePaymentScreen');
+          navigation.navigate('SuccessStack', {screen: 'InvoicePaymentScreen'});
           break;
         case 'creditCard':
-          navigation.navigate('CardPaymentSuccessScreen');
+          navigation.navigate('SuccessStack', {screen: 'CardPaymentSuccessScreen'});
           break;
         default:
-          
+          navigation.navigate('MainPage', {screen: 'Cart'})
           break;
       }
     }

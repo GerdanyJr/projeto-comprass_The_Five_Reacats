@@ -23,9 +23,7 @@ export function SuccessStack() {
             <Stack.Screen 
             name= "CardPaymentSuccessScreen" 
             component={CardPaymentSuccessScreen} />
-            <Stack.Screen 
-            name="HomeScreen"
-            component={HomeScreen} />
+
         </Stack.Navigator>
     )
 }

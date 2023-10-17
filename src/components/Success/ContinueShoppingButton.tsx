@@ -11,13 +11,14 @@ const ContinueShoppingButton: React.FC<ContinueShoppingButtonProps> = ({ childre
   const navigation = useNavigation<any>();
 
   const handleContinuePress = () => {
-    navigation.navigate('HomeScreen');
+    navigation.navigate('MainPage');
   };
 
   return (
     <TouchableOpacity 
     style={styles.continueButton} 
     onPress={handleContinuePress} 
+    accessibilityHint='continueShoppingButton'
     {...props}>
       <Text 
       style={styles.buttonText}>
