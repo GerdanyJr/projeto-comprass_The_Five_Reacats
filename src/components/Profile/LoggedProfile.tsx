@@ -7,6 +7,7 @@ import { WarningModal } from './WarningModal';
 import { ChangeLanguage } from './ChangeLanguage';
 import { useTranslation } from 'react-i18next';
 import { User } from '../../types/interfaces/User';
+import { UserContext } from '../../store/UserContext';
 
 export function LoggedProfile({
   logout,
@@ -15,6 +16,7 @@ export function LoggedProfile({
   logout: () => void;
   user: User;
 }) {
+  const userCtx = useContext(UserContext);
   const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const [isChangesModalVisible, setIsChangesModalVisible] = useState(false);
@@ -30,7 +32,9 @@ export function LoggedProfile({
   }
 
   function toggleSwitch() {
-    setIsEditing((prevState) => !prevState);
+    if (changes !== undefined) {
+      setIsChangesModalVisible(true);
+    } else setIsEditing((prevState) => !prevState);
   }
 
   async function handleImageChangePress() {
@@ -39,9 +43,24 @@ export function LoggedProfile({
       maxHeight: 256,
       maxWidth: 256,
     });
-    if(response.assets) {
-        setAvatar(response.assets[0].uri);
+    if (response && response.assets && response.assets[0]) {
+      const uri = response.assets[0].uri;
+      setAvatar(uri);
+      setChanges((prevState: any) => {
+        return { ...prevState, avatar: uri };
+      });
     }
+  }
+
+  function handleSubmitPress() {
+    userCtx.updateUser(changes);
+    setIsEditing((prevState) => !prevState);
+  }
+
+  function handleYesChangesPress() {
+    userCtx.updateUser(changes);
+    setIsEditing(false);
+    setIsChangesModalVisible(false);
   }
   function handleYesLogoutPress() {
     setIsLogoutModalVisible(false);
@@ -51,7 +70,7 @@ export function LoggedProfile({
     <View style={styles.container}>
       <Pressable
         style={styles.checkContainer}
-        onPress={() => console.log('foda')}
+        onPress={handleSubmitPress}
         disabled={!isEditing}
       >
         <Image
@@ -118,11 +137,9 @@ export function LoggedProfile({
       <WarningModal
         visible={isChangesModalVisible}
         message={t('profileScreen.abortChanges')}
-        onYesPress={() => {
-          setIsChangesModalVisible(false);
-        }}
+        onYesPress={handleYesChangesPress}
         onNoPress={() => {
-          console.log('no');
+          setIsChangesModalVisible(false);
         }}
       />
       <WarningModal
