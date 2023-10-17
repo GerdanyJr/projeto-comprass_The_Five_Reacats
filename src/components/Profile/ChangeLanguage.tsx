@@ -25,17 +25,17 @@ export function ChangeLanguage({
   return (
     <Modal animationType="slide" transparent={true} visible={visible}>
       <View style={styles.container}>
-        <NotchHeader title={'Languages'} />
+        <NotchHeader title={t('profileScreen.language')} />
         <View style={styles.optionsContainer}>
           <Option
             title={t('profileScreen.english')}
             onPress={handleEnglishPress}
-            selected={false}
+            selected={i18n.language === 'en'}
           />
           <Option
             title={t("profileScreen.portuguese")}
             onPress={handlePortuguesePress}
-            selected={false}
+            selected={i18n.language === 'pt'}
           />
         </View>
       </View>
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    elevation: 10,
     borderTopLeftRadius: 34,
     borderTopRightRadius: 34,
     backgroundColor: 'white',
