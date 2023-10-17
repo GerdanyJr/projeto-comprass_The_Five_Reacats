@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Image, View, Pressable, Text, StyleSheet } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 
@@ -9,6 +9,9 @@ interface CounterProps {
 }
 
 const Counter = ({ count, onPressMinus, onPressPlus}: CounterProps) => {
+  useEffect(()=> {
+  },[count])
+
   return (
     <View style={style.container}>
       <Pressable

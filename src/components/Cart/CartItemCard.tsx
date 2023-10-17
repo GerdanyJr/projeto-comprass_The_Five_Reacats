@@ -1,53 +1,66 @@
-import React, { useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { Image, View, Pressable, Text, StyleSheet } from 'react-native';
+import { UserContext } from '../../store/UserContext';
 import Counter from './Counter';
+import { Product } from '../../types/interfaces/Product';
 
 interface CartItemCardProps {
-  name: string,
-  price: string,
-  url: string,
-  id: string,
-  removeProductFromCart: (itemId: string) => void
-  quantity: number
+  data: Product
+  removeProductFromCart: (itemId: string) => void;
+  quantity: number;
 }
 
-
-const CartItemCard = ({name, price, url, id, removeProductFromCart, quantity} : CartItemCardProps) => {
+const CartItemCard = ({
+  data,
+  removeProductFromCart,
+  quantity,
+}: CartItemCardProps) => {
   const [count, setCount] = useState<number>(quantity);
+  const userCtx = useContext(UserContext);
 
   const onPressDelete = () => {
-    removeProductFromCart(id);
-  }
+    removeProductFromCart(data.id);
+  };
 
   const onPressMinus = () => {
-    count !== 0 ? setCount(count - 1) : setCount(count);
-    
-  }
+    if(count !== 0){
+      setCount(count - 1)
+      userCtx.setItem(data, count - 1);
+    } else{
+      setCount(count);
+    }
+  };
 
   const onPressPlus = () => {
     setCount(count + 1);
-  }
+    userCtx.setItem(data, count + 1);
+  };
 
+  const totalValue = count * Number(data.price);
 
-  const totalValue = count * Number(price);
-  
   return (
     <View style={style.container}>
       <View>
-        <Image
-          source={{uri: url}}
-          style={style.img}
-        />
+        <Image source={{ uri: data.images[0] }} style={style.img} />
       </View>
       <View>
         <View style={style.infoContainer}>
-          <Text style={style.productName}>{name}</Text>
-          <Pressable android_ripple={{color: '#fff'}} style={{position: 'absolute', left: 225}} onPress={onPressDelete}>
-            <Image source={require('../../assets/images/remove-from-cart-icon.png')} />
+          <Text style={style.productName}>{data.title}</Text>
+          <Pressable
+            android_ripple={{ color: '#fff' }}
+            onPress={onPressDelete}
+          >
+            <Image
+              source={require('../../assets/images/remove-from-cart-icon.png')}
+            />
           </Pressable>
         </View>
-        <View style={[style.infoContainer, {alignItems: 'center'}]}>
-          <Counter count={count} onPressMinus={onPressMinus} onPressPlus={onPressPlus}/>
+        <View style={[style.infoContainer, { alignItems: 'center' }]}>
+          <Counter
+            count={count}
+            onPressMinus={onPressMinus}
+            onPressPlus={onPressPlus}
+          />
           <Text style={style.price}>{totalValue} R$</Text>
         </View>
       </View>
@@ -58,40 +71,43 @@ const CartItemCard = ({name, price, url, id, removeProductFromCart, quantity} : 
 const style = StyleSheet.create({
   container: {
     marginTop: 20,
-    width: 380,
     height: 104,
     flexDirection: 'row',
     borderRadius: 8,
-    overflow: 'hidden',
+    gap: 12,
+    width: 343,
+    backgroundColor: "#fff",
+    elevation: 8
   },
 
   productName: {
+    maxWidth: 150,
     fontWeight: '700',
     fontSize: 16,
     color: 'black',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
 
   infoContainer: {
     flexDirection: 'row',
     flex: 1,
     justifyContent: 'space-between',
-    paddingLeft: 5
+    width: 228,
   },
 
   img: {
-    width: 119,
+    width: 104,
     height: 104,
-    borderRadius: 8
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
   },
 
   price: {
     fontWeight: '600',
     fontSize: 14,
     color: 'black',
-    paddingRight: 16,
-    paddingLeft: 100
-  }
+    marginRight: 12
+  },
 });
 
 export default CartItemCard;

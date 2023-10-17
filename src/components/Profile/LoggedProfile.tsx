@@ -8,6 +8,7 @@ import { ChangeLanguage } from './ChangeLanguage';
 import { useTranslation } from 'react-i18next';
 import { User } from '../../types/interfaces/User';
 import { UserContext } from '../../store/UserContext';
+import { SwitchCustom } from './SwitchCustom';
 
 export function LoggedProfile({
   logout,
@@ -112,11 +113,8 @@ export function LoggedProfile({
         <View style={styles.optionsContainer}>
           <View style={styles.option}>
             <Text style={styles.optionName}>{t('profileScreen.editInfo')}</Text>
-            <Switch
-              trackColor={{ false: Colors.gray_500, true: Colors.red_500 }}
-              onChange={toggleSwitch}
-              value={isEditing}
-            />
+            <SwitchCustom onPress={toggleSwitch} value={isEditing}/>
+
           </View>
           <Pressable
             style={styles.option}

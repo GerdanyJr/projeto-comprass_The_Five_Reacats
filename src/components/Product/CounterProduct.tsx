@@ -19,6 +19,12 @@ export function CounterProduct({ data }: { data: Product | undefined }) {
       <Pressable
         onPress={() => {
           count !== 0 ? setCount(count - 1) : setCount(count);
+          if(count !== 0 && data !== undefined){
+            setCount(count - 1)
+            userCtx.setItem(data, count - 1);
+          } else{
+            setCount(count);
+          }
         }}
         style={({ pressed }) =>
           pressed ? [styles.button, styles.pressed] : styles.button
