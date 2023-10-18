@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Colors } from '../../assets/constants/Colors';
+import { UserContext } from '../../store/UserContext';
 
 interface ContinueShoppingButtonProps extends TouchableOpacityProps {
   children?: React.ReactNode;
@@ -9,8 +10,10 @@ interface ContinueShoppingButtonProps extends TouchableOpacityProps {
 
 const ContinueShoppingButton: React.FC<ContinueShoppingButtonProps> = ({ children, ...props }) => {
   const navigation = useNavigation<any>();
+  const userContext = useContext(UserContext);
 
   const handleContinuePress = () => {
+    userContext.clearCart();
     navigation.navigate('HomeTabs', {screen: 'Home'});
   };
 
