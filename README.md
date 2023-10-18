@@ -1,79 +1,120 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Comprass App
 
-# Getting Started
+This project is a mobile application created as part of the Compass UOL Enterprise scholarship program. Comprass is designed to provide users with a convenient shopping experience. It offers a variety of features, such as product search, viewing products by category, adding products to the cart, a streamlined checkout process, user profiles, and more. This README will provide an overview of the app's features, the technologies used, and instructions for running the project.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features
 
-## Step 1: Start the Metro Server
+### Splash Screen
+- Upon opening the app, users are greeted with a splash screen.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### Home Screen
+- After the splash screen, users are redirected to the home page.
+- They can search for products and view products categorized by different categories.
+- Clicking on a product takes the user to the Product screen.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### Session Persistence with Async Storage
+- The app ensures a seamless user experience by utilizing Async Storage to persist user sessions. Users can exit the app and return without needing to log in again.
 
-```bash
-# using npm
-npm start
+### Product Screen
+- On the Product screen, users can:
+  - View product photos, price, and description.
+  - See similar products.
+  - Use a counter to add the product to the cart.
 
-# OR using Yarn
-yarn start
-```
+### Cart Screen
+- Users can access their cart from the bottom tab navigator.
+- The cart screen displays added products.
+- Users can increment or decrement the quantity of products in the cart.
+- If the cart is empty, a cart logo with a short message is displayed.
 
-## Step 2: Start your Application
+### Checkout Screen
+- Users can proceed to the checkout screen from the cart screen.
+- Depending on their authentication status:
+  - If unauthenticated, they see a login button that redirects to the login page.
+  - If authenticated, they can complete a checkout form, including:
+    - Adding a shipping address.
+    - Providing a valid CEP for auto-completion of user data.
+    - Choosing from three payment methods: PIX, invoice, or credit card.
+    - If they choose a credit card, they enter card data, and the app displays the card brand.
+    - Choosing a delivery method.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+### Success Screen
+- Users see a success screen after completing the checkout.
+- Depending on the payment method:
+  - For credit card payments, they see a success screen with a button that redirects to the home.
+  - For invoice payments, they can download the invoice.
+  - For PIX payments, they see a QR code.
 
-### For Android
+### Profile Screen
+- Users can view their data (image, email, name) and change it if they are logged in.
+- If unauthenticated, they see a login button and a language change button (email cannot be changed).
 
-```bash
-# using npm
-npm run android
+### Authentication
+- The app supports the following authentication features:
+  - Login: Utilizes JWT authentication provided by the e-commerce API.
+  - I forgot my password: Users can reset their password by entering their email (symbolic change for demonstration purposes).
+  - Registration: Users can sign up by providing their email, name, password, and confirming their password.
 
-# OR using Yarn
-yarn android
-```
+## Technologies Used
 
-### For iOS
+This app was developed with React Native and utilizes the following libraries and APIs:
 
-```bash
-# using npm
-npm run ios
+- **[React Native](https://reactnative.dev/):** React Native is a popular JavaScript framework for building natively-rendered mobile applications for both iOS and Android platforms. It enables developers to create mobile apps with a native look and feel while using React.
+- **[React Navigation](https://reactnavigation.org/):** React Navigation is a highly regarded navigation library for React Native applications. It simplifies navigation and routing, offering features like stack navigation, tab navigation, and drawer navigation.
+- **[React Hook Form](https://react-hook-form.com/):** React Hook Form is a library designed for managing forms and form validations in React applications. It streamlines form handling by utilizing React hooks, making form state and validation rules easy to manage.
+- [Via cep api](https://viacep.com.br/exemplo/javascript/):** Used to fetch and autocomplete user data based on CEP input.
+- **[Fake E-Commerce API](fakeapi.platzi.com):** versatile resource for projects requiring product, user, and category data in JSON format. It offers features like pagination, JWT authentication, file uploads, category-based product filtering, user creation, CRUD operations, and integration with tools like Postman and Insomnia. Ideal for e-commerce prototyping and learning API integration.
+- **[Yup](https://github.com/jquense/yup):** For form schema validation.
+- **[Async Storage](https://react-native-async-storage.github.io/async-storage):** React Native Async Storage is a local storage solution for storing small amounts of persistent data on a user's mobile device. It allows developers to save and retrieve data, such as user preferences or tokens, between app sessions without the need for a network connection.
+- **[i18next](https://www.i18next.com/):** i18next is a widely-used internationalization (i18n) framework for JavaScript applications. It provides a comprehensive solution for managing and implementing multilingual support in your web or mobile applications. 
+- **[react i18next](https://react.i18next.com/): react-i18next is a powerful internationalization framework for React / React Native which is based on i18next. Check out the history of i18next and when react-i18next was introduced.
+- 
+## Installation and Running
 
-# OR using Yarn
-yarn ios
-```
+To set up and run the project, follow these steps:
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   ```
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+2. Install project dependencies:
+   ```
+   npm install
+   ```
 
-## Step 3: Modifying your App
+3. Start the development server:
+   ```
+   npm start
+   ```
 
-Now that you have successfully run the app, let's modify it.
+4. To execute the app on a physical device (Android):
+   ```
+   npm run android
+   ```
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+## Developers
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+This app was developed by the The Five Reacats Squad as part of the Compass UOL Enterprise scholarship program:
 
-## Congratulations! :tada:
+- [Álvaro Marques Silva](https://github.com/Alvaro-18)
+- [Bernardo Tonin Prates](https://github.com/bernardotonin)
+- [Gerdany Gonçalves da Conceição Júnior](https://github.com/GerdanyJr)
+- [Luiz Virgens Matos](https://github.com/TheDevLG)
+- [Janilson Gomes Rocha](https://github.com/janilsonr)
 
-You've successfully run and modified your React Native App. :partying_face:
+## Acknowledgments
 
-### Now what?
+This project was made possible by the Compass UOL Scholarship Program. We would like to express our deep gratitude to the instructors and mentors who played a crucial role in our learning journey:
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+- Jardel Bordignom
+- Thiago Schweder
+- Julianne Valiati
+- Liliv Hana Vasconcelos
+- Rafael Nascimento Colares deserves a special acknowledgment for his outstanding dedication and unwavering support. His exceptional attentiveness in addressing our queries and concerns has been truly invaluable.
 
-# Troubleshooting
+Their guidance and expertise have been instrumental in our development, and we are truly thankful for their contributions to our success.
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+## Credits
 
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+The design of the design of this project is credited to Compass UOL as part of the Compass UOL scholarship program.
