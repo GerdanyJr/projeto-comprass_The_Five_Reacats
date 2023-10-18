@@ -108,6 +108,7 @@
   "successScreen": {
     "successText": "Successo!",
     "thankYouText": "Seu pedido será entregue em breve. \nObrigado por escolher nosso aplicativo!",
+    "continue":"Continuar",
     "continueShopping": "CONTINUE COMPRANDO",
     "instructionText": "Pague seu pix usando o código QR acima e \nsiga os passos enviados por e-mail.",
     "downloadInvoice": "BAIXAR BOLETO",
