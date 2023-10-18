@@ -1,4 +1,4 @@
-import {View, Pressable, GestureResponderEvent, StyleSheet, Text} from "react-native";
+import {View, Pressable, GestureResponderEvent, StyleSheet} from "react-native";
 
 export function SwitchCustom({value, onPress}: {value:boolean, onPress: (event: GestureResponderEvent) => void,}){
 

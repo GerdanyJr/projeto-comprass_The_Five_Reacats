@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   paymentMethodTitle: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontSize: 20,
     fontWeight: 'bold',
@@ -81,12 +82,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   changeMethods: {
+    fontFamily: 'Open Sans',
     color: Colors.red_500,
     fontWeight: '600',
     fontSize: 18,
     textAlign: 'right',
   },
   paymentMethods: {
+    fontFamily: 'Open Sans',
     color: Colors.gray_500,
     fontSize: 20,
     fontWeight: '500',

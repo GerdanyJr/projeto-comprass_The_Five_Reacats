@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     bottom: 114,
   },
   buttonText: {
+    fontFamily: 'Open Sans',
     color: Colors.white,
     fontSize: 14,
     fontWeight: '800',

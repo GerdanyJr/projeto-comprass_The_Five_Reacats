@@ -5,7 +5,7 @@ import Counter from './Counter';
 import { Product } from '../../types/interfaces/Product';
 
 interface CartItemCardProps {
-  data: Product
+  data: Product;
   removeProductFromCart: (itemId: string) => void;
   quantity: number;
 }
@@ -17,19 +17,19 @@ const CartItemCard = ({
 }: CartItemCardProps) => {
   const [count, setCount] = useState<number>(quantity);
   const userCtx = useContext(UserContext);
-  useEffect(()=> {
+  useEffect(() => {
     setCount(quantity);
-  }, [quantity])
-  
+  }, [quantity]);
+
   const onPressDelete = () => {
     removeProductFromCart(data.id);
   };
 
   const onPressMinus = () => {
-    if(count !== 0){
-      setCount(count - 1)
+    if (count !== 0) {
+      setCount(count - 1);
       userCtx.setItem(data, count - 1);
-    } else{
+    } else {
       setCount(count);
     }
   };
@@ -49,10 +49,7 @@ const CartItemCard = ({
       <View>
         <View style={style.infoContainer}>
           <Text style={style.productName}>{data.title}</Text>
-          <Pressable
-            android_ripple={{ color: '#fff' }}
-            onPress={onPressDelete}
-          >
+          <Pressable android_ripple={{ color: '#fff' }} onPress={onPressDelete}>
             <Image
               source={require('../../assets/images/remove-from-cart-icon.png')}
             />
@@ -79,12 +76,13 @@ const style = StyleSheet.create({
     borderRadius: 8,
     gap: 12,
     width: 343,
-    backgroundColor: "#fff",
-    elevation: 8
+    backgroundColor: '#fff',
+    elevation: 8,
   },
 
   productName: {
     maxWidth: 150,
+    fontFamily: 'Open Sans',
     fontWeight: '700',
     fontSize: 16,
     color: 'black',
@@ -111,10 +109,11 @@ const style = StyleSheet.create({
   },
 
   price: {
+    fontFamily: 'Open Sans',
     fontWeight: '600',
     fontSize: 14,
     color: 'black',
-    marginRight: 12
+    marginRight: 12,
   },
 });
 

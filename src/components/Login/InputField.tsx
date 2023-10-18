@@ -141,21 +141,26 @@ const styles = StyleSheet.create({
     position: 'absolute',
     color: Colors.gray_500,
     fontSize: 18,
+    fontFamily: 'Open Sans',
   },
   focusedLabel: {
     position: 'absolute',
     color: Colors.gray_500,
     fontSize: 16,
+    fontFamily: 'Open Sans',
   },
   errorLabel: {
     color: Colors.red_500,
     fontSize: 18,
+    fontFamily: 'Open Sans',
   },
   errorFocusedLabel: {
     color: Colors.red_500,
     fontSize: 16,
+    fontFamily: 'Open Sans',
   },
   input: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     minWidth: '90%',
     maxWidth: '90%',

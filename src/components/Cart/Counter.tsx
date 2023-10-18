@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React from 'react';
 import { Image, View, Pressable, Text, StyleSheet } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 
@@ -48,6 +48,7 @@ const style = StyleSheet.create({
   },
 
   count: {
+    fontFamily: 'Open Sans',
     paddingHorizontal: 12,
     fontWeight: '600',
     fontSize: 14,

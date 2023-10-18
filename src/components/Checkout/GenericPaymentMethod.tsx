@@ -44,11 +44,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   paymentMethodTitle: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontSize: 20,
     fontWeight: 'bold',
   },
   changeMethods: {
+    fontFamily: 'Open Sans',
     color: Colors.red_500,
     fontWeight: '600',
     fontSize: 18,
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   name: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     marginHorizontal: 16,
     fontSize: 18

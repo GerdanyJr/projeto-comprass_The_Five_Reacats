@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   },
 
   categoryTitle: {
+    fontFamily: 'Open Sans',
     color: '#000',
     marginLeft: 16,
     fontSize: 32,
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
   },
 
   buttonViewAllText: {
+    fontFamily: 'Open Sans',
     color: '#000',
     fontWeight: '400',
     fontSize: 12,

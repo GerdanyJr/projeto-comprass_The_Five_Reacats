@@ -71,12 +71,14 @@ const styles = StyleSheet.create({
   },
 
   productCategory: {
+    fontFamily: 'Open Sans',
     marginTop: 8,
     color: Colors.gray_500,
     fontSize: 12,
     fontWeight: '400',
   },
   productName: {
+    fontFamily: 'Open Sans',
     marginTop: 4,
     color: '#000',
     fontSize: 16,
@@ -84,6 +86,7 @@ const styles = StyleSheet.create({
   },
 
   productPrice: {
+    fontFamily: 'Open Sans',
     marginTop: 6,
     color: '#000',
     fontSize: 14,

@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   header: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontSize: 34,
     fontWeight: 'bold',
@@ -59,12 +60,14 @@ const styles = StyleSheet.create({
     gap: 18,
   },
   loginText: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontSize: 24,
     fontWeight: '600',
   },
   loginButton: {
     width: 'auto',
+    height: 55,
     paddingVertical: 14,
     paddingHorizontal: 42,
   },
@@ -80,6 +83,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.gray_200,
   },
   optionName: {
+    fontFamily: 'Open Sans',
     fontWeight: '700',
     color: Colors.black,
     fontSize: 24,

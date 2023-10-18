@@ -74,18 +74,21 @@ const styles = StyleSheet.create({
   },
 
   cardTitle: {
+    fontFamily: 'Open Sans',
     color: '#000',
     fontSize: 14,
     fontWeight: '700',
   },
 
   cardDescription: {
+    fontFamily: 'Open Sans',
     color: '#000',
     fontSize: 10,
     fontWeight: '400',
   },
 
   cardPrice: {
+    fontFamily: 'Open Sans',
     color: Colors.red_500,
     fontSize: 16,
     fontWeight: '800',

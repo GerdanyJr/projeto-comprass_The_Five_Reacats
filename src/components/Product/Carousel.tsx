@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
   },
 
   name: {
+    fontFamily: 'Open Sans',
     color: '#000',
     fontSize: 24,
     fontWeight: '700',
@@ -55,12 +56,14 @@ const styles = StyleSheet.create({
   },
 
   category: {
+    fontFamily: 'Open Sans',
     color: Colors.gray_500,
     fontSize: 11,
     fontWeight: '400',
   },
 
   description: {
+    fontFamily: 'Open Sans',
     color: '#000',
     fontSize: 14,
     fontWeight: '300',
@@ -68,6 +71,7 @@ const styles = StyleSheet.create({
 
   },
   price: {
+    fontFamily: 'Open Sans',
     textAlignVertical: "center",
     color: '#000',
     fontSize: 24,

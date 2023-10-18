@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext} from 'react';
 import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
 import CartItemCard from '../components/Cart/CartItemCard';
 import { FormButton } from '../components/UI/FormButton';
@@ -81,6 +81,7 @@ function CartScreen(): JSX.Element {
 
 const style = StyleSheet.create({
   header: {
+    fontFamily: 'Open Sans',
     fontSize: 34,
     fontWeight: '700',
     color: 'black',
@@ -114,6 +115,7 @@ const style = StyleSheet.create({
   },
 
   price: {
+    fontFamily: 'Open Sans',
     fontSize: 16,
     fontWeight: '600',
     paddingHorizontal: 15,
@@ -121,6 +123,7 @@ const style = StyleSheet.create({
   },
 
   totalAmount: {
+    fontFamily: 'Open Sans',
     fontSize: 14,
     fontWeight: '400',
     color: 'gray',
@@ -134,6 +137,7 @@ const style = StyleSheet.create({
   },
 
   emptyCartText: {
+    fontFamily: 'Open Sans',
     textAlign: 'center',
     fontSize: 24,
     fontWeight: '400',

@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
   },
 
   count: {
+    fontFamily: 'Open Sans',
     height: 43,
     width: 104,
     textAlign: 'center',

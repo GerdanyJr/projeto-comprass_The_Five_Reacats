@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, ImageBackgroundProps } from 'react-native';
+import { ImageBackground, StyleSheet } from 'react-native';
 
 
 const BagsBackgroundImage = ({children, ...props } : {children:React.ReactNode}) => {
@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     height: 213,
     width: 208,
     marginTop: 209,
-    
   },
 });
 

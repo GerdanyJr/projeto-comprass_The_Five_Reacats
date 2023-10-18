@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    fontFamily: 'Open Sans',
     fontWeight: '400',
     fontSize: 16,
     color: '#000',
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
   },
 
   descriptionActive: {
+    fontFamily: 'Open Sans',
     marginTop: 14,
     fontWeight: '400',
     fontSize: 12,

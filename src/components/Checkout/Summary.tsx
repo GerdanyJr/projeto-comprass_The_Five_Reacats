@@ -51,14 +51,17 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   summaryItem: {
+    fontFamily: 'Open Sans',
     fontSize: 20,
     color: Colors.gray_500,
   },
   summaryPrice: {
+    fontFamily: 'Open Sans',
     fontSize: 18,
     color: Colors.black,
   },
   finalPrice: {
+    fontFamily: 'Open Sans',
     fontSize: 20,
     color: Colors.black,
     fontWeight: 'bold',

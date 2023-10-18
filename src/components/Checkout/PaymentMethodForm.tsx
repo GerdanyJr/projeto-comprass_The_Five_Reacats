@@ -75,7 +75,7 @@ export function PaymentMethodForm() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.3,
+    flex: 0.33,
     borderTopLeftRadius: 34,
     borderTopRightRadius: 34,
     backgroundColor: 'white',
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   optionTitle: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontWeight: '600',
     fontSize: 20,
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
   },
   selectedOption: {
+    fontFamily: 'Open Sans',
     color: Colors.white,
     backgroundColor: Colors.red_500,
   },

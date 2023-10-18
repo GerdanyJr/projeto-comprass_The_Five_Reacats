@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   title: {
+    fontFamily: 'Open Sans',
     marginTop: 16,
     color: 'black',
     fontWeight: 'bold',

@@ -57,12 +57,14 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     padding: 16,
     fontSize: 24,
     fontWeight: 'bold',
   },
   message: {
+    fontFamily: 'Open Sans',
     fontSize: 18,
     paddingHorizontal: 12,
     paddingBottom: 16,
@@ -75,6 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   option: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontWeight: 'bold',
     fontSize: 18,

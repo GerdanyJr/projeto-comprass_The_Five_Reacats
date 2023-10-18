@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     color: Colors.black_800,
     textAlign: 'center',
     paddingBottom: 12,
-    
+    fontFamily: 'Open Sans',
   },
 });
 

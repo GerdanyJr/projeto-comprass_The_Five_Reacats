@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   thankYouText: {
+    fontFamily: 'Open Sans',
     color: Colors.black_800,
     lineHeight: 24,
     fontSize: 16,

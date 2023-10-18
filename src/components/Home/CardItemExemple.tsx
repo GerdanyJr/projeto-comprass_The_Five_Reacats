@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
   },
 
   count: {
+    fontFamily: 'Open Sans',
     height: 21,
     width: 46,
     textAlign: 'center',
@@ -163,18 +164,21 @@ const styles = StyleSheet.create({
   },
 
   productName: {
+    fontFamily: 'Open Sans',
     marginTop: 8,
     color: Colors.gray_500,
     fontSize: 14,
     fontWeight: '700',
   },
   productDescription: {
+    fontFamily: 'Open Sans',
     marginTop: 4,
     color: '#000',
     fontSize: 10,
     fontWeight: '400',
   },
   productPrice: {
+    fontFamily: 'Open Sans',
     marginTop: 6,
     color: Colors.red_500,
     fontSize: 16,

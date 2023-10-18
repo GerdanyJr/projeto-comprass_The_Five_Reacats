@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.gray_900,
   },
   title: {
+    fontFamily: 'Open Sans',
     color: Colors.white,
     fontWeight: 'bold',
     fontSize: 20,

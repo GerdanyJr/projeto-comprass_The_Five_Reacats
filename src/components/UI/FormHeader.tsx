@@ -19,11 +19,13 @@ export function FormHeader({ title, description, style }: FormHeaderProps) {
 
 const styles = StyleSheet.create({
   title: {
+    fontFamily: 'Open Sans',
     color: Colors.white,
     fontWeight: 'bold',
     fontSize: 40,
   },
   description: {
+    fontFamily: 'Open Sans',
     color: Colors.white,
     fontSize: 20,
     marginTop: 16,

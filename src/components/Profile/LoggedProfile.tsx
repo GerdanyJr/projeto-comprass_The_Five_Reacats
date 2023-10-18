@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Dimensions, Pressable, Switch, TextInput } from 'react-native';
+import { Dimensions, Pressable, TextInput } from 'react-native';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { Colors } from '../../assets/constants/Colors';
@@ -174,6 +174,7 @@ const styles = StyleSheet.create({
     display: 'none',
   },
   header: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontSize: 34,
     fontWeight: 'bold',
@@ -188,6 +189,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   input: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontSize: 32,
     padding: 0,
@@ -196,11 +198,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   username: {
+    fontFamily: 'Open Sans',
     fontSize: 32,
     color: Colors.black,
     fontWeight: '600',
   },
   email: {
+    fontFamily: 'Open Sans',
     fontSize: 18,
     color: Colors.gray_200,
   },
@@ -227,6 +231,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.gray_200,
   },
   optionName: {
+    fontFamily: 'Open Sans',
     fontWeight: '700',
     color: Colors.black,
     fontSize: 24,

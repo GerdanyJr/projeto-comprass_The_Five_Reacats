@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   footer: {
     marginTop: 20,
     gap: 38,
+    marginBottom: 30
   },
   translucentBackground: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',

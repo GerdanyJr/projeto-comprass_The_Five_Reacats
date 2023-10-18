@@ -8,6 +8,7 @@ export function FormError({ message }: { message: string }) {
 
 const styles = StyleSheet.create({
   error: {
+    fontFamily: 'Open Sans',
     color: Colors.red_200,
     fontWeight: '400',
     fontSize: 16,

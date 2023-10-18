@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
   },
 
   headerText: {
+    fontFamily: 'Open Sans',
     textAlign: 'center',
     width: '90%',
     fontWeight: '700',

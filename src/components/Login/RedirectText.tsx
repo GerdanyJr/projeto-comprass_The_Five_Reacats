@@ -17,6 +17,7 @@ export function RedirectText({ title, onPress }: RedirectTextProps) {
 
 const styles = StyleSheet.create({
   redirectText: {
+    fontFamily: 'Open Sans',
     width: '50%',
     textAlign: 'center',
     alignSelf: 'center',

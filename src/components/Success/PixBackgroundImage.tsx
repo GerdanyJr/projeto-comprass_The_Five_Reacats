@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, ImageBackgroundProps } from 'react-native';
+import { ImageBackground, StyleSheet } from 'react-native';
 
 const PixBackgroundImage= ({children, ...props } : {children:React.ReactNode}) => {
   return (

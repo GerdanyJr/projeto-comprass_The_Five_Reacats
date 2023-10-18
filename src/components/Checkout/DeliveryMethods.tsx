@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     height: 150,
   },
   deliveryMethodTitle: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontSize: 20,
     fontWeight: 'bold',

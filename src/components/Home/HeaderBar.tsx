@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
   },
 
   username: {
+    fontFamily: 'Open Sans',
     color: '#000',
     fontWeight: '400',
     fontSize: 12,
@@ -159,6 +160,7 @@ const styles = StyleSheet.create({
   },
 
   emptyList: {
+    fontFamily: 'Open Sans',
     width: 315,
     height: 201,
     color: '#000',
@@ -194,6 +196,7 @@ const styles = StyleSheet.create({
   },
 
   inputSearch: {
+    fontFamily: 'Open Sans',
     width: 323,
     height: 38,
     alignSelf: 'center',

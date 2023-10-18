@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   shippingAddressTitle: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontSize: 20,
     fontWeight: 'bold',
@@ -89,12 +90,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   changeShipping: {
+    fontFamily: 'Open Sans',
     color: Colors.red_500,
     fontWeight: '600',
     fontSize: 18,
     textAlign: 'right',
   },
   clickToAddShipping: {
+    fontFamily: 'Open Sans',
     color: Colors.gray_500,
     fontSize: 20,
     fontWeight: '500',
@@ -108,11 +111,13 @@ const styles = StyleSheet.create({
     maxWidth: '80%',
   },
   name: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontWeight: '600',
     fontSize: 20,
   },
   address: {
+    fontFamily: 'Open Sans',
     paddingTop: 6,
     color: Colors.black,
     fontSize: 16,

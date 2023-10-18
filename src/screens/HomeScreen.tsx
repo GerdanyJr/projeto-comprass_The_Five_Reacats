@@ -16,7 +16,7 @@ import { fetchCategories } from '../service/FetchProductsAux';
 import { Category } from '../types/interfaces/Product';
 import { UserContext } from '../store/UserContext';
 
-export function HomeScreen({ navigation }: { navigation: any }) {
+export function HomeScreen() {
   const { t } = useTranslation();
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
   },
 
   paragraph: {
+    fontFamily: 'Open Sans',
     color: '#fff',
     fontSize: 16,
     fontWeight: '600',

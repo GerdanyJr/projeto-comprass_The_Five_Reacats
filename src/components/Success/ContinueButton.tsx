@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     
   },
   buttonText: {
+    fontFamily: 'Open Sans',
     color: 'white',
     fontSize: 14,
     fontWeight: '800',

@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   thankYouText: {
+    fontFamily: 'Open Sans',
     color: Colors.black_800,
     lineHeight: 24,
     fontSize: 16,
@@ -41,8 +42,9 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   SuccessText: {
-    marginTop: 16,
-    marginBottom: 310,
+    position: "absolute",
+    height: "42%",
+    justifyContent: "flex-end",
   },
 });
 

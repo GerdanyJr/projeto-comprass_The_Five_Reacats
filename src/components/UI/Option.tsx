@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   optionTitle: {
+    fontFamily: 'Open Sans',
     color: Colors.black,
     fontWeight: '600',
     fontSize: 20,
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
   },
   selectedOption: {
+    fontFamily: 'Open Sans',
     color: Colors.white,
     backgroundColor: Colors.red_500,
   },
