@@ -3,9 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../assets/constants/Colors';
 import { CartItem } from '../../types/interfaces/CartItem';
 import { useTranslation } from 'react-i18next';
+import { formatCurrency } from '../../util/formatter';
+import i18n from '../../lib/i18n';
 
 export function Summary({ cart }: { cart: CartItem[] }) {
   const { t } = useTranslation();
+  const price = cart
+    .map((x) => Number(x.item.price) * x.quantity)
+    .reduce((price, x) => price + x);
   return (
     <View>
       <View style={styles.container}>
@@ -13,7 +18,7 @@ export function Summary({ cart }: { cart: CartItem[] }) {
           <Text style={styles.summaryItem}>{t('summary.order')}:</Text>
         </View>
         <View>
-          <Text style={styles.summaryPrice}>112,00 R$</Text>
+          <Text style={styles.summaryPrice}>{formatCurrency(price, i18n.language)}</Text>
         </View>
       </View>
       <View style={styles.container}>
@@ -21,7 +26,7 @@ export function Summary({ cart }: { cart: CartItem[] }) {
           <Text style={styles.summaryItem}>{t('summary.delivery')}:</Text>
         </View>
         <View>
-          <Text style={styles.summaryPrice}>0 R$</Text>
+          <Text style={styles.summaryPrice}>{formatCurrency(0, i18n.language)}</Text>
         </View>
       </View>
       <View style={styles.container}>
@@ -31,7 +36,7 @@ export function Summary({ cart }: { cart: CartItem[] }) {
           </Text>
         </View>
         <View>
-          <Text style={styles.finalPrice}>112,00 R$</Text>
+          <Text style={styles.finalPrice}>{formatCurrency(price, i18n.language)}</Text>
         </View>
       </View>
     </View>
