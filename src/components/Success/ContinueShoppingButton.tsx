@@ -11,7 +11,7 @@ const ContinueShoppingButton: React.FC<ContinueShoppingButtonProps> = ({ childre
   const navigation = useNavigation<any>();
 
   const handleContinuePress = () => {
-    navigation.navigate('MainPage');
+    navigation.navigate('HomeTabs', {screen: 'Home'});
   };
 
   return (
