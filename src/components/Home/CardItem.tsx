@@ -21,13 +21,12 @@ export const CardItem = memo(
     data: Product;
     onPress: (event: GestureResponderEvent) => void;
   }) => {
-    const [count, setCount] = useState(0);
     const userCtx = useContext(UserContext);
-
+    const [count, setCount] = useState(userCtx.getQuantity(data.id));
+    const quantity = userCtx.getQuantity(data.id);''
     useEffect(() => {
-      const quantity = userCtx.getQuantity(data.id);
       setCount(quantity);
-    }, [count]);
+    }, [quantity]);
 
     return (
       <View style={styles.container}>
@@ -36,7 +35,7 @@ export const CardItem = memo(
             onPress={() => {
               if(count !== 0){
                 setCount(count - 1)
-                userCtx.setItem(data, count-1);
+                userCtx.setItem(data, count - 1);
               } else{
                 setCount(count);
               }

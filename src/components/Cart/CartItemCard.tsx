@@ -1,10 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Image, View, Pressable, Text, StyleSheet } from 'react-native';
 import { UserContext } from '../../store/UserContext';
 import Counter from './Counter';
-import { CartItem } from '../../types/interfaces/CartItem';
-import { useTranslation } from 'react-i18next';
-import { formatCurrency } from '../../util/formatter';
 import { Product } from '../../types/interfaces/Product';
 
 interface CartItemCardProps {
@@ -20,7 +17,10 @@ const CartItemCard = ({
 }: CartItemCardProps) => {
   const [count, setCount] = useState<number>(quantity);
   const userCtx = useContext(UserContext);
-
+  useEffect(()=> {
+    setCount(quantity);
+  }, [quantity])
+  
   const onPressDelete = () => {
     removeProductFromCart(data.id);
   };
