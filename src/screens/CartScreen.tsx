@@ -73,7 +73,7 @@ function CartScreen(): JSX.Element {
         <Text style={style.price}>{formatCurrency(cartTotalValue(), i18n.language)}</Text>
       </View>
       <View style={style.button}>
-        <FormButton title="BUY" disabled={totalItens() === 0} onPress={()=> {navigation.navigate("CheckoutStack")}} />
+        <FormButton title={t('cartScreen.buy')} disabled={totalItens() === 0} onPress={()=> {navigation.navigate("CheckoutStack")}} />
       </View>
     </View>
   );
