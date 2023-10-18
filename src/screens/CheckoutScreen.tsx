@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Colors } from '../assets/constants/Colors';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../store/UserContext';
@@ -23,7 +23,7 @@ export function CheckoutScreen() {
   function LoggedCheckout() {
     
     return (
-      <ScrollView>
+      <View>
         <ShippingAddresses />
         <PaymentMethod />
         <DeliveryMethods />
@@ -40,7 +40,7 @@ export function CheckoutScreen() {
             }
           />
         </View>
-      </ScrollView>
+      </View>
     );
   }
 
