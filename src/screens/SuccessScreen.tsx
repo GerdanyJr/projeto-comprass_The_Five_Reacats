@@ -7,11 +7,9 @@ import { Colors } from '../assets/constants/Colors';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { CheckoutContext } from '../store/CheckoutContext'
 import { useTranslation } from 'react-i18next';
-import { useRoute } from '@react-navigation/native';
 
 const SuccessScreen: React.FC = () => {
   const { t } = useTranslation();
-  const route = useRoute();
   const navigation = useNavigation<any>();
   const { paymentMethod } = useContext(CheckoutContext);
 
