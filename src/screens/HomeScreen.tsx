@@ -9,12 +9,11 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { HeaderBar } from '../components/Home/HeaderBar';
 import { Section } from '../components/Home/Sections';
 import { fetchCategories } from '../service/FetchProductsAux';
 import { Category } from '../types/interfaces/Product';
-import { UserContext } from '../store/UserContext';
 
 export function HomeScreen() {
   const { t } = useTranslation();
@@ -35,18 +34,17 @@ export function HomeScreen() {
     setLoading(true);
     const dados = await fetchCategories();
     setCategories(dados);
-    setLoading(false)
+    setLoading(false);
   }
 
-  function LoadingLayer(){
-    if(!loading) return;
+  function LoadingLayer() {
+    if (!loading) return;
     return (
       <View>
         <ActivityIndicator size={100} color="red" />
       </View>
-    )
+    );
   }
-  const userCtx = useContext(UserContext);
 
   function listHeader() {
     return (
@@ -59,7 +57,7 @@ export function HomeScreen() {
           style={styles.logoApp}
         />
         <View style={styles.paragraphContainer}>
-          <Text style={styles.paragraph}>{t("homeScreen.paragraph")}</Text>
+          <Text style={styles.paragraph}>{t('homeScreen.paragraph')}</Text>
           <Image
             source={require('../assets/images/cart-icon.png')}
             style={styles.cartIcon}
@@ -77,11 +75,7 @@ export function HomeScreen() {
         renderItem={({ item }) => <Section id={item.id} title={item.name} />}
         ListFooterComponent={LoadingLayer}
       />
-      <HeaderBar
-        isAuthenticated={userCtx.isAuthenticated}
-        userImg={userCtx.user?.avatar}
-        username={userCtx.user?.name}
-      />
+      <HeaderBar />
     </View>
   );
 }

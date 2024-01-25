@@ -88,7 +88,10 @@ export function LoggedProfile({
             source={require('../../assets/images/edit.png')}
             style={[styles.editingPen, !isEditing && styles.hidden]}
           />
-          {user.avatar && <Image source={{ uri: avatar }} style={styles.avatar} />}
+          <Image
+            source={{ uri: avatar ? avatar : '' }}
+            style={styles.avatar}
+          />
         </Pressable>
         <View style={styles.userInfoContainer}>
           <View>
@@ -113,8 +116,7 @@ export function LoggedProfile({
         <View style={styles.optionsContainer}>
           <View style={styles.option}>
             <Text style={styles.optionName}>{t('profileScreen.editInfo')}</Text>
-            <SwitchCustom onPress={toggleSwitch} value={isEditing}/>
-
+            <SwitchCustom onPress={toggleSwitch} value={isEditing} />
           </View>
           <Pressable
             style={styles.option}

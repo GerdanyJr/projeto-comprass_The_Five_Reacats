@@ -10,29 +10,21 @@ import {
   TextInput,
   FlatList,
 } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { ParamListBase, useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { CardSearchResult } from './CardSearchResult';
 import { fetchItensByTitle } from '../../service/FetchProductsAux';
 import { ProductByTitle } from '../../types/interfaces/Product';
 import { Colors } from '../../assets/constants/Colors';
+import { UserContext } from '../../store/UserContext';
 
-
-export function HeaderBar({
-  isAuthenticated,
-  username,
-  userImg,
-}: {
-  isAuthenticated: boolean;
-  username: string | undefined;
-  userImg: string | undefined;
-}) {
+export function HeaderBar() {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-
   const [modalVisible, setModalVisible] = useState(false);
   const [fetchSearch, setFetchSearch] = useState<ProductByTitle[]>([]);
   const [search, setSearch] = useState('');
+  const { isAuthenticated, user } = useContext(UserContext);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -49,8 +41,12 @@ export function HeaderBar({
         style={isAuthenticated ? styles.userContain : styles.anonymous}
         testID="userBar"
       >
-        <Image source={{ uri: userImg }} style={styles.userImage} />
-        <Text style={styles.username}>Hello, {username}</Text>
+        {isAuthenticated && (
+          <>
+            <Image source={{ uri: user?.avatar }} style={styles.userImage} />
+            <Text style={styles.username}>Hello, {user?.name}</Text>
+          </>
+        )}
       </View>
 
       <View>
@@ -77,7 +73,7 @@ export function HeaderBar({
           onRequestClose={() => setModalVisible(!modalVisible)}
         >
           <TextInput
-            placeholder={t("homeScreen.searchBar")}
+            placeholder={t('homeScreen.searchBar')}
             style={styles.inputSearch}
             placeholderTextColor={'#9B9B9B'}
             onChangeText={setSearch}
@@ -106,7 +102,9 @@ export function HeaderBar({
             )}
             maxToRenderPerBatch={3}
             ListEmptyComponent={() => (
-              <Text style={styles.emptyList}>{t("homeScreen.productNotFound")}</Text>
+              <Text style={styles.emptyList}>
+                {t('homeScreen.productNotFound')}
+              </Text>
             )}
           />
         </Modal>
@@ -124,7 +122,6 @@ const styles = StyleSheet.create({
     marginTop: 16,
     position: 'absolute',
   },
-
   userContain: {
     height: 22,
     flexDirection: 'row',
@@ -136,13 +133,11 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderWidth: 1,
   },
-
   userImage: {
     width: 18,
     height: 18,
     borderRadius: 18,
   },
-
   username: {
     fontFamily: 'Open Sans',
     color: '#000',
@@ -150,15 +145,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginRight: 4,
   },
-
   anonymous: {
     opacity: 0,
   },
-
   emptySearch: {
     display: 'none',
   },
-
   emptyList: {
     fontFamily: 'Open Sans',
     width: 315,
@@ -169,32 +161,27 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
   },
-
   searchButton: {
     width: 41,
     height: 41,
     backgroundColor: Colors.red_500,
     borderRadius: 50,
   },
-
   pressed: {
     opacity: 0.75,
   },
-
   searchIcon: {
     width: 22,
     height: 22,
     marginTop: 7,
     marginLeft: 7,
   },
-
   searchBar: {
     width: 330,
     height: 55,
     borderWidth: 2,
     borderColor: Colors.red_500,
   },
-
   inputSearch: {
     fontFamily: 'Open Sans',
     width: 323,
@@ -210,7 +197,6 @@ const styles = StyleSheet.create({
     marginTop: 66,
     padding: 12,
   },
-
   containResultsSearch: {
     maxWidth: 315,
     maxHeight: 201,
