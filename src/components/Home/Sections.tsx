@@ -1,86 +1,31 @@
-import '../../lib/i18n';
-import { useTranslation } from 'react-i18next';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
+import React from 'react';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { useState, useEffect } from 'react';
-import { ParamListBase, useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { CardItem } from './CardItem';
-import { CardItemExemple } from './CardItemExemple';
-import { fetchItensByCategory } from '../../service/FetchProductsAux';
-import { Product } from '../../types/interfaces/Product';
+import { Section } from './Section';
+import { fetchCategories } from '../../service/FetchProductsAux';
+import { Category } from '../../types/interfaces/Product';
+import { HomeHeader } from './HomeHeader';
 
-export function Section({ id, title }: { id: string; title: string }) {
-  const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [limit, setLimit] = useState(5);
-  const { t } = useTranslation();
-
+export default function Sections() {
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
-    loadApi();
-  }, []);
-
-  async function loadApi() {
-    if (loading) return;
-    if(products.length !== 0){
-      setLoading(true);
+    async function getCategories() {
+      const fetchedCategories = await fetchCategories();
+      setCategories(fetchedCategories);
     }
-    const dados = await fetchItensByCategory(id, limit);
-    setProducts([...products, ...dados]);
-    setLimit((prev) => prev + 5);
-    setLoading(false);
-  }
+    getCategories();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <View style={styles.categoryHeader}>
-        <Text style={styles.categoryTitle}>{title}</Text>
-        <Pressable style={styles.buttonViewAll}>
-          <Text style={styles.buttonViewAllText}>{t("homeScreen.viewAll")}</Text>
-        </Pressable>
-      </View>
       <FlatList
-        accessibilityHint="productslist"
-        data={products}
-        renderItem={({ item }: { item: Product }) => (
-          <CardItem
-            data={item}
-            onPress={() => {
-              navigation.navigate('Product', {
-                itemId: item.id,
-                categoryId: item.category.id,
-              });
-            }}
-          />
+        ListHeaderComponent={<HomeHeader />}
+        data={categories}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item: category }) => (
+          <Section id={category.id} title={category.name} />
         )}
-        onEndReached={loadApi}
-        onEndReachedThreshold={0.8}
-        horizontal={true}
-        keyExtractor={(item) => String(item.id)}
-        ListEmptyComponent={() => (
-          <CardItemExemple
-              onPress={() => {
-                navigation.navigate('Product', { itemId: 0, categoryId: 0 });
-              }}
-            />
-        )}
-        ListFooterComponent={() => {
-          if (!loading) return;
-          return (
-            <View>
-              <ActivityIndicator size={25} color="#000" />
-            </View>
-          );
-        }}
       />
     </View>
   );
@@ -88,34 +33,35 @@ export function Section({ id, title }: { id: string; title: string }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 16,
     backgroundColor: '#fff',
+    paddingBottom: 16,
   },
-
-  categoryHeader: {
-    width: 343,
-    height: 44,
-    flexDirection: 'row',
+  backgroundImage: {
+    height: 374,
+    alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 16,
   },
-
-  categoryTitle: {
+  logoApp: {
+    marginTop: 160,
+    width: 263,
+    height: 56,
+  },
+  paragraphContainer: {
+    alignSelf: 'flex-start',
+    flexDirection: 'row',
+    marginLeft: 12,
+    paddingBottom: 16,
+    gap: 12,
+    alignItems: 'center',
+  },
+  paragraph: {
     fontFamily: 'Open Sans',
-    color: '#000',
-    marginLeft: 16,
-    fontSize: 32,
-    fontWeight: '800',
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
   },
-
-  buttonViewAll: {
-    justifyContent: 'center',
-  },
-
-  buttonViewAllText: {
-    fontFamily: 'Open Sans',
-    color: '#000',
-    fontWeight: '400',
-    fontSize: 12,
+  cartIcon: {
+    width: 46,
+    height: 46,
   },
 });
