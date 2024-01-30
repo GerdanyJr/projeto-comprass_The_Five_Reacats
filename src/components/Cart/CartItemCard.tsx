@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, View, Pressable, Text, StyleSheet } from 'react-native';
-import { UserContext } from '../../store/UserContext';
 import Counter from './Counter';
 import { Product } from '../../types/interfaces/Product';
+import useCart from '../../hooks/useCart';
 
 interface CartItemCardProps {
   data: Product;
@@ -15,8 +15,8 @@ const CartItemCard = ({
   removeProductFromCart,
   quantity,
 }: CartItemCardProps) => {
+  const { decreaseQuantity, addItem } = useCart();
   const [count, setCount] = useState<number>(quantity);
-  const userCtx = useContext(UserContext);
   useEffect(() => {
     setCount(quantity);
   }, [quantity]);
@@ -26,17 +26,11 @@ const CartItemCard = ({
   };
 
   const onPressMinus = () => {
-    if (count !== 0) {
-      setCount(count - 1);
-      userCtx.setItem(data, count - 1);
-    } else {
-      setCount(count);
-    }
+    decreaseQuantity(data.id);
   };
 
   const onPressPlus = () => {
-    setCount(count + 1);
-    userCtx.setItem(data, count + 1);
+    addItem(data.id);
   };
 
   const totalValue = count * Number(data.price);
