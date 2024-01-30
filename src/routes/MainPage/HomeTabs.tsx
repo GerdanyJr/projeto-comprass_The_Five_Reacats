@@ -1,15 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { mainPageOptions } from './MainPageOptions';
 import { HomeScreen } from '../../screens/HomeScreen';
-import { UserContext } from '../../store/UserContext';
 import { ProfileScreen } from '../../screens/ProfileScreen';
 import CartScreen from '../../screens/CartScreen';
 
-import { useContext } from 'react';
+import useCart from '../../hooks/useCart';
 
 const Tab = createBottomTabNavigator();
 export function HomeTabs() {
-  const userCtx = useContext(UserContext);
+  const { cart } = useCart();
   return (
     <Tab.Navigator screenOptions={mainPageOptions.screenOptions}>
       <Tab.Screen
@@ -21,7 +20,7 @@ export function HomeTabs() {
         name="Cart"
         component={CartScreen}
         options={
-          userCtx.cart.length === 0
+          Object.entries(cart).length == 0
             ? mainPageOptions.cartOptions
             : mainPageOptions.cartOptionsActivated
         }
